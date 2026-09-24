@@ -52,3 +52,7 @@ next-env.d.ts
 
 # Supabase CLI scratch files
 /supabase/.temp/
+
+# One-time database transfer dumps (may contain customer data)
+/.migration-backup/
+/.migration-tools/

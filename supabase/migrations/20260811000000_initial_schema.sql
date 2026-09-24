@@ -83,9 +83,13 @@ create table if not exists public.rx_products (
   name text not null,
   composition text not null,
   form text,
+  pack_size text,
+  schedule text,
   therapy_area text not null,
   indications text[] default '{}'::text[] not null,
   accent_hex text,
+  image_url text,
+  gallery text[] default '{}'::text[] not null,
   sort_order integer default 0 not null,
   is_active boolean default true not null,
   created_at timestamptz default now() not null

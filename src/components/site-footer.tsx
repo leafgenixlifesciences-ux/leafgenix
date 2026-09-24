@@ -20,6 +20,7 @@ const quickLinks = [
   { href: "/products", label: "Nutraceuticals" },
   { href: "/prescription-range", label: "Rx Range" },
   { href: "/blog", label: "Journal" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact Us" },
 ];
 

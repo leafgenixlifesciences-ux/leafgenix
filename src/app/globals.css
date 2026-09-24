@@ -840,99 +840,134 @@ html.js .reveal[data-shown="false"] {
 }
 
 .launch-gate__body {
-  display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(24rem, 0.94fr);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: clamp(2rem, 5vw, 6rem);
+  justify-content: center;
   min-height: 0;
+  padding-block: clamp(0.75rem, 2.2vh, 1.75rem);
+  text-align: center;
 }
 
-.launch-gate__copy {
+.launch-gate__intro {
   position: relative;
-  z-index: 3;
-  max-width: 47rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 68rem;
 }
 
 .launch-gate__kicker {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  margin-bottom: clamp(1rem, 2.1vh, 1.6rem);
-  font-size: clamp(0.72rem, 1vw, 0.88rem);
+  margin-bottom: clamp(0.65rem, 1.4vh, 1rem);
+  font-size: clamp(0.67rem, 0.9vw, 0.8rem);
   font-weight: 750;
   color: var(--color-lime-bright);
 }
 
 .launch-gate h1 {
-  max-width: 11ch;
+  max-width: 20ch;
   font-family: var(--font-display);
-  font-size: clamp(3.4rem, 6.4vw, 6.8rem);
-  font-weight: 800;
-  line-height: 0.88;
-  letter-spacing: -0.062em;
+  font-size: clamp(2rem, 4.2vw, 4.4rem);
+  font-weight: 760;
+  line-height: 0.98;
+  letter-spacing: -0.048em;
   color: #fff;
 }
 
-.launch-gate h1 span {
-  color: var(--color-lime-bright);
+.launch-gate__lede {
+  max-width: 58rem;
+  margin-top: clamp(0.65rem, 1.5vh, 1.1rem);
+  font-size: clamp(0.78rem, 1.05vw, 1rem);
+  line-height: 1.55;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.68);
 }
 
-.launch-gate__lede {
-  max-width: 42rem;
-  margin-top: clamp(1rem, 2.5vh, 1.75rem);
-  font-size: clamp(0.94rem, 1.25vw, 1.12rem);
-  line-height: 1.65;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.72);
+.launch-gate__clock {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 78rem);
+  margin-top: clamp(1.2rem, 3vh, 2.5rem);
+}
+
+.launch-gate__clock-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: clamp(0.55rem, 1.5vh, 1rem);
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  font-weight: 750;
+  letter-spacing: 0.035em;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .launch-countdown {
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(1.2rem, 3.4vw, 3rem);
-  margin-top: clamp(1.4rem, 3.2vh, 2.4rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  width: 100%;
 }
 
 .launch-countdown__unit {
   position: relative;
-  min-width: clamp(3.3rem, 6vw, 5.5rem);
+  min-width: 0;
 }
 
 .launch-countdown__number {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 4vw, 4rem);
-  font-weight: 750;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
+  font-size: clamp(4.25rem, 10.5vw, 10.5rem);
+  font-weight: 780;
+  line-height: 0.8;
+  letter-spacing: -0.065em;
   font-variant-numeric: tabular-nums;
   color: #fff;
+  text-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
 }
 
 .launch-countdown__label {
   display: block;
-  margin-top: 0.5rem;
-  font-size: clamp(0.6rem, 0.8vw, 0.72rem);
+  margin-top: clamp(0.65rem, 1.3vh, 0.9rem);
+  font-size: clamp(0.64rem, 0.9vw, 0.8rem);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.48);
 }
 
-.launch-countdown__dot {
+.launch-countdown__separator {
   position: absolute;
-  top: 0.62rem;
-  right: clamp(-1.7rem, -2vw, -0.8rem);
-  width: 0.32rem;
-  height: 0.32rem;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0.72rem 0 var(--color-accent);
+  top: -0.08em;
+  right: -0.11em;
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 7.5vw, 7.6rem);
+  font-weight: 300;
+  line-height: 0.85;
+  color: var(--color-accent);
+}
+
+.launch-gate__moment {
+  margin-top: clamp(0.6rem, 1.6vh, 1rem);
+  font-size: clamp(0.66rem, 0.9vw, 0.8rem);
+  font-weight: 700;
+  color: var(--color-lime-bright);
 }
 
 .launch-gate__proof {
+  position: relative;
+  z-index: 2;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 0.7rem 1.2rem;
-  margin-top: clamp(1.4rem, 3vh, 2.2rem);
+  gap: 0.55rem 1.4rem;
+  margin-top: clamp(1rem, 2.4vh, 1.8rem);
 }
 
 .launch-gate__proof span {
@@ -957,10 +992,15 @@ html.js .reveal[data-shown="false"] {
 
 .launch-gate__leaf-ring {
   position: absolute;
-  inset: 4%;
+  top: 50%;
+  left: 50%;
+  width: min(72vw, 64rem);
+  aspect-ratio: 1.8;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 70% 20% 70% 26% / 65% 25% 70% 32%;
-  transform: rotate(-9deg);
+  opacity: 0.32;
+  transform: translate(-50%, -44%) rotate(-5deg);
+  pointer-events: none;
 }
 
 .launch-gate__leaf-ring::before,
@@ -975,65 +1015,6 @@ html.js .reveal[data-shown="false"] {
 .launch-gate__leaf-ring::after {
   inset: 22%;
   border-color: rgba(237, 148, 13, 0.25);
-}
-
-.launch-gate__badge {
-  position: absolute;
-  top: 8%;
-  right: 0;
-  z-index: 6;
-  display: grid;
-  gap: 0.15rem;
-  padding: 0.8rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  transform: rotate(4deg);
-  box-shadow: 0 18px 42px -24px rgba(0, 0, 0, 0.8);
-}
-
-.launch-gate__badge span {
-  font-size: 0.64rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.launch-gate__badge strong {
-  font-family: var(--font-display);
-  font-size: 1rem;
-}
-
-.launch-pack {
-  position: absolute;
-  width: 35%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  border-radius: clamp(0.9rem, 1.5vw, 1.5rem);
-  background: #fff;
-  box-shadow:
-    0 40px 70px -32px rgba(0, 0, 0, 0.9),
-    0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-
-.launch-pack--one {
-  left: 5%;
-  bottom: 16%;
-  z-index: 2;
-  transform: rotate(-14deg);
-}
-
-.launch-pack--two {
-  left: 33%;
-  bottom: 9%;
-  z-index: 4;
-  transform: scale(1.12);
-}
-
-.launch-pack--three {
-  right: 4%;
-  bottom: 17%;
-  z-index: 3;
-  transform: rotate(14deg);
 }
 
 .launch-gate__footer {
@@ -1069,30 +1050,8 @@ html.js .reveal[data-shown="false"] {
 }
 
 @media (max-width: 900px) {
-  .launch-gate__body {
-    grid-template-columns: 1fr;
-    align-content: center;
-    gap: 1rem;
-  }
-
-  .launch-gate__copy {
-    max-width: 42rem;
-  }
-
   .launch-gate h1 {
-    font-size: clamp(3.2rem, 12vw, 5.8rem);
-  }
-
-  .launch-gate__visual {
-    position: absolute;
-    right: -10vw;
-    bottom: 6%;
-    width: min(46vw, 24rem);
-    opacity: 0.36;
-  }
-
-  .launch-gate__badge {
-    display: none;
+    font-size: clamp(2rem, 6vw, 3.6rem);
   }
 }
 
@@ -1113,39 +1072,38 @@ html.js .reveal[data-shown="false"] {
   }
 
   .launch-gate__body {
-    align-content: center;
+    padding-block: 0.65rem;
   }
 
   .launch-gate__kicker {
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.55rem;
   }
 
   .launch-gate h1 {
-    font-size: clamp(3rem, 15vw, 4.35rem);
+    font-size: clamp(1.72rem, 7.8vw, 2.65rem);
   }
 
   .launch-gate__lede {
-    max-width: 31rem;
-    font-size: 0.82rem;
-    line-height: 1.5;
+    max-width: 34rem;
+    font-size: 0.76rem;
+    line-height: 1.45;
   }
 
   .launch-countdown {
-    justify-content: space-between;
-    gap: 0.7rem;
     width: 100%;
   }
 
-  .launch-countdown__unit {
-    min-width: 0;
+  .launch-gate__clock {
+    margin-top: 1.1rem;
   }
 
   .launch-countdown__number {
-    font-size: clamp(2rem, 10.5vw, 3rem);
+    font-size: clamp(3.1rem, 19vw, 5.25rem);
   }
 
-  .launch-countdown__dot {
-    display: none;
+  .launch-countdown__separator {
+    right: -0.08em;
+    font-size: clamp(2.6rem, 13vw, 4rem);
   }
 
   .launch-gate__proof {
@@ -1156,11 +1114,9 @@ html.js .reveal[data-shown="false"] {
     font-size: 0.61rem;
   }
 
-  .launch-gate__visual {
-    right: -28%;
-    bottom: 11%;
-    width: 68vw;
-    opacity: 0.18;
+  .launch-gate__leaf-ring {
+    width: 110vw;
+    opacity: 0.22;
   }
 
   .launch-gate__footer > p,
@@ -1179,17 +1135,40 @@ html.js .reveal[data-shown="false"] {
 }
 
 @media (max-height: 690px) {
-  .launch-gate__proof,
-  .launch-gate__lede {
-    margin-top: 0.85rem;
+  .launch-gate__shell {
+    padding-block: 0.85rem;
   }
 
-  .launch-countdown {
-    margin-top: 1rem;
+  .launch-gate__lede {
+    margin-top: 0.55rem;
+    line-height: 1.4;
   }
 
   .launch-gate h1 {
-    font-size: clamp(3rem, 8.5vh, 5.2rem);
+    font-size: clamp(1.75rem, 5.5vh, 3.1rem);
+  }
+
+  .launch-gate__clock {
+    margin-top: 0.8rem;
+  }
+
+  .launch-countdown__number {
+    font-size: clamp(3.2rem, 14vh, 7.2rem);
+  }
+
+  .launch-gate__proof {
+    margin-top: 0.8rem;
+  }
+}
+
+@media (max-height: 560px) {
+  .launch-gate__lede,
+  .launch-gate__proof {
+    display: none;
+  }
+
+  .launch-gate__clock {
+    margin-top: 0.65rem;
   }
 }
 

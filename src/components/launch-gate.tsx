@@ -99,55 +99,43 @@ export function LaunchGate({ initiallyLaunched }: { initiallyLaunched: boolean }
           </p>
         </header>
 
-        <div className="launch-gate__body">
-          <div className="launch-gate__copy">
+        <main className="launch-gate__body">
+          <div className="launch-gate__leaf-ring" aria-hidden="true" />
+
+          <div className="launch-gate__intro">
             <div className="launch-gate__kicker">
               <Leaf className="h-4 w-4" />
-              Something healthier is taking root
+              A clearer standard for everyday wellness
             </div>
-            <h1 id="launch-title">
-              Better labels.<br />
-              Better choices.<br />
-              <span>Almost here.</span>
-            </h1>
+            <h1 id="launch-title">Research-led nutrition.<br />Honest labels. Better choices.</h1>
             <p className="launch-gate__lede">
-              Leaf Genix Lifesciences is launching its online nutraceutical store with research-led formulations, complete ingredient quantities and clear product information.
+              Leaf Genix Lifesciences creates thoughtfully formulated nutraceuticals with complete ingredient quantities and clear product information—so every family can choose with confidence.
             </p>
+          </div>
 
+          <div className="launch-gate__clock">
+            <p className="launch-gate__clock-title">
+              <span className="launch-gate__pulse" />
+              Our online store launches in
+            </p>
             <div className="launch-countdown" aria-label={`Launch countdown: ${countdown.map(([value, label]) => `${value} ${label}`).join(", ")}`}>
               {countdown.map(([value, label], index) => (
                 <div className="launch-countdown__unit" key={label}>
                   <span className="launch-countdown__number">{String(value).padStart(2, "0")}</span>
                   <span className="launch-countdown__label">{label}</span>
-                  {index < countdown.length - 1 && <span className="launch-countdown__dot" aria-hidden="true" />}
+                  {index < countdown.length - 1 && <span className="launch-countdown__separator" aria-hidden="true">:</span>}
                 </div>
               ))}
             </div>
-
-            <div className="launch-gate__proof">
-              <span><ShieldCheck className="h-4 w-4" /> FSSAI registered</span>
-              <span><ShieldCheck className="h-4 w-4" /> WHO-GMP partner facilities</span>
-              <span><ShieldCheck className="h-4 w-4" /> Full label disclosure</span>
-            </div>
+            <p className="launch-gate__moment">25 September 2026 · 12:00 AM IST</p>
           </div>
 
-          <div className="launch-gate__visual" aria-hidden="true">
-            <div className="launch-gate__leaf-ring" />
-            <div className="launch-gate__badge">
-              <span>Online store</span>
-              <strong>opens at midnight</strong>
-            </div>
-            {[
-              ["/products/synvit-forte-tablets-studio.png", "launch-pack--one"],
-              ["/products/probion-colostrum-probiotic-studio.png", "launch-pack--two"],
-              ["/products/firtilo-f-studio.png", "launch-pack--three"],
-            ].map(([src, className]) => (
-              <div className={`launch-pack ${className}`} key={src}>
-                <Image src={src} alt="" fill sizes="220px" className="object-cover" priority />
-              </div>
-            ))}
+          <div className="launch-gate__proof">
+            <span><ShieldCheck className="h-4 w-4" /> FSSAI registered</span>
+            <span><ShieldCheck className="h-4 w-4" /> WHO-GMP partner facilities</span>
+            <span><ShieldCheck className="h-4 w-4" /> Full label disclosure</span>
           </div>
-        </div>
+        </main>
 
         <footer className="launch-gate__footer">
           <p>Serving families across India from Jaipur, Rajasthan.</p>

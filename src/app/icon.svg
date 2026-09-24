@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Leaf Genix Lifesciences</title>
+  <rect width="64" height="64" rx="14" fill="#005c2d"/>
+  <path
+    d="M11 36.5c8.8-1.4 16.6 1.1 21.8 7.1-8.2 3.4-17.7 1.2-21.8-7.1Z"
+    fill="#c9e82d"
+  />
+  <path
+    d="M32.1 10.5c7.6 8 8.6 18.1 1.6 28.1-7.4-7.9-8.3-18.5-1.6-28.1Z"
+    fill="#fff"
+  />
+  <path
+    d="M53 29.4c-1.7 9.7-8.1 16.1-18.5 17.4 1.9-9.5 8.5-15.7 18.5-17.4Z"
+    fill="#91bd2a"
+  />
+  <path
+    d="M16 50.1c11.2-3.1 22.7-3.2 34.5-.2"
+    fill="none"
+    stroke="#fff"
+    stroke-linecap="round"
+    stroke-width="3.2"
+  />
+  <path
+    d="M20 54.1c9.7-2.4 19.1-2.4 28.2-.2"
+    fill="none"
+    stroke="#ed940d"
+    stroke-linecap="round"
+    stroke-width="2.5"
+  />
+</svg>

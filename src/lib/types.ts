@@ -86,6 +86,8 @@ export type Order = {
   tracking_number: string | null;
   courier_name: string | null;
   created_at: string;
+  customer_confirmation_email_sent_at: string | null;
+  admin_notification_email_sent_at: string | null;
 };
 
 export type OrderItem = {

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
 import { contactSchema } from "@/lib/validation";
 import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
+import { emailConfigured, sendContactEmails } from "@/lib/email";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -40,19 +41,40 @@ export async function POST(request: Request) {
     );
   }
 
+  if (!emailConfigured()) {
+    console.error("[contact] Resend email settings are not configured");
+    return NextResponse.json(
+      { error: "The contact form is temporarily unavailable. Please email us directly." },
+      { status: 503 },
+    );
+  }
+
   const { name, email, phone, subject, message } = parsed.data;
 
   try {
     const admin = createAdminClient();
-    const { error } = await admin.from("contact_messages").insert({
+    const { data: contact, error } = await admin
+      .from("contact_messages")
+      .insert({
+        name,
+        email,
+        phone: phone || null,
+        subject: subject || null,
+        message,
+      })
+      .select("id")
+      .single();
+
+    if (error || !contact) throw new Error(error?.message ?? "Contact was not saved");
+
+    await sendContactEmails({
+      id: contact.id,
       name,
       email,
       phone: phone || null,
       subject: subject || null,
       message,
     });
-
-    if (error) throw new Error(error.message);
   } catch (err) {
     console.error("[contact]", err);
     return NextResponse.json(

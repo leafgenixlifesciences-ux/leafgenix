@@ -50,6 +50,7 @@ email-provider secrets still need to be supplied — see below.
 | `RESEND_API_KEY` | Resend → API Keys | **Yes — server only** |
 | `RESEND_FROM_EMAIL` | A sender on your verified Resend domain | No |
 | `LEAD_NOTIFICATION_EMAIL` | Inbox that receives new coupon lead details | No |
+| `ADMIN_NOTIFICATION_EMAIL` | Inbox for contact enquiries and paid orders (falls back to lead/support email) | No |
 
 **Two things still need filling in before orders work:**
 
@@ -57,8 +58,8 @@ email-provider secrets still need to be supplied — see below.
    order returns a clear "not configured" message instead of crashing.
 2. `RAZORPAY_KEY_ID` + `RAZORPAY_KEY_SECRET` — without them checkout runs in
    "setup mode" and explains why.
-3. `RESEND_API_KEY` + `RESEND_FROM_EMAIL` — without them the welcome-coupon
-   form stays unavailable rather than collecting details it cannot email.
+3. `RESEND_API_KEY` + `RESEND_FROM_EMAIL` — without them the contact and
+   welcome-coupon forms stay unavailable, and paid-order emails remain pending.
 
 All three Razorpay values are read **on the server at request time**, so adding
 or rotating keys only needs a restart — never a rebuild. (They are deliberately
@@ -102,6 +103,8 @@ Browser                    Server                          Razorpay
    │  Razorpay Checkout modal opens (UPI / card / netbanking)     │
    │  POST /api/razorpay/verify  (signature check, fast path)     │
    │                         │  marks paid, decrements stock      │
+   │                         │  emails confirmation to customer  │
+   │                         │  and paid-order details to admin  │
    │                         │ ◄──── POST /api/razorpay/webhook ──│
    │                         │  authoritative confirmation        │
    ▼  redirected to /order/<id>
@@ -259,9 +262,10 @@ variables. The three `NEXT_PUBLIC_*` values are set. The four secrets are
 | `RESEND_API_KEY` | Resend → API Keys |
 | `RESEND_FROM_EMAIL` | verified sender, e.g. `LeafGenix Website <offers@leafgenix.in>` |
 | `LEAD_NOTIFICATION_EMAIL` | business inbox for coupon leads |
+| `ADMIN_NOTIFICATION_EMAIL` | business inbox for contact and paid-order notifications |
 
 Until they are added the catalogue, cart and accounts work, but checkout
-shows "payments not configured", the contact form cannot save messages, and
+shows "payments not configured", the contact form cannot accept messages, and
 the coupon form cannot issue a code until its email settings are present.
 After adding them, trigger a redeploy (Deploys → Trigger deploy).
 

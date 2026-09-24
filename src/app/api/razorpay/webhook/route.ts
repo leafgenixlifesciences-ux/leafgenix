@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
 import { verifyWebhookSignature } from "@/lib/razorpay";
+import { sendPaidOrderEmails } from "@/lib/email";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -84,16 +85,31 @@ export async function POST(request: Request) {
 
         if (error) throw new Error(error.message);
 
-        if (!claimed || claimed.length === 0) {
-          // Already paid, or no such order. Both are fine to acknowledge.
-          break;
+        let paidOrderId = claimed?.[0]?.id as string | undefined;
+
+        if (paidOrderId) {
+          const { error: stockError } = await admin.rpc(
+            "decrement_stock_for_order",
+            { p_order_id: paidOrderId },
+          );
+          if (stockError) console.error("[webhook] stock:", stockError.message);
+        } else {
+          // A sibling webhook or the browser verification may have won the
+          // paid-state race. Still retry any transactional email that has not
+          // been durably marked as delivered.
+          const { data: existing } = await admin
+            .from("orders")
+            .select("id, status")
+            .eq("razorpay_order_id", payment.order_id)
+            .maybeSingle();
+          if (existing?.status === "paid") paidOrderId = existing.id;
         }
 
-        const { error: stockError } = await admin.rpc(
-          "decrement_stock_for_order",
-          { p_order_id: claimed[0].id },
-        );
-        if (stockError) console.error("[webhook] stock:", stockError.message);
+        if (paidOrderId) {
+          // Throwing makes Razorpay retry a transient Resend failure. The
+          // order is already safely paid, and both emails are idempotent.
+          await sendPaidOrderEmails(paidOrderId);
+        }
         break;
       }
 

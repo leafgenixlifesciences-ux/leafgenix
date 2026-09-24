@@ -3,6 +3,7 @@ import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
 import { verifyPaymentSignature } from "@/lib/razorpay";
 import { verifySchema } from "@/lib/validation";
 import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
+import { sendPaidOrderEmails } from "@/lib/email";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -101,13 +102,20 @@ export async function POST(request: Request) {
   if (!claimed || claimed.length === 0) {
     const { data: existing } = await admin
       .from("orders")
-      .select("id")
+      .select("id, status")
       .eq("id", orderId)
       .eq("razorpay_order_id", razorpay_order_id)
       .maybeSingle();
 
     if (!existing) {
       return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
+    if (existing.status === "paid") {
+      try {
+        await sendPaidOrderEmails(orderId);
+      } catch (error) {
+        console.error("[verify] order email:", error);
+      }
     }
     return NextResponse.json({ ok: true, orderId, alreadyRecorded: true });
   }
@@ -117,6 +125,15 @@ export async function POST(request: Request) {
     p_order_id: orderId,
   });
   if (stockError) console.error("[verify] stock:", stockError.message);
+
+  // Email failure must never turn a captured payment into a failed checkout.
+  // Razorpay's authoritative webhook also calls this helper and will retry on
+  // provider failures; Resend idempotency keys prevent duplicates.
+  try {
+    await sendPaidOrderEmails(orderId);
+  } catch (error) {
+    console.error("[verify] order email:", error);
+  }
 
   return NextResponse.json({ ok: true, orderId });
 }

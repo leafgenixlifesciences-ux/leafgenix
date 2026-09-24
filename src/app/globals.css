@@ -1043,10 +1043,17 @@ html.js .reveal[data-shown="false"] {
   color: rgba(255, 255, 255, 0.48);
 }
 
-.launch-gate__footer > div {
+.launch-gate__links,
+.launch-gate__contact {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1.25rem;
+}
+
+.launch-gate__links {
+  justify-content: center;
+  gap: 0.45rem 1rem;
 }
 
 .launch-gate__footer a {
@@ -1157,12 +1164,17 @@ html.js .reveal[data-shown="false"] {
   }
 
   .launch-gate__footer > p,
-  .launch-gate__footer a:first-child {
+  .launch-gate__contact {
     display: none;
   }
 
   .launch-gate__footer {
-    justify-content: flex-end;
+    justify-content: center;
+  }
+
+  .launch-gate__links {
+    gap: 0.35rem 0.85rem;
+    font-size: 0.66rem;
   }
 }
 

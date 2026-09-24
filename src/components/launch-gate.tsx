@@ -1,11 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Leaf, Mail, ShieldCheck } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 import { LAUNCH_AT_MS } from "@/lib/launch";
 import { site } from "@/lib/site";
+
+const PUBLIC_INFORMATION_LINKS = [
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms" },
+  { href: "/shipping-policy", label: "Shipping" },
+  { href: "/refund-policy", label: "Refunds" },
+  { href: "/contact", label: "Contact" },
+] as const;
 
 type Remaining = {
   days: number;
@@ -27,10 +37,12 @@ function remainingUntilLaunch(): Remaining | null {
 }
 
 export function LaunchGate({ initiallyLaunched }: { initiallyLaunched: boolean }) {
+  const pathname = usePathname();
   const [remaining, setRemaining] = useState<Remaining | null>(
     initiallyLaunched ? null : { days: 0, hours: 0, minutes: 0, seconds: 0 },
   );
-  const visible = remaining !== null;
+  const isPublicInformationPage = PUBLIC_INFORMATION_LINKS.some(({ href }) => pathname === href);
+  const visible = remaining !== null && !isPublicInformationPage;
 
   useEffect(() => {
     if (initiallyLaunched) return;
@@ -63,7 +75,7 @@ export function LaunchGate({ initiallyLaunched }: { initiallyLaunched: boolean }
     [remaining],
   );
 
-  if (!remaining) return null;
+  if (!remaining || isPublicInformationPage) return null;
 
   return (
     <section className="launch-gate" aria-labelledby="launch-title">
@@ -139,7 +151,12 @@ export function LaunchGate({ initiallyLaunched }: { initiallyLaunched: boolean }
 
         <footer className="launch-gate__footer">
           <p>Serving families across India from Jaipur, Rajasthan.</p>
-          <div>
+          <nav className="launch-gate__links" aria-label="Legal and support links">
+            {PUBLIC_INFORMATION_LINKS.map(({ href, label }) => (
+              <Link href={href} key={href}>{label}</Link>
+            ))}
+          </nav>
+          <div className="launch-gate__contact">
             <a href={`mailto:${site.email}`}>
               <Mail className="h-4 w-4" /> {site.email}
             </a>

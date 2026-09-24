@@ -9,6 +9,9 @@
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--no-audit --no-fund"
+  # These values are intentionally public configuration/content. Keep secret
+  # scanning enabled for Supabase, Razorpay and Resend credentials.
+  SECRETS_SCAN_OMIT_KEYS = "LEAD_NOTIFICATION_EMAIL,RESEND_FROM_EMAIL,NEXT_PUBLIC_SITE_URL"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

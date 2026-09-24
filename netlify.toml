@@ -1,0 +1,14 @@
+# Netlify build settings for the Leaf Genix storefront.
+# Next.js is served through Netlify's OpenNext adapter (@netlify/plugin-nextjs),
+# which handles the App Router, proxy.ts, image optimisation and route caching.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

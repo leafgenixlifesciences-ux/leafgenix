@@ -1,0 +1,30 @@
+# Leaf Genix Lifesciences
+> Leaf Genix Lifesciences is a Jaipur-based Indian nutraceutical company focused on research-led formulations, complete ingredient quantities and clear product information.
+
+## Primary pages
+- [Home](https://leafgenix.in/): Brand overview, formulation standards and featured nutraceuticals.
+- [Nutraceutical range](https://leafgenix.in/products): All consumer nutraceutical products, prices, pack sizes and categories.
+- [About Leaf Genix](https://leafgenix.in/about): Company identity, standards, manufacturing and regulatory information.
+- [Health and nutrition journal](https://leafgenix.in/blog): Evidence-led educational articles with cited sources.
+- [Prescription range](https://leafgenix.in/prescription-range): Prescription products listed for healthcare-professional reference only; they are not sold online.
+- [Contact](https://leafgenix.in/contact): Official address, telephone, email and enquiry form.
+
+## Verified business facts
+- Legal name: Leaf Genix Lifesciences
+- Location: Jaipur, Rajasthan, India
+- FSSAI Registration: 22226076000075
+- GSTIN: 08BSWPS3920A1ZI
+- Support: support@leafpharmaceuticals.in | +91 95019 01100
+- Consumer products are nutraceuticals and dietary supplements, not medicines and not substitutes for professional medical advice.
+- Prescription products are published for reference and are not sold through this website.
+
+## Product pages
+- [Synvit-Forte](https://leafgenix.in/products/synvit-forte-tablets)
+- [Probion](https://leafgenix.in/products/probion-colostrum-probiotic)
+- [Edo Well](https://leafgenix.in/products/edo-well-syrup)
+- [L-Sharp 400](https://leafgenix.in/products/l-sharp-400-syrup)
+- [Firtilo-f](https://leafgenix.in/products/firtilo-f)
+- [MD3 Nano Shot](https://leafgenix.in/products/md3-nano-shot)
+- [Perfect Liv](https://leafgenix.in/products/perfect-liv-syrup)
+- [Haemerange](https://leafgenix.in/products/haemerange-syrup)
+- [Calcin-K27](https://leafgenix.in/products/calcin-k27-softgel)

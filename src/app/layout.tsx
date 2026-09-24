@@ -1,0 +1,196 @@
+import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque, IBM_Plex_Mono, Manrope } from "next/font/google";
+import Script from "next/script";
+import "./globals.css";
+
+import { CartProvider } from "@/components/cart-provider";
+import { CartDrawer } from "@/components/cart-drawer";
+import { CouponPopup } from "@/components/coupon-popup";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { LaunchGate } from "@/components/launch-gate";
+import { getSessionUser } from "@/lib/auth";
+import { launchHasPassed } from "@/lib/launch";
+import { site } from "@/lib/site";
+import { siteUrl } from "@/lib/utils";
+
+// Display face: characterful, heavy weights, optical-size axis - carries every
+// headline and every big number. Body: Manrope, for long reading at small sizes.
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  // Variable font: leave `weight` off so the full 200-800 range and the
+  // optical-size / width axes all load together.
+  axes: ["opsz", "wdth"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
+  title: {
+    default: `${site.fullName} — ${site.tagline}`,
+    template: `%s · ${site.name}`,
+  },
+  description: site.description,
+  applicationName: site.fullName,
+  authors: [{ name: site.fullName, url: siteUrl("/about") }],
+  creator: site.fullName,
+  publisher: site.fullName,
+  category: "Health and wellness",
+  formatDetection: { email: false, address: false, telephone: false },
+  keywords: [
+    "Leaf Genix Lifesciences",
+    "nutraceuticals India",
+    "Synvit-Forte spirulina tablet",
+    "Probion bovine colostrum probiotic",
+    "Edo Well omega 3 syrup",
+    "L-Sharp 400 L-carnosine",
+    "MD3 Nano Shot vitamin D3",
+    "Perfect Liv ayurvedic liver syrup",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: siteUrl(),
+    siteName: site.fullName,
+    title: `${site.fullName} — ${site.tagline}`,
+    description: site.description,
+  },
+  twitter: { card: "summary_large_image" },
+  manifest: "/manifest.webmanifest",
+  robots: { index: true, follow: true },
+  alternates: { canonical: "/" },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#005c2d",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default async function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  // Read once, server-side, so the header renders the right account state in
+  // the very first byte of HTML - no auth flicker. Deduped per request, so
+  // the pages below reuse this rather than asking Supabase again.
+  const signedIn = Boolean(await getSessionUser());
+  const initiallyLaunched = launchHasPassed();
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "OnlineStore"],
+        "@id": siteUrl("/#organization"),
+        name: site.legalName,
+        alternateName: site.name,
+        url: siteUrl(),
+        logo: {
+          "@type": "ImageObject",
+          url: siteUrl("/leafgenix-logo.png"),
+        },
+        email: site.email,
+        telephone: site.supportPhone,
+        slogan: site.tagline,
+        description: site.description,
+        areaServed: { "@type": "Country", name: "India" },
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: `${site.addressLines[1]}, ${site.addressLines[2]}`,
+          addressLocality: site.city,
+          addressRegion: site.state,
+          postalCode: site.postalCode,
+          addressCountry: "IN",
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: site.supportPhone,
+          email: site.email,
+          contactType: "customer support",
+          areaServed: "IN",
+          availableLanguage: ["English", "Hindi"],
+        },
+        sameAs: Object.values(site.social).filter(Boolean),
+        knowsAbout: [
+          "Nutraceuticals",
+          "Nutrition labels",
+          "Vitamin and mineral supplements",
+          "Probiotics",
+          "Omega-3 nutrition",
+          "Women and child health",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": siteUrl("/#website"),
+        url: siteUrl(),
+        name: site.fullName,
+        description: site.description,
+        inLanguage: "en-IN",
+        publisher: { "@id": siteUrl("/#organization") },
+      },
+    ],
+  };
+
+  return (
+    <html
+      lang="en-IN"
+      className={`${bricolage.variable} ${manrope.variable} ${plexMono.variable}`}
+    >
+      <head>
+        {/* Marks scripting as available before first paint. Scroll-reveal
+            styles only engage when this class is present, so content is
+            never hidden for users without JavaScript. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add("js")`,
+          }}
+        />
+      </head>
+      <body className="min-h-dvh antialiased">
+        <LaunchGate initiallyLaunched={initiallyLaunched} />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[99] focus:rounded-full focus:bg-brand focus:px-5 focus:py-3 focus:text-white"
+        >
+          Skip to content
+        </a>
+
+        <CartProvider>
+          <SiteHeader signedIn={signedIn} />
+          <main id="main">{children}</main>
+          <SiteFooter />
+          <CartDrawer />
+          <CouponPopup />
+        </CartProvider>
+
+        {/* Razorpay Checkout — loaded once, used by the checkout page */}
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="lazyOnload"
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
+        />
+      </body>
+    </html>
+  );
+}

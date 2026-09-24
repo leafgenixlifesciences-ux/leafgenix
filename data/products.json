@@ -1,0 +1,1658 @@
+[
+  {
+    "faqs": [
+      {
+        "a": "That is exactly what it is designed for. Check the doses against what you are currently taking, and if you are on a therapeutic-strength omega-3 prescribed for a specific reason, speak to your doctor before switching.",
+        "q": "Can I stop my separate multivitamin and omega-3 if I take this?"
+      },
+      {
+        "a": "Yes. Spirulina is a food, consumed daily in many parts of the world. It is not a drug and does not need cycling.",
+        "q": "Is spirulina safe to take every day?"
+      },
+      {
+        "a": "Even a good diet can fall short on a few nutrients — vitamin D and marine omega-3 are the usual gaps in Indian diets. If your diet is genuinely varied you may need less; Synvit-Forte is there to cover the gaps.",
+        "q": "Will it help if my diet is already good?"
+      },
+      {
+        "a": "Nutraceuticals work gradually. Give it 8 to 12 weeks of consistent daily use before judging.",
+        "q": "How long before I notice anything?"
+      }
+    ],
+    "form": "Tablet",
+    "name": "Synvit-Forte",
+    "slug": "synvit-forte-tablets",
+    "uses": [
+      "Everyday immune support for adults",
+      "Antioxidant support from spirulina and the vitamin blend",
+      "Nutritional gap-filling where diet is restricted or irregular",
+      "Support during periods of physical or mental stress",
+      "General strength, stamina and energy",
+      "Convalescence and recovery nutrition"
+    ],
+    "badge": "New-generation antioxidant",
+    "stock": 240,
+    "rating": 4.7,
+    "flavour": null,
+    "gallery": [
+      "/products/synvit-forte-tablets-studio.png",
+      "/products/synvit-forte-tablets-2.jpg",
+      "/products/synvit-forte-tablets-3.jpg",
+      "/products/synvit-forte-tablets-4.jpg",
+      "/products/synvit-forte-tablets-5.jpg"
+    ],
+    "tagline": "Spirulina, Omega-3 and 21 multivitamins in one daily tablet",
+    "category": "Immunity & Vitality",
+    "evidence": [
+      {
+        "claim": "Declared the best food for tomorrow at a world conference",
+        "source": "United Nations Organization (UNO)"
+      },
+      {
+        "claim": "Hailed as the greatest super food on earth",
+        "source": "World Health Organization (WHO)"
+      },
+      {
+        "claim": "1 gm of spirulina found nutritionally equal to 1 kg of assorted vegetables",
+        "source": "NASA scientists"
+      }
+    ],
+    "fssai_no": "10019021005016",
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/synvit-forte-tablets-studio.png",
+    "mrp_paise": 21360,
+    "nutrition": [
+      {
+        "rda": "",
+        "dose": "2.67",
+        "unit": "Kcal",
+        "nutrient": "Energy"
+      },
+      {
+        "rda": "",
+        "dose": "0.64",
+        "unit": "g",
+        "nutrient": "Carbohydrate"
+      },
+      {
+        "rda": "",
+        "dose": "0.02",
+        "unit": "g",
+        "nutrient": "Protein"
+      },
+      {
+        "rda": "",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Fat"
+      },
+      {
+        "rda": "**",
+        "dose": "500",
+        "unit": "mg",
+        "nutrient": "Spirulina"
+      },
+      {
+        "rda": "**",
+        "dose": "180",
+        "unit": "mg",
+        "nutrient": "Omega 3 Fatty Acid"
+      },
+      {
+        "rda": "66.66",
+        "dose": "400",
+        "unit": "IU",
+        "nutrient": "Vitamin D3"
+      },
+      {
+        "rda": "100",
+        "dose": "50",
+        "unit": "mcg",
+        "nutrient": "Chromium Picolinate"
+      },
+      {
+        "rda": "7.5",
+        "dose": "75",
+        "unit": "mg",
+        "nutrient": "Calcium (as citrate)"
+      },
+      {
+        "rda": "5.8",
+        "dose": "58",
+        "unit": "mg",
+        "nutrient": "Phosphorus"
+      },
+      {
+        "rda": "100",
+        "dose": "19",
+        "unit": "mg",
+        "nutrient": "Ferrous Fumarate"
+      },
+      {
+        "rda": "44.11",
+        "dose": "7.5",
+        "unit": "mg",
+        "nutrient": "Zinc (as monohydrate)"
+      },
+      {
+        "rda": "0.02",
+        "dose": "0.1",
+        "unit": "mg",
+        "nutrient": "Magnesium (as oxide)"
+      },
+      {
+        "rda": "75",
+        "dose": "30",
+        "unit": "mcg",
+        "nutrient": "Selenium"
+      },
+      {
+        "rda": "55.55",
+        "dose": "1",
+        "unit": "mg",
+        "nutrient": "Vitamin B1"
+      },
+      {
+        "rda": "60",
+        "dose": "1.5",
+        "unit": "mg",
+        "nutrient": "Vitamin B2"
+      },
+      {
+        "rda": "41.66",
+        "dose": "1",
+        "unit": "mg",
+        "nutrient": "Vitamin B6"
+      },
+      {
+        "rda": "45.45",
+        "dose": "1",
+        "unit": "mcg",
+        "nutrient": "Vitamin B12"
+      },
+      {
+        "rda": "100",
+        "dose": "176.47",
+        "unit": "mcg",
+        "nutrient": "Folic Acid"
+      },
+      {
+        "rda": "55.55",
+        "dose": "10",
+        "unit": "mg",
+        "nutrient": "Niacinamide"
+      },
+      {
+        "rda": "100",
+        "dose": "5",
+        "unit": "mg",
+        "nutrient": "D-Calcium Pantothenate"
+      },
+      {
+        "rda": "62.5",
+        "dose": "50",
+        "unit": "mg",
+        "nutrient": "Vitamin C"
+      },
+      {
+        "rda": "100",
+        "dose": "3300",
+        "unit": "IU",
+        "nutrient": "Vitamin A Acetate"
+      },
+      {
+        "rda": "50",
+        "dose": "5",
+        "unit": "mg",
+        "nutrient": "Vitamin E"
+      }
+    ],
+    "pack_size": "10 Tablets",
+    "directions": "Take 1 tablet daily after a meal with water, or as directed by your healthcare practitioner. For best results take at the same time each day.",
+    "shelf_life": "Best before 18 months from the date of manufacture",
+    "sort_order": 1,
+    "composition": "Each tablet contains: Spirulina 500 mg, Omega 3 Fatty Acid 180 mg, Vitamin D3 400 IU, Chromium Picolinate 50 mcg, Calcium (as citrate) 75 mg, Phosphorus 58 mg, Ferrous Fumarate 19 mg, Zinc (as monohydrate) 7.5 mg, Magnesium (as oxide) 0.1 mg, Selenium 30 mcg, Vitamin B1 1 mg, B2 1.5 mg, B6 1 mg, B12 1 mcg, Folic Acid 176.47 mcg, Niacinamide 10 mg, D-Calcium Pantothenate 5 mg, Vitamin C 50 mg, Vitamin A Acetate 3300 IU, Vitamin E 5 mg.",
+    "description": "Most multivitamins give you vitamins. Most omega-3 capsules give you EPA and DHA. Synvit-Forte was formulated to stop that trade-off. Each tablet combines standardised Spirulina — the blue-green algae the WHO has called the greatest superfood on earth — with Omega-3 fatty acids EPA and DHA, Vitamin D3, and 21 essential vitamins and minerals.\n\nSpirulina is the reason this works as one tablet rather than three. NASA scientists found 1 gram of spirulina to be nutritionally equivalent to roughly 1 kilogram of assorted vegetables, and the United Nations declared it the best food for tomorrow. Building the formulation on that base means the vitamin, mineral and omega-3 additions have somewhere dense to sit.\n\nIt is designed for adults who want dependable daily cover — immune support, antioxidant defence and energy — without managing a routine of separate supplements.",
+    "ingredients": [
+      "Spirulina",
+      "Omega-3 (EPA)",
+      "Omega-3 (DHA)",
+      "Vitamin D3",
+      "21 Essential Vitamins & Minerals"
+    ],
+    "is_featured": true,
+    "price_paise": 21360,
+    "safety_info": "Not for children under 12. Consult your physician before use if you are pregnant, nursing, or taking prescription medication — particularly blood thinners, as omega-3 may add to their effect. Do not exceed the recommended daily dose. This is a nutraceutical, not a medicine, and is not intended to diagnose, treat, cure or prevent any disease.",
+    "key_benefits": [
+      "Supports normal immune function",
+      "Nutritional support during physical and mental stress",
+      "Antioxidant support — helps protect cells from oxidative stress",
+      "Fills everyday vitamin and mineral gaps, even in an otherwise healthy diet",
+      "One tablet replaces separate multivitamin, omega-3 and vitamin D supplements"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Nutraceutical / dietary supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Tablet"
+      },
+      {
+        "label": "Pack size",
+        "value": "10 Tablets"
+      },
+      {
+        "label": "Key actives",
+        "value": "Spirulina · Omega-3 EPA/DHA · Vitamin D3 · 21 multivitamins"
+      },
+      {
+        "label": "Recommended dose",
+        "value": "1 tablet daily after a meal"
+      },
+      {
+        "label": "Suitable for",
+        "value": "Adults"
+      },
+      {
+        "label": "Storage",
+        "value": "Store below 30°C, protected from light and moisture"
+      },
+      {
+        "label": "Marketed by",
+        "value": "Leaf Genix Lifesciences, Jaipur"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "Spirulina, marine omega-3 and a full 21-nutrient multivitamin are usually three separate purchases. Synvit-Forte combines all three at stated strength in a single daily tablet.",
+        "title": "One tablet, three supplements"
+      },
+      {
+        "body": "Ordinary multivitamins use inert bulking agents as the tablet base. Here the base is spirulina — itself a complete food source of protein, iron, B-vitamins and antioxidants. Nothing in the tablet is there just to make up volume.",
+        "title": "Built on spirulina, not on fillers"
+      },
+      {
+        "body": "Many combination products list a long ingredient wall but dose most of it in trace amounts. This is a full-spectrum multivitamin profile alongside the actives, not a sprinkle for the label.",
+        "title": "21 nutrients, not a token blend"
+      },
+      {
+        "body": "The spirulina base is the same ingredient the UN, WHO and NASA have all separately assessed and endorsed — an unusually well-documented starting point for a daily supplement.",
+        "title": "Backed by institutional recognition"
+      }
+    ],
+    "short_description": "Spirulina with Omega-3 Fatty Acid EPA/DHA, Vitamin D3 and 21 essential multivitamins — a single tablet that replaces a shelf of separate bottles."
+  },
+  {
+    "faqs": [
+      {
+        "a": "Yes — the strawberry flavour is designed with children in mind. For infants under one year, check with your paediatrician first.",
+        "q": "Can children take Probion?"
+      },
+      {
+        "a": "Both is fine. If taking alongside antibiotics, space the sachet at least two hours apart from the antibiotic dose so the bacteria are not killed on arrival.",
+        "q": "Should I take it during antibiotics or after?"
+      },
+      {
+        "a": "It is the first milk produced by cows after calving. It is naturally rich in antibodies and growth factors, and is used as a nutritional supplement for immune and gut support.",
+        "q": "What is bovine colostrum exactly?"
+      },
+      {
+        "a": "No. Store it in a cool dry place below 25°C. Avoid leaving it in direct sunlight or in a hot car.",
+        "q": "Does it need refrigeration?"
+      }
+    ],
+    "form": "Sachet",
+    "name": "Probion",
+    "slug": "probion-colostrum-probiotic",
+    "uses": [
+      "Restoring gut flora during and after a course of antibiotics",
+      "Reducing the duration and severity of diarrhoea",
+      "Supporting immune function in children and adults",
+      "Reducing the incidence and duration of respiratory infections",
+      "Support for allergic rhinitis symptoms — nasal congestion and sneezing",
+      "Support in infants with a family history of atopic dermatitis"
+    ],
+    "badge": "Pre + probiotic with colostrum",
+    "stock": 300,
+    "rating": 4.8,
+    "flavour": "Strawberry",
+    "gallery": [
+      "/products/probion-colostrum-probiotic-studio.png",
+      "/products/probion-colostrum-probiotic-2.jpg",
+      "/products/probion-colostrum-probiotic-3.jpg",
+      "/products/probion-colostrum-probiotic-4.jpg",
+      "/products/probion-colostrum-probiotic-5.jpg",
+      "/products/probion-colostrum-probiotic-6.jpg"
+    ],
+    "tagline": "Pre & probiotic with bovine colostrum — 5 billion CFU in one sachet",
+    "category": "Gut & Immunity",
+    "evidence": [
+      {
+        "claim": "L. rhamnosus GG and L. acidophilus reduced the duration and severity of diarrhoea compared to placebo",
+        "source": "Journal of Clinical Gastroenterology; Journal of Pediatric Gastroenterology and Nutrition"
+      },
+      {
+        "claim": "Prevention of atopic dermatitis (eczema) in infants with a family history of allergies",
+        "source": "Journal of Allergy and Clinical Immunology — double-blind, placebo-controlled trial"
+      },
+      {
+        "claim": "L. paracasei reduced the incidence and duration of respiratory infections compared to placebo",
+        "source": "International Journal of Immunopathology and Pharmacology"
+      },
+      {
+        "claim": "L. paracasei reduced the severity of allergic rhinitis symptoms such as nasal congestion and sneezing",
+        "source": "Clinical trial published in the Journal of Allergy and Clinical Immunology"
+      },
+      {
+        "claim": "S. boulardii significantly reduced the risk of developing Clostridium difficile infection in paediatric patients",
+        "source": "Digestive Diseases and Sciences"
+      }
+    ],
+    "fssai_no": "10019021005016",
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/probion-colostrum-probiotic-studio.png",
+    "mrp_paise": 47970,
+    "nutrition": [
+      {
+        "rda": "",
+        "dose": "4.08",
+        "unit": "Kcal",
+        "nutrient": "Energy"
+      },
+      {
+        "rda": "",
+        "dose": "1.00",
+        "unit": "g",
+        "nutrient": "Carbohydrate"
+      },
+      {
+        "rda": "",
+        "dose": "0.02",
+        "unit": "g",
+        "nutrient": "Protein"
+      },
+      {
+        "rda": "",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Fat"
+      },
+      {
+        "rda": "**",
+        "dose": "400",
+        "unit": "mg",
+        "nutrient": "Colostrum"
+      },
+      {
+        "rda": "**",
+        "dose": "400",
+        "unit": "mg",
+        "nutrient": "FOS"
+      },
+      {
+        "rda": "**",
+        "dose": "5",
+        "unit": "Billion CFU",
+        "nutrient": "Probiotic blend"
+      }
+    ],
+    "pack_size": "10 x 1 g Sachets",
+    "directions": "Empty the contents of one sachet into a glass of water, milk or juice, stir and drink. One sachet daily, or as directed by your healthcare practitioner. Do not mix into anything hot — heat destroys live cultures.",
+    "shelf_life": "Best before 18 months from the date of manufacture",
+    "sort_order": 2,
+    "composition": "Each 1 g sachet contains: Colostrum 400 mg, FOS 400 mg, Probiotic blend 5 Billion CFU (Lactobacillus rhamnosus, Lactobacillus paracasei, Lactobacillus acidophilus, Lactobacillus sporogenes, Bifidobacterium longum, Saccharomyces boulardii).",
+    "description": "Bovine colostrum is the first milk a cow produces after giving birth. It is rich in antibodies, growth factors and other beneficial components, and has long been used as a nutritional supplement to support immune function and gut health.\n\nProbion pairs 400 mg of that colostrum with six clinically studied probiotic strains delivering 5 billion CFU. The pairing matters: colostrum is a prebiotic-like substrate that helps the introduced bacteria establish, while the probiotics do the work in the gut. Each strain in the blend was selected because there is published human research behind it — not because it was cheap to source.\n\nThe result is a single strawberry-flavoured sachet a day, for children and adults alike, covering gut health and immune support together.",
+    "ingredients": [
+      "Bovine Colostrum",
+      "Lactobacillus rhamnosus GG",
+      "Lactobacillus paracasei",
+      "Lactobacillus acidophilus",
+      "Lactobacillus sporogenes",
+      "Bifidobacterium longum",
+      "Saccharomyces boulardii"
+    ],
+    "is_featured": true,
+    "price_paise": 47970,
+    "safety_info": "Contains milk derivatives — not suitable for anyone with a milk-protein allergy. Consult a doctor before use in severely immunocompromised patients. Not a substitute for prescribed treatment. Keep out of reach of children.",
+    "key_benefits": [
+      "5 Billion CFU across six clinically studied strains",
+      "400 mg bovine colostrum — antibodies and growth factors",
+      "One sachet a day, for children and adults",
+      "Combines prebiotic and probiotic action in a single dose",
+      "Delicious strawberry flavour — no fight at dosing time"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Nutraceutical / dietary supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Sachet — oral powder"
+      },
+      {
+        "label": "Pack size",
+        "value": "10 x 1 g Sachets"
+      },
+      {
+        "label": "Colostrum",
+        "value": "400 mg per sachet"
+      },
+      {
+        "label": "Probiotic count",
+        "value": "5 Billion CFU"
+      },
+      {
+        "label": "Strains",
+        "value": "6 — L. rhamnosus GG, L. paracasei, L. acidophilus, L. sporogenes, B. longum, S. boulardii"
+      },
+      {
+        "label": "Flavour",
+        "value": "Strawberry"
+      },
+      {
+        "label": "Recommended dose",
+        "value": "1 sachet daily"
+      },
+      {
+        "label": "Suitable for",
+        "value": "Children and adults — ask a paediatrician for infants"
+      },
+      {
+        "label": "Storage",
+        "value": "Store in a cool, dry place below 25°C, away from direct sunlight"
+      },
+      {
+        "label": "Marketed by",
+        "value": "Leaf Genix Lifesciences, Jaipur"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "Almost every probiotic on the Indian shelf is bacteria in a capsule. Probion adds 400 mg of bovine colostrum — the antibody-rich first milk — which supports immune function directly and gives the introduced bacteria a substrate to establish on.",
+        "title": "Colostrum plus probiotics, not probiotics alone"
+      },
+      {
+        "body": "This is not a generic multi-strain blend. Every strain was chosen against specific human research — L. rhamnosus GG for diarrhoea duration, L. paracasei for respiratory infection, S. boulardii for C. difficile risk.",
+        "title": "Six strains, each with its own published evidence"
+      },
+      {
+        "body": "A sachet works for a toddler and an adult alike, which a capsule does not. The strawberry flavour means children take it without negotiation.",
+        "title": "One dose for the whole family"
+      },
+      {
+        "body": "Many products declare only 'probiotic blend' with no strain names or viable count. Every strain is named here and the 5 billion CFU figure is on the pack.",
+        "title": "Named strains and a stated CFU count"
+      }
+    ],
+    "short_description": "Bovine colostrum 400 mg with a six-strain probiotic blend delivering 5 billion CFU. One sachet a day, for children and adults, in a strawberry flavour children will actually take."
+  },
+  {
+    "faqs": [
+      {
+        "a": "No. It is a nutraceutical that provides nutritional support. Any diagnosed neurodegenerative condition needs medical supervision and prescribed treatment — this sits alongside that, never in place of it.",
+        "q": "Is this a treatment for Alzheimer's or dementia?"
+      },
+      {
+        "a": "Yes — the syrup format is designed with children in mind. Ask your paediatrician for the right dose by age and weight.",
+        "q": "Can my child take it?"
+      },
+      {
+        "a": "No. It is mango flavoured specifically to mask the fish oil, which is the usual reason people abandon omega-3 syrups.",
+        "q": "Will it taste fishy?"
+      },
+      {
+        "a": "Omega-3 acts structurally, so benefit accumulates over months rather than days. Three to six months of consistent use is a reasonable first course.",
+        "q": "How long should we continue?"
+      }
+    ],
+    "form": "Syrup",
+    "name": "Edo Well",
+    "slug": "edo-well-syrup",
+    "uses": [
+      "Omega-3 (DHA) nutritional support for children's brain development",
+      "Memory and cognitive function in adults and the elderly",
+      "Nutritional support alongside neurodegenerative disorders in their early stages",
+      "Support for mood and depressive symptoms as an adjunct",
+      "General omega-3 and vitamin D supplementation for the whole family",
+      "Eye and immune support through Vitamin A, C and E"
+    ],
+    "badge": null,
+    "stock": 260,
+    "rating": 4.6,
+    "flavour": "Mango",
+    "gallery": [
+      "/products/edo-well-syrup-studio.png",
+      "/products/edo-well-syrup-2.jpg",
+      "/products/edo-well-syrup-3.jpg",
+      "/products/edo-well-syrup-4.jpg",
+      "/products/edo-well-syrup-5.jpg"
+    ],
+    "tagline": "The true calibration for the brain",
+    "category": "Brain & Development",
+    "evidence": [
+      {
+        "claim": "Treatment with omega-3 fatty acids (EPA+DHA), being safe and well tolerated, represents a valuable and biologically plausible tool in the management of neurodegenerative diseases in their early stages",
+        "source": "Cited in Leaf Genix clinical literature"
+      },
+      {
+        "claim": "Significant improvement in MDD and Parkinson's Disease — positiveness over depression; significant improvement in ability from disabilities on UPDRS score",
+        "source": "Brain health outcome data cited on pack literature"
+      },
+      {
+        "claim": "Significant decrease in MADRS and CGI scores; verbal recall was given for 6 months with cognition and plasma transdihydrin positively correlating with MMSE and inversely with ADAS-Cog score",
+        "source": "Cognition outcome data cited on pack literature"
+      }
+    ],
+    "fssai_no": "10017064001161",
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/edo-well-syrup-studio.png",
+    "mrp_paise": 88911,
+    "nutrition": [
+      {
+        "rda": "",
+        "dose": "35.25",
+        "unit": "Kcal",
+        "nutrient": "Energy"
+      },
+      {
+        "rda": "",
+        "dose": "6.00",
+        "unit": "g",
+        "nutrient": "Carbohydrate"
+      },
+      {
+        "rda": "",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Protein"
+      },
+      {
+        "rda": "",
+        "dose": "1.25",
+        "unit": "g",
+        "nutrient": "Fat"
+      },
+      {
+        "rda": "**",
+        "dose": "1.5",
+        "unit": "mg",
+        "nutrient": "FOS"
+      },
+      {
+        "rda": "**",
+        "dose": "400",
+        "unit": "mg",
+        "nutrient": "Omega 3 — EPA"
+      },
+      {
+        "rda": "**",
+        "dose": "300",
+        "unit": "mg",
+        "nutrient": "Omega 3 — DHA"
+      },
+      {
+        "rda": "10",
+        "dose": "100",
+        "unit": "mg",
+        "nutrient": "Calcium Carbonate"
+      },
+      {
+        "rda": "31.25",
+        "dose": "25",
+        "unit": "mg",
+        "nutrient": "Vitamin C"
+      },
+      {
+        "rda": "100",
+        "dose": "10",
+        "unit": "mg",
+        "nutrient": "Vitamin E"
+      },
+      {
+        "rda": "100",
+        "dose": "600",
+        "unit": "mcg",
+        "nutrient": "Vitamin A"
+      },
+      {
+        "rda": "100",
+        "dose": "176.47",
+        "unit": "mcg",
+        "nutrient": "Folic Acid"
+      },
+      {
+        "rda": "66.66",
+        "dose": "400",
+        "unit": "IU",
+        "nutrient": "Vitamin D3"
+      }
+    ],
+    "pack_size": "200 ml",
+    "directions": "Shake well before use. Adults and elderly: 10 ml (one teaspoonful) once or twice daily. Children: as directed by your paediatrician. Best taken after a meal.",
+    "shelf_life": "Best before 18 months from the date of manufacture",
+    "sort_order": 3,
+    "composition": "Each 10 ml (one teaspoonful) contains: Omega 3 — EPA 400 mg, DHA 300 mg; Calcium Carbonate 100 mg; Vitamin C 25 mg; Vitamin E 10 mg; Vitamin A 600 mcg; Folic Acid 176.47 mcg; Vitamin D3 400 IU; FOS 1.5 mg.",
+    "description": "Brain tissue is roughly sixty per cent fat, and DHA is the single most abundant structural fatty acid in it. That makes marine omega-3 less of an optional supplement and more of a building material — particularly during childhood development and again in later life when cognitive decline becomes a concern.\n\nEdo Well delivers 400 mg EPA and 300 mg DHA per 10 ml teaspoonful, alongside Vitamin D3, Vitamin A, C and E, calcium, folic acid and FOS as a prebiotic. Treatment with omega-3 fatty acids, being safe and well tolerated, represents a valuable and biologically plausible tool in the management of neurodegenerative diseases in their early stages.\n\nBecause it is a syrup rather than a capsule, it works for a five-year-old and an eighty-year-old alike. The mango flavour is there for a practical reason: a supplement nobody will swallow does nothing.",
+    "ingredients": [
+      "EPA",
+      "DHA",
+      "Vitamin D3",
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin E",
+      "Calcium Carbonate",
+      "Folic Acid",
+      "FOS"
+    ],
+    "is_featured": true,
+    "price_paise": 88911,
+    "safety_info": "Contains fish oil — not suitable for vegetarians or anyone with a seafood allergy. Shake well before use. Not for medicinal use. This product is not intended to diagnose, treat, cure or prevent any disease. Consult your doctor if you take blood-thinning medication. Store out of reach of children.",
+    "key_benefits": [
+      "400 mg EPA and 300 mg DHA per teaspoonful",
+      "Omega-3 DHA and EPA to support normal brain function, for children and adults",
+      "Vitamin D3 400 IU plus Vitamin A, C and E in the same dose",
+      "FOS included as a prebiotic for absorption and gut comfort",
+      "Syrup format — works for children and the elderly, no capsule to swallow",
+      "Delicious mango flavour"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Nutraceutical / dietary supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Syrup"
+      },
+      {
+        "label": "Pack size",
+        "value": "200 ml"
+      },
+      {
+        "label": "Serving size",
+        "value": "10 ml (one teaspoonful)"
+      },
+      {
+        "label": "EPA per serving",
+        "value": "400 mg"
+      },
+      {
+        "label": "DHA per serving",
+        "value": "300 mg"
+      },
+      {
+        "label": "Vitamin D3 per serving",
+        "value": "400 IU (66.66% RDA)"
+      },
+      {
+        "label": "Flavour",
+        "value": "Mango"
+      },
+      {
+        "label": "Shelf life",
+        "value": "Best before 18 months from date of manufacture"
+      },
+      {
+        "label": "FSSAI (printed on pack)",
+        "value": "10019021005016"
+      },
+      {
+        "label": "Storage",
+        "value": "Store below 25°C. Shake well before use. Keep out of reach of children"
+      },
+      {
+        "label": "Marketed by",
+        "value": "Leaf Genix Lifesciences, Jaipur"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "Children's omega-3 syrups typically carry 50 to 100 mg of DHA per dose. Edo Well delivers 700 mg of combined EPA and DHA in a single teaspoonful — capsule-level strength in a format a child can take.",
+        "title": "A therapeutic dose in a syrup"
+      },
+      {
+        "body": "Vitamin D3, A, C, E, calcium and folic acid are all in the same teaspoon. There is no need for a second bottle alongside it.",
+        "title": "Multivitamin built in, not sold separately"
+      },
+      {
+        "body": "The same syrup suits children's omega-3 needs and adults or elderly users who want a capsule-free format. Very few products in this category cover both ends properly.",
+        "title": "One syrup, children to elderly"
+      },
+      {
+        "body": "Fructo-oligosaccharide is included rather than plain sugar syrup as the carrier — it feeds gut flora instead of just sweetening the dose.",
+        "title": "FOS as a prebiotic, deliberately"
+      }
+    ],
+    "short_description": "Omega-3 EPA/DHA with Vitamin D3, multivitamins, polyols, FOS and folic acid. Nutritional support for brain function, from children to the elderly, in a mango-flavoured syrup."
+  },
+  {
+    "faqs": [
+      {
+        "a": "No, and it is not meant to. L-Sharp 400 is positioned as an adjuvant — supportive nutrition given alongside standard therapy. Never stop a prescribed medicine without your doctor's instruction.",
+        "q": "Can this replace my child's prescribed medication?"
+      },
+      {
+        "a": "No. It is a naturally occurring dipeptide of beta-alanine and L-histidine found in brain and muscle tissue. It is classified here as a nutraceutical.",
+        "q": "Is L-Carnosine a drug?"
+      },
+      {
+        "a": "No. L-Carnosine is not a sedative. Reported improvements are in cognition, communication and behaviour, without the drowsiness associated with several conventional agents.",
+        "q": "Will it sedate my child?"
+      },
+      {
+        "a": "Published improvement in cognition and behaviour is measured over months, not days. Discuss a realistic review point with your treating doctor — three months is a common first checkpoint.",
+        "q": "How long does it take?"
+      }
+    ],
+    "form": "Syrup",
+    "name": "L-Sharp 400",
+    "slug": "l-sharp-400-syrup",
+    "uses": [
+      "Supportive adjuvant in autism spectrum disorder (ASD)",
+      "Supportive adjuvant in ADHD and learning disorders",
+      "Supportive adjuvant in epilepsy and seizure disorders",
+      "Supportive adjuvant in obsessive-compulsive disorder",
+      "Supportive adjuvant in cerebral palsy",
+      "Nutritional support in depression, MDD and schizophrenia",
+      "Nutritional support in Parkinson's disease, Alzheimer's disease and dementia",
+      "Cognitive support after traumatic brain injury"
+    ],
+    "badge": "L-Carnosine 400 mg / 5 ml",
+    "stock": 180,
+    "rating": 4.8,
+    "flavour": "Bubblegum",
+    "gallery": [
+      "/products/l-sharp-400-syrup-studio.png",
+      "/products/l-sharp-400-syrup-2.jpg",
+      "/products/l-sharp-400-syrup-3.jpg",
+      "/products/l-sharp-400-syrup-4.jpg",
+      "/products/l-sharp-400-syrup-5.jpg"
+    ],
+    "tagline": "L-Carnosine neuro nutrition, backed by cited research",
+    "category": "Neuro Nutrition",
+    "evidence": [
+      {
+        "claim": "L-Carnosine graded B — Provisionally Recommended; clonazepam, clonidine, donepezil, niaprazine and ramelteon graded C with adverse effects common",
+        "source": "Handbook of Autism and Pervasive Developmental Disorder: Assessment, Diagnosis, and Treatment, Aug 2022 Edition"
+      },
+      {
+        "claim": "33.1% reduction in hyperactivity and non-compliance as an effective adjuvant to antipsychotics; safe and well tolerated",
+        "source": "Cited in Leaf Genix clinical literature"
+      },
+      {
+        "claim": "32% of patients in an independent open-label service study showed improvement in motor symptoms; efficacy of basic DOPA therapy demonstrated in 34% of patients with Parkinson's disease",
+        "source": "Cited in Leaf Genix clinical literature"
+      },
+      {
+        "claim": "Significant improvement in cognition, social communications, language domains, memory, behaviour, learning ability and gross motor ability",
+        "source": "Cognitive rehabilitation in paediatric cognitive engineering, International Journal of Cognitive Research"
+      }
+    ],
+    "fssai_no": "10019021005016",
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/l-sharp-400-syrup-studio.png",
+    "mrp_paise": 124200,
+    "nutrition": [
+      {
+        "rda": "",
+        "dose": "14.40",
+        "unit": "Kcal",
+        "nutrient": "Energy"
+      },
+      {
+        "rda": "",
+        "dose": "3.50",
+        "unit": "g",
+        "nutrient": "Carbohydrate"
+      },
+      {
+        "rda": "",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Protein"
+      },
+      {
+        "rda": "",
+        "dose": "0.10",
+        "unit": "g",
+        "nutrient": "Fat"
+      },
+      {
+        "rda": "**",
+        "dose": "400",
+        "unit": "mg",
+        "nutrient": "L-Carnosine"
+      }
+    ],
+    "pack_size": "200 ml",
+    "directions": "5 ml twice daily (bid), or as directed by your treating physician. Each 5 ml contains 400 mg of L-Carnosine. May be taken with or without food.",
+    "shelf_life": "Best before 18 months from the date of manufacture",
+    "sort_order": 4,
+    "composition": "Each 5 ml (one teaspoonful) contains: L-Carnosine 400 mg.",
+    "description": "L-Carnosine is a naturally occurring dipeptide of beta-alanine and L-histidine, concentrated in brain and muscle tissue. Its interest in neurology comes from doing several things at once: it scavenges copper and zinc, regulates NMDA and GABA receptors, modulates dopamine and glutamate levels, buffers oxidative stress, and supports neurotransmitter regulation and neuroprotection.\n\nL-Sharp 400 delivers 400 mg of L-Carnosine per 5 ml. It is positioned as an effective adjuvant with a demonstrated mechanism of action — support alongside standard therapy in autism spectrum disorder, ADHD, epilepsy, OCD, cerebral palsy and learning disorders, and separately in depression, MDD, schizophrenia, Parkinson's disease, Alzheimer's disease and dementia.\n\nThe published data behind it is the reason it exists in this form. In the Handbook of Autism and Pervasive Developmental Disorder, L-Carnosine carries a Grade B recommendation — provisionally recommended — while several conventional agents in the same table are graded C with the note that adverse effects are common.",
+    "ingredients": [
+      "L-Carnosine",
+      "Beta-alanine (constituent)",
+      "L-histidine (constituent)"
+    ],
+    "is_featured": true,
+    "price_paise": 124200,
+    "safety_info": "Intended as supportive nutrition alongside — never instead of — prescribed treatment. If you or your child are under the care of a neurologist, psychiatrist or paediatrician, tell them before starting. Not recommended during pregnancy or breastfeeding without medical advice. This product is not intended to diagnose, treat, cure or prevent any disease.",
+    "key_benefits": [
+      "400 mg L-Carnosine per 5 ml — a meaningful, stated dose",
+      "Scavenges copper and zinc; regulates NMDA and GABA receptors",
+      "Improves neuronal transmission and executive function",
+      "Reduces beta-amyloid protein and prevents tau protein formation",
+      "Raises BDNF levels and regulates synaptic plasticity",
+      "Crosses the blood-brain barrier",
+      "Safe, well tolerated and non-sedating",
+      "Bubblegum flavour for paediatric compliance"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Nutraceutical / dietary supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Syrup"
+      },
+      {
+        "label": "Pack size",
+        "value": "200 ml"
+      },
+      {
+        "label": "Strength",
+        "value": "L-Carnosine 400 mg per 5 ml"
+      },
+      {
+        "label": "Recommended dose",
+        "value": "5 ml twice daily (bid)"
+      },
+      {
+        "label": "Flavour",
+        "value": "Bubblegum"
+      },
+      {
+        "label": "Classification",
+        "value": "Nutraceutical — supportive nutrition alongside standard care"
+      },
+      {
+        "label": "Storage",
+        "value": "Store below 25°C, protected from light. Keep out of reach of children"
+      },
+      {
+        "label": "Marketed by",
+        "value": "Leaf Genix Lifesciences, Jaipur"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "In the Handbook of Autism and Pervasive Developmental Disorder (Aug 2022 edition), L-Carnosine is graded B — provisionally recommended. Clonazepam, clonidine, donepezil, niaprazine and ramelteon in the same table are graded C, with the remark that adverse effects are common.",
+        "title": "Grade B where alternatives are Grade C"
+      },
+      {
+        "body": "33.1% reduction in hyperactivity and non-compliance has been reported for L-Carnosine as an adjuvant to antipsychotics. It is designed to work with existing therapy, safely, rather than compete with it.",
+        "title": "Adjuvant, not replacement — and dosed to prove it"
+      },
+      {
+        "body": "L-histidine binds endogenous GABA and forms homocarnosine; beta-alanine crosses the blood-brain barrier and raises BDNF. One dipeptide addresses oxidative stress, neurotransmitter regulation and synaptic plasticity together.",
+        "title": "A single molecule with multiple mechanisms"
+      },
+      {
+        "body": "The patient groups this is made for — children with ASD or ADHD, elderly patients with dementia — are precisely the groups that struggle with tablets. Bubblegum-flavoured syrup is a clinical decision, not a marketing one.",
+        "title": "A syrup, because compliance is the whole problem"
+      }
+    ],
+    "short_description": "L-Carnosine 400 mg per 5 ml. A dipeptide studied as supportive nutrition alongside standard care in neurodevelopmental, psychiatric and neurodegenerative conditions."
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is the proportion of myo- to D-chiro-inositol measured in healthy human plasma, and it is the ratio used in the studies that made inositol interesting in the first place. A product giving myo-inositol alone is a different intervention, whatever the total milligrams say.",
+        "q": "Why does the 40:1 ratio matter?"
+      },
+      {
+        "a": "The published work generally looks at outcomes over three to six months of consistent use. Treat anything faster than that with suspicion, and review it with your doctor.",
+        "q": "How long before anything changes?"
+      },
+      {
+        "a": "That is a question for your doctor, who knows your prescription and your bloodwork. Do not add or stop anything on the basis of a product page.",
+        "q": "Can I take it alongside metformin?"
+      },
+      {
+        "a": "It is formulated around that literature, but the actives are general-purpose. Your doctor is the right person to say whether it fits your situation.",
+        "q": "Is it only for women with PCOS?"
+      }
+    ],
+    "form": "Tablet",
+    "name": "Firtilo-f",
+    "slug": "firtilo-f",
+    "uses": [
+      "Supporting menstrual regularity in women with PCOS",
+      "Supporting healthy insulin sensitivity and glucose metabolism",
+      "Supporting ovarian function as part of a fertility plan",
+      "Adjunct to diet and lifestyle measures, on medical advice"
+    ],
+    "badge": "For women",
+    "stock": 200,
+    "rating": null,
+    "flavour": null,
+    "gallery": [
+      "/products/firtilo-f-studio.png",
+      "/products/firtilo-f-2.jpg",
+      "/products/firtilo-f-3.jpg",
+      "/products/firtilo-f-4.jpg",
+      "/products/firtilo-f-5.jpg"
+    ],
+    "tagline": "Myo-inositol at the 40:1 ratio the PCOS research actually used",
+    "category": "Women's Health",
+    "evidence": [
+      {
+        "claim": "Myo-inositol and D-chiro-inositol in a 40:1 ratio reflects the proportion found in healthy human plasma, and is the ratio used in the clinical work on ovarian function.",
+        "source": "Nordio M, Proietti E. Eur Rev Med Pharmacol Sci, 2012"
+      },
+      {
+        "claim": "Inositol supplementation has been studied for its effect on menstrual regularity and markers of insulin sensitivity in women with PCOS.",
+        "source": "Unfer V et al. Gynecol Endocrinol, 2017 (systematic review)"
+      },
+      {
+        "claim": "Chromium is an essential trace element with an established role in normal macronutrient metabolism; 200 mcg meets 100% of the Indian RDA.",
+        "source": "ICMR-NIN Nutrient Requirements for Indians, 2020"
+      }
+    ],
+    "fssai_no": "22226076000075",
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/firtilo-f-studio.png",
+    "mrp_paise": 30600,
+    "nutrition": [
+      {
+        "rda": "**",
+        "dose": "1100",
+        "unit": "mg",
+        "nutrient": "Myo-Inositol"
+      },
+      {
+        "rda": "**",
+        "dose": "27.8",
+        "unit": "mg",
+        "nutrient": "D-Chiro Inositol"
+      },
+      {
+        "rda": "**",
+        "dose": "200",
+        "unit": "mcg",
+        "nutrient": "Chromium Picolinate"
+      },
+      {
+        "rda": "**",
+        "dose": "20",
+        "unit": "mg",
+        "nutrient": "Fenugreek Extract"
+      },
+      {
+        "rda": "66.66",
+        "dose": "400",
+        "unit": "IU",
+        "nutrient": "Vitamin D3 (Cholecalciferol)"
+      },
+      {
+        "rda": "0.00",
+        "dose": "0.00",
+        "unit": "Kcal",
+        "nutrient": "Energy"
+      },
+      {
+        "rda": "0.00",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Protein"
+      },
+      {
+        "rda": "**",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Carbohydrate"
+      },
+      {
+        "rda": "**",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Sugar"
+      },
+      {
+        "rda": "0.00",
+        "dose": "0.00",
+        "unit": "g",
+        "nutrient": "Fat"
+      },
+      {
+        "rda": "**",
+        "dose": "0.00",
+        "unit": "mg",
+        "nutrient": "Cholesterol"
+      },
+      {
+        "rda": "0.10",
+        "dose": "2.00",
+        "unit": "mg",
+        "nutrient": "Sodium"
+      }
+    ],
+    "pack_size": "10 Tablets",
+    "directions": "As recommended by your healthcare professional. Swallow the tablet whole with water — do not crush, chew or break it. Best taken consistently at the same time each day.",
+    "shelf_life": "Best before 18 months from the date of manufacture",
+    "sort_order": 5,
+    "composition": "Each film-coated tablet contains: Myo-Inositol 1100 mg, D-Chiro Inositol 27.8 mg, Chromium Picolinate 200 mcg, Fenugreek Extract 20 mg, Vitamin D3 (Cholecalciferol) 400 IU.",
+    "description": "Most inositol supplements sold in India give you myo-inositol alone, or a ratio picked for cost rather than for the body. Firtilo-f is dosed at 1100 mg myo-inositol to 27.8 mg D-chiro-inositol — almost exactly 40:1, the ratio found in healthy human plasma and the one used in the trials people cite when they recommend inositol at all.\n\nAround it sits the rest of what the same literature keeps pointing at: chromium picolinate 200 mcg for glucose handling, a standardised fenugreek extract, and vitamin D3 400 IU, because insufficiency is close to universal among Indian women and it is measured alongside almost every one of these outcomes.\n\nEvery quantity is printed on the pack. There is no proprietary blend and nothing hidden behind the word \"complex\".",
+    "ingredients": [
+      "Myo-Inositol",
+      "D-Chiro Inositol",
+      "Chromium Picolinate",
+      "Fenugreek Extract",
+      "Vitamin D3"
+    ],
+    "is_featured": true,
+    "price_paise": 30600,
+    "safety_info": "Not for medicinal use. This product is not intended to diagnose, treat, cure or prevent any disease, and is not a substitute for a varied diet. Consult a healthcare provider before use if you are pregnant, nursing, taking any medication, or have a medical condition. Do not exceed the recommended daily dose. Keep out of reach of children.",
+    "key_benefits": [
+      "Myo- and D-chiro-inositol at the 40:1 physiological ratio, not an arbitrary one",
+      "Chromium picolinate 200 mcg — 100% RDA — for glucose metabolism",
+      "Standardised fenugreek extract",
+      "Vitamin D3 400 IU, at 66.66% RDA",
+      "One tablet a day; no proprietary blends, every quantity on the label"
+    ],
+    "review_count": null,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Nutraceutical / dietary supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Film-coated tablet"
+      },
+      {
+        "label": "Pack size",
+        "value": "10 Tablets"
+      },
+      {
+        "label": "Key actives",
+        "value": "Myo-Inositol 1100 mg · D-Chiro Inositol 27.8 mg · Chromium Picolinate 200 mcg · Vitamin D3 400 IU"
+      },
+      {
+        "label": "Inositol ratio",
+        "value": "40:1 (myo : D-chiro)"
+      },
+      {
+        "label": "Recommended dose",
+        "value": "As recommended by a healthcare professional"
+      },
+      {
+        "label": "Suitable for",
+        "value": "Adult women"
+      },
+      {
+        "label": "Storage",
+        "value": "Store in a cool, dry place, out of reach of children"
+      },
+      {
+        "label": "Manufactured by",
+        "value": "Phaedrus Life Science Pvt. Ltd., Vatva, Ahmedabad (WHO-GMP, ISO 9001:2015)"
+      },
+      {
+        "label": "Marketed by",
+        "value": "Leaf Genix Lifesciences, Jaipur"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "40:1 myo to D-chiro is the ratio measured in healthy human plasma and used in the trials. A supplement giving myo-inositol alone, or a flat 1:1, is not the same intervention.",
+        "title": "The ratio is the whole point"
+      },
+      {
+        "body": "1100 mg of myo-inositol per tablet is printed on the pack. Check it against any competing label before you decide.",
+        "title": "A dose you can compare"
+      },
+      {
+        "body": "200 mcg of chromium picolinate is 100% RDA, not a token sprinkle added for the ingredient list.",
+        "title": "Chromium at full RDA"
+      },
+      {
+        "body": "No proprietary blend. Five actives, five printed quantities.",
+        "title": "Nothing hidden"
+      }
+    ],
+    "short_description": "A myo-inositol and D-chiro-inositol tablet dosed at 1100 mg : 27.8 mg — the 40:1 physiological ratio — with chromium picolinate, fenugreek extract and vitamin D3."
+  },
+  {
+    "faqs": [
+      {
+        "a": "Usually once a week during a correction course, then less often for maintenance. The exact schedule should come from your doctor and ideally from a blood test, not from a general rule.",
+        "q": "How often do I take this?"
+      },
+      {
+        "a": "Vitamin D is fat-soluble and absorbs poorly from an undissolved granule. A nano-technology oral solution is already in a form the gut can take up, and there is nothing left in the glass.",
+        "q": "Why a shot and not a sachet?"
+      },
+      {
+        "a": "60000 IU is an adult correction dose. Paediatric vitamin D dosing is different and must be set by a paediatrician.",
+        "q": "Can children take it?"
+      },
+      {
+        "a": "It is sugar free, which is why it was formulated that way. Your diabetes management is otherwise unaffected.",
+        "q": "Is it safe for diabetics?"
+      }
+    ],
+    "form": "Oral Solution",
+    "name": "MD3 Nano Shot",
+    "slug": "md3-nano-shot",
+    "uses": [
+      "Correcting and maintaining Vitamin D3 levels",
+      "Supporting calcium absorption for bone strength",
+      "Prevention of rickets in children",
+      "Prevention of osteoporosis in adults",
+      "Neuromuscular and immune function support",
+      "Reduction of inflammation"
+    ],
+    "badge": "Nano Technology",
+    "stock": 500,
+    "rating": 4.7,
+    "flavour": "Pineapple",
+    "gallery": [
+      "/products/photo-coming-soon.jpg"
+    ],
+    "tagline": "For a rapid rise in Vitamin D3 levels",
+    "category": "Bone & Vitamin D",
+    "evidence": [],
+    "fssai_no": null,
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/photo-coming-soon.jpg",
+    "mrp_paise": 9900,
+    "nutrition": [],
+    "pack_size": "5 ml",
+    "directions": "Drink the entire 5 ml shot directly, or as directed by your physician. Typically taken once weekly during a correction course. Best taken after a meal containing some fat, which aids absorption of fat-soluble vitamins.",
+    "shelf_life": null,
+    "sort_order": 6,
+    "composition": "Each 5 ml oral solution contains: Cholecalciferol (Vitamin D3) 60000 IU. Sugar free. Pineapple flavour.",
+    "description": "The problem with weekly vitamin D sachets is not the dose — it is what happens to it. Cholecalciferol is fat-soluble, and a granule dissolved in water is poorly absorbed by a gut that has nothing to emulsify it with.\n\nMD3 Nano Shot uses nano technology to present the same 60000 IU as a ready-to-use oral solution, with particle sizes engineered for absorption rather than left to chance. There is nothing to mix, nothing to dissolve, and no gritty sachet to negotiate — you drink the 5 ml shot.\n\nIt is sugar free and pineapple flavoured, which matters more than it sounds: this is a weekly dose most people take for eight to twelve weeks, and compliance across that period is what actually raises a serum 25-OH-D level.",
+    "ingredients": [
+      "Cholecalciferol (Vitamin D3)"
+    ],
+    "is_featured": false,
+    "price_paise": 8500,
+    "safety_info": "High-dose vitamin D. Do not take more often than directed by your doctor. Not for patients with hypercalcaemia, hypervitaminosis D, or kidney stones without medical supervision. Have your serum 25-OH-D level checked before starting and after completing a course. Keep well out of reach of children.",
+    "key_benefits": [
+      "Helps absorb maximum calcium",
+      "Makes bones healthy and strong",
+      "Prevents rickets in children",
+      "Prevents osteoporosis in adults",
+      "Helps in neuro-muscular and immune function, and reduction of inflammation",
+      "Sugar free — suitable where sugar intake is restricted",
+      "Ready-to-use oral solution — excellent patient compliance"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Nutraceutical / dietary supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Oral solution — ready to use"
+      },
+      {
+        "label": "Pack size",
+        "value": "5 ml"
+      },
+      {
+        "label": "Strength",
+        "value": "Cholecalciferol 60000 IU per 5 ml"
+      },
+      {
+        "label": "Technology",
+        "value": "Nano technology for enhanced absorption"
+      },
+      {
+        "label": "Sugar",
+        "value": "Sugar free"
+      },
+      {
+        "label": "Flavour",
+        "value": "Pineapple"
+      },
+      {
+        "label": "Typical regimen",
+        "value": "One shot weekly, or as directed by your physician"
+      },
+      {
+        "label": "Storage",
+        "value": "Store below 30°C, protected from light"
+      },
+      {
+        "label": "Marketed by",
+        "value": "Leaf Genix Lifesciences, Jaipur"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "Every 60000 IU product carries the same dose on the label. The difference is how much of it is absorbed. Nano-sized particles present the fat-soluble vitamin in a form the gut can take up without depending on what you ate alongside it.",
+        "title": "Nano technology, not just a higher number"
+      },
+      {
+        "body": "Ready to use straight from the pack — no mixing, no undissolved granules left at the bottom of the glass, no guessing whether the full dose was actually taken.",
+        "title": "A liquid shot instead of a sachet"
+      },
+      {
+        "body": "Most 60000 IU sachets are sugar-based granules. This is sugar free, which matters for the diabetic patients who make up a large share of the people being tested for vitamin D deficiency.",
+        "title": "Sugar free"
+      },
+      {
+        "body": "Correction protocols run weekly for two to three months. Flavour is what keeps a patient on week nine.",
+        "title": "Pineapple flavour for an 8 to 12 week course"
+      }
+    ],
+    "short_description": "Cholecalciferol 60000 IU in a 5 ml ready-to-use oral solution. Nano technology for absorption, sugar free, pineapple flavoured."
+  },
+  {
+    "faqs": [
+      {
+        "a": "No. It is a hepatoprotective support formulation. Diagnosed liver disease needs a doctor's supervision and prescribed treatment — Perfect Liv sits alongside that.",
+        "q": "Will this cure fatty liver or hepatitis?"
+      },
+      {
+        "a": "The claimed effects are on SGPT, SGOT and bilirubin, which are standard liver function tests. Your doctor can measure them before and after.",
+        "q": "How will I know it is working?"
+      },
+      {
+        "a": "Generally yes, but tell your doctor you are taking it — particularly if you are on medication that is itself hard on the liver.",
+        "q": "Is it safe with my other medicines?"
+      },
+      {
+        "a": "Yes, Perfect Liv is available as both a syrup and a tablet.",
+        "q": "Is there a tablet version?"
+      }
+    ],
+    "form": "Syrup",
+    "name": "Perfect Liv",
+    "slug": "perfect-liv-syrup",
+    "uses": [
+      "Supportive care in viral hepatitis",
+      "Drug-induced hepatotoxicity",
+      "Alcohol-induced hepatotoxicity",
+      "Cholestatic jaundice",
+      "Elevated SGPT / SGOT / bilirubin",
+      "General liver maintenance for adults under load"
+    ],
+    "badge": "Ayurvedic",
+    "stock": 280,
+    "rating": 4.5,
+    "flavour": null,
+    "gallery": [
+      "/products/photo-coming-soon.jpg"
+    ],
+    "tagline": "An Ayurvedic hepatoprotective syrup",
+    "category": "Liver Care",
+    "evidence": [],
+    "fssai_no": null,
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/photo-coming-soon.jpg",
+    "mrp_paise": 24500,
+    "nutrition": [],
+    "pack_size": "200 ml",
+    "directions": "To be directed by the physician. Shake well before use.",
+    "shelf_life": null,
+    "sort_order": 7,
+    "composition": "Ayurvedic proprietary hepatoprotective herbal syrup. Full herbal composition is printed on the pack.",
+    "description": "The liver processes everything — medication, alcohol, processed food, environmental load — and it repairs itself well until it does not. Perfect Liv is a classical Ayurvedic hepatoprotective formulation built for maintenance support and for the phase after a liver insult, when enzymes are elevated and the organ needs help recovering.\n\nIt is a very safe and effective herbal formula that helps protect a patient's liver suffering from viral hepatitis, drug-induced hepatotoxicity, alcohol-induced hepatotoxicity and cholestatic jaundice.\n\nIt is presented simply, without exotic claims: reduces SGPT, SGOT and bilirubin, increases bile flow, improves liver immunity, and reverses hepatic cell damage.",
+    "ingredients": [
+      "Ayurvedic hepatoprotective herbal blend"
+    ],
+    "is_featured": false,
+    "price_paise": 21000,
+    "safety_info": "If you have been diagnosed with a liver condition, use only under medical supervision — this supports treatment, it does not replace it. Not a substitute for prescribed antiviral or specialist therapy in hepatitis. Not for children except on medical advice.",
+    "key_benefits": [
+      "Reduces SGPT, SGOT and bilirubin levels",
+      "Increases bile flow",
+      "Improves liver immunity",
+      "Reverses hepatic cell damage",
+      "A very safe and effective herbal formula",
+      "Everyday support for the liver, in a classical Ayurvedic form"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Ayurvedic proprietary medicine"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Syrup"
+      },
+      {
+        "label": "Pack size",
+        "value": "200 ml"
+      },
+      {
+        "label": "Action",
+        "value": "Hepatoprotective"
+      },
+      {
+        "label": "Also available as",
+        "value": "Tablet"
+      },
+      {
+        "label": "Recommended dose",
+        "value": "As directed by your physician"
+      },
+      {
+        "label": "Storage",
+        "value": "Store below 30°C, protected from direct sunlight"
+      },
+      {
+        "label": "Marketed by",
+        "value": "Leaf Genix Lifesciences, Jaipur"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "The claim set is specific and measurable — SGPT, SGOT and bilirubin. That is a liver function test, not a wellness slogan, and it can be checked.",
+        "title": "Named outcomes, not vague 'detox'"
+      },
+      {
+        "body": "Viral hepatitis, drug-induced and alcohol-induced hepatotoxicity, and cholestatic jaundice. It was designed around clinical situations rather than as a general tonic.",
+        "title": "Formulated for four specific insults"
+      },
+      {
+        "body": "Manufactured under the same WHO-GMP quality system as the rest of the Leaf Genix range, so an Ayurvedic formulation arrives with pharmaceutical-grade batch control.",
+        "title": "Ayurvedic, with a pharmaceutical presentation"
+      },
+      {
+        "body": "Liver recovery is measured in months. The formulation is positioned as very safe and well tolerated precisely because it needs to be taken for that long.",
+        "title": "Safe enough for long courses"
+      }
+    ],
+    "short_description": "A hepatoprotective Ayurvedic herbal syrup that reduces SGPT, SGOT and bilirubin levels, increases bile flow and reverses hepatic cell damage."
+  },
+  {
+    "faqs": [
+      {
+        "a": "It is formulated with ferric ammonium citrate rather than ferrous sulphate, which is generally better tolerated. Taking it after food helps further.",
+        "q": "Will it upset my stomach like other iron tonics?"
+      },
+      {
+        "a": "Iron and folic acid supplementation is routine in pregnancy, but the dose and product should be confirmed by your obstetrician.",
+        "q": "Can I take it during pregnancy?"
+      },
+      {
+        "a": "That is a normal and harmless effect of oral iron. It is not a cause for concern.",
+        "q": "Why has my stool turned dark?"
+      },
+      {
+        "a": "Haemoglobin typically begins to respond within a few weeks, but stores take three to six months to refill. Do not stop early just because you feel better.",
+        "q": "How long until my haemoglobin improves?"
+      }
+    ],
+    "form": "Syrup",
+    "name": "Haemerange",
+    "slug": "haemerange-syrup",
+    "uses": [
+      "Iron deficiency anaemia",
+      "Nutritional anaemia in pregnancy and lactation",
+      "Anaemia in children and adolescents",
+      "Recovery after blood loss or surgery",
+      "Fatigue and weakness associated with low iron",
+      "Vitamin B12 and folate supplementation"
+    ],
+    "badge": null,
+    "stock": 320,
+    "rating": 4.5,
+    "flavour": "Orange",
+    "gallery": [
+      "/products/photo-coming-soon.jpg"
+    ],
+    "tagline": "Hematinic syrup of iron, folic acid and Vitamin B12",
+    "category": "Blood & Iron",
+    "evidence": [],
+    "fssai_no": null,
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/photo-coming-soon.jpg",
+    "mrp_paise": 23500,
+    "nutrition": [],
+    "pack_size": "200 ml",
+    "directions": "Adults: 15 ml (one tablespoonful) once or twice daily after meals. Children: as directed by your physician. Take with a source of vitamin C such as citrus juice to aid absorption; avoid taking with tea, coffee or calcium supplements, which reduce it.",
+    "shelf_life": null,
+    "sort_order": 8,
+    "composition": "Each 15 ml (one tablespoonful) contains: Ferric Ammonium Citrate IP 160 mg (equivalent to Elemental Iron 32.8 mg), Cyanocobalamin IP 7.5 mcg, Folic Acid IP 0.5 mg, Alcohol (95%) 0.87 ml (as Ethyl Alcohol).",
+    "description": "Iron deficiency is the most common nutritional deficiency in India, and the most commonly abandoned supplement — because ferrous salts cause constipation, nausea and a metallic taste that most people will not tolerate for the three to six months a correction actually takes.\n\nHaemerange uses Ferric Ammonium Citrate, which is generally better tolerated than plain ferrous sulphate, and pairs it with folic acid and cyanocobalamin so that all three inputs to red cell production are covered together. Each 15 ml tablespoonful provides 160 mg of ferric ammonium citrate, equivalent to 32.8 mg of elemental iron, with 7.5 mcg of B12 and 0.5 mg of folic acid.\n\nIt is orange flavoured for the same reason it is a syrup: the dose that gets taken is the only one that raises a haemoglobin count.",
+    "ingredients": [
+      "Ferric Ammonium Citrate",
+      "Cyanocobalamin (Vitamin B12)",
+      "Folic Acid"
+    ],
+    "is_featured": false,
+    "price_paise": 19900,
+    "safety_info": "Contains 0.87 ml alcohol (95%) per 15 ml. Iron overdose is a leading cause of fatal poisoning in children under six — keep well out of reach. Do not take alongside another iron supplement. Iron may darken the stool, which is harmless. Consult your doctor before use if you have haemochromatosis or any iron-overload condition.",
+    "key_benefits": [
+      "32.8 mg elemental iron per tablespoonful",
+      "Ferric ammonium citrate — generally gentler on the stomach than ferrous salts",
+      "Folic acid and Vitamin B12 in the same dose",
+      "Orange flavoured — no metallic aftertaste",
+      "Syrup format, easy to dose by age and weight"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Hematinic supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Syrup"
+      },
+      {
+        "label": "Pack size",
+        "value": "200 ml"
+      },
+      {
+        "label": "Serving size",
+        "value": "15 ml (one tablespoonful)"
+      },
+      {
+        "label": "Elemental iron",
+        "value": "32.8 mg per 15 ml"
+      },
+      {
+        "label": "Vitamin B12",
+        "value": "7.5 mcg per 15 ml"
+      },
+      {
+        "label": "Folic acid",
+        "value": "0.5 mg per 15 ml"
+      },
+      {
+        "label": "Flavour",
+        "value": "Orange"
+      },
+      {
+        "label": "Manufactured by",
+        "value": "Samson Laboratories Pvt. Ltd. (WHO-GMP), Barotiwala, Solan"
+      },
+      {
+        "label": "Storage",
+        "value": "Store below 30°C, protected from light"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "Red cell production needs iron, folate and B12 together. Products that supply iron alone leave two of the three inputs to chance.",
+        "title": "All three haematinics in one dose"
+      },
+      {
+        "body": "The salt choice is the difference between a course that gets finished and one abandoned in week two. Ferric ammonium citrate is generally better tolerated for gastric side effects.",
+        "title": "Ferric ammonium citrate, not ferrous sulphate"
+      },
+      {
+        "body": "160 mg of the salt equals 32.8 mg of elemental iron, and both numbers are printed. Many labels quote only the salt weight, which overstates what you are actually getting.",
+        "title": "Stated elemental iron"
+      },
+      {
+        "body": "The metallic taste of iron is the single most cited reason patients stop. Flavour here is an adherence tool, not a garnish.",
+        "title": "Orange flavoured syrup"
+      }
+    ],
+    "short_description": "Ferric Ammonium Citrate with folic acid and Vitamin B12 in an orange-flavoured syrup — iron supplementation without the metallic aftertaste."
+  },
+  {
+    "faqs": [
+      {
+        "a": "Calcitriol is the already-active form. The body normally has to convert D3 through the liver and then the kidney, and that conversion becomes less reliable with age or kidney impairment.",
+        "q": "Why calcitriol instead of ordinary Vitamin D3?"
+      },
+      {
+        "a": "It directs absorbed calcium into bone rather than letting it deposit in soft tissue and arteries. Calcium without vitamin K is absorbed but not necessarily well placed.",
+        "q": "What does Vitamin K27 do here?"
+      },
+      {
+        "a": "It is a softgel rather than a compressed tablet, which disperses faster and is generally easier on the gut. The magnesium content also helps.",
+        "q": "Will it cause constipation like other calcium tablets?"
+      },
+      {
+        "a": "Not at the same time — calcium blocks iron absorption. Leave at least two hours between them.",
+        "q": "Can I take it with my iron syrup?"
+      }
+    ],
+    "form": "Softgel Capsule",
+    "name": "Calcin-K27",
+    "slug": "calcin-k27-softgel",
+    "uses": [
+      "Calcium and vitamin D supplementation in adults",
+      "Osteoporosis and osteopenia support",
+      "Post-menopausal bone health",
+      "Calcium support during pregnancy and lactation",
+      "Bone and joint health in older adults",
+      "Nerve support through methylcobalamin and folate"
+    ],
+    "badge": null,
+    "stock": 260,
+    "rating": 4.6,
+    "flavour": null,
+    "gallery": [
+      "/products/photo-coming-soon.jpg"
+    ],
+    "tagline": "Calcium that reaches the bone, not just the bloodstream",
+    "category": "Bone & Calcium",
+    "evidence": [],
+    "fssai_no": null,
+    "gst_rate": 12.0,
+    "hsn_code": "21069099",
+    "image_url": "/products/photo-coming-soon.jpg",
+    "mrp_paise": 39900,
+    "nutrition": [],
+    "pack_size": "10 Softgel Capsules",
+    "directions": "Take 1 capsule daily after a meal with water, or as directed by your healthcare practitioner. Do not take at the same time as an iron supplement or thyroid medication — space them at least two hours apart.",
+    "shelf_life": null,
+    "sort_order": 9,
+    "composition": "Each soft gelatin capsule contains: Calcium Carbonate IP 500 mg, Calcitriol IP 0.25 mcg, Zinc Sulphate Monohydrate IP equivalent to Elemental Zinc 7.5 mg, Magnesium Sulphate IP equivalent to Elemental Magnesium 50 mg, Vitamin K27 45 mcg, Methylcobalamin IP 1500 mcg, L-Methyl Folate 800 mcg, Excipients q.s.",
+    "description": "Taking calcium on its own is close to pointless. Calcium needs calcitriol — the active form of vitamin D — to be absorbed from the gut, and it needs Vitamin K to be directed into bone rather than deposited in soft tissue and arteries. Magnesium is required for the enzymes that handle it. Miss those and most of a calcium tablet simply passes through.\n\nCalcin-K27 is built around that dependency chain. Each soft gelatin capsule carries 500 mg of calcium carbonate with calcitriol 0.25 mcg, Vitamin K27 45 mcg, elemental magnesium 50 mg and elemental zinc 7.5 mg, plus methylcobalamin 1500 mcg and L-methyl folate 800 mcg for nerve and homocysteine support.\n\nThe softgel format matters too: a liquid-filled capsule disperses faster than a compressed chalk tablet and avoids the constipation that makes people abandon calcium supplements.",
+    "ingredients": [
+      "Calcium Carbonate",
+      "Calcitriol",
+      "Vitamin K27",
+      "Magnesium",
+      "Zinc",
+      "Methylcobalamin",
+      "L-Methyl Folate"
+    ],
+    "is_featured": false,
+    "price_paise": 34000,
+    "safety_info": "Consult your doctor before use if you have kidney stones, hypercalcaemia, or kidney disease, or if you take digoxin, thiazide diuretics or thyroid medication. Contains calcitriol — do not combine with another active vitamin D analogue without medical supervision. Not for children except on medical advice.",
+    "key_benefits": [
+      "500 mg calcium carbonate with calcitriol — the active form of Vitamin D",
+      "Vitamin K27 directs calcium into bone rather than soft tissue",
+      "Elemental magnesium 50 mg and zinc 7.5 mg as required cofactors",
+      "Methylcobalamin 1500 mcg and L-methyl folate 800 mcg for nerve support",
+      "Softgel capsule — faster dispersion, gentler than compressed tablets"
+    ],
+    "review_count": 0,
+    "specifications": [
+      {
+        "label": "Product type",
+        "value": "Nutraceutical / dietary supplement"
+      },
+      {
+        "label": "Dosage form",
+        "value": "Soft gelatin capsule"
+      },
+      {
+        "label": "Pack size",
+        "value": "10 Softgel Capsules"
+      },
+      {
+        "label": "Calcium",
+        "value": "Calcium Carbonate IP 500 mg"
+      },
+      {
+        "label": "Vitamin D",
+        "value": "Calcitriol IP 0.25 mcg"
+      },
+      {
+        "label": "Vitamin K",
+        "value": "Vitamin K27 45 mcg"
+      },
+      {
+        "label": "Magnesium",
+        "value": "Elemental Magnesium 50 mg"
+      },
+      {
+        "label": "Zinc",
+        "value": "Elemental Zinc 7.5 mg"
+      },
+      {
+        "label": "Recommended dose",
+        "value": "1 capsule daily, or as directed"
+      },
+      {
+        "label": "Manufactured by",
+        "value": "Samson Laboratories Pvt. Ltd. (WHO-GMP), Barotiwala, Solan"
+      },
+      {
+        "label": "Storage",
+        "value": "Store below 30°C, protected from light and moisture"
+      }
+    ],
+    "differentiators": [
+      {
+        "body": "Calcitriol is the biologically active form of vitamin D — the body does not have to convert it through the liver and kidney first. That matters most in exactly the older patients who need calcium supplementation.",
+        "title": "Calcitriol, not plain cholecalciferol"
+      },
+      {
+        "body": "Calcium absorbed without vitamin K can end up in arteries and soft tissue rather than bone. Including K27 is what turns absorption into deposition.",
+        "title": "Vitamin K27 sends calcium to the right place"
+      },
+      {
+        "body": "A significant share of the population carries MTHFR variants that impair conversion of ordinary folic acid. L-methyl folate skips that step entirely.",
+        "title": "L-methyl folate, the pre-activated form"
+      },
+      {
+        "body": "Compressed calcium tablets are large, gritty and constipating. A liquid-filled soft gelatin capsule disperses faster and is far easier to keep taking.",
+        "title": "Softgel, not a chalk tablet"
+      }
+    ],
+    "short_description": "Calcium carbonate with calcitriol, Vitamin K27, magnesium, zinc, methylcobalamin and L-methyl folate — the full set of cofactors calcium needs to be used."
+  }
+]

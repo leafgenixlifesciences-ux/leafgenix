@@ -49,3 +49,6 @@ next-env.d.ts
 
 # Netlify CLI state
 .netlify
+
+# Supabase CLI scratch files
+/supabase/.temp/

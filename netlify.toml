@@ -12,3 +12,8 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Free Supabase projects may pause after a low-activity week. This performs a
+# small real database read three times daily from the published Netlify site.
+[functions."supabase-keepalive"]
+  schedule = "0 */8 * * *"

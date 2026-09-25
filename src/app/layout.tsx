@@ -5,6 +5,7 @@ import "./globals.css";
 import { CartProvider } from "@/components/cart-provider";
 import { CartDrawer } from "@/components/cart-drawer";
 import { CouponPopup } from "@/components/coupon-popup";
+import { GoogleTagManager } from "@/components/google-tag-manager";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { LaunchGate } from "@/components/launch-gate";
@@ -70,6 +71,9 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
   manifest: "/manifest.webmanifest",
   robots: { index: true, follow: true },
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
   alternates: { canonical: "/" },
 };
 
@@ -171,6 +175,8 @@ export default function RootLayout({
           <CartDrawer />
           <CouponPopup />
         </CartProvider>
+
+        <GoogleTagManager />
 
         <script
           type="application/ld+json"

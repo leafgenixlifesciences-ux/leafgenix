@@ -74,6 +74,11 @@ const sections: LegalSection[] = [
             "Automatically, on every request",
           ],
           [
+            "Website measurement data",
+            "Pages viewed, approximate device and browser information, referral source and aggregated interaction events",
+            "Only when Google Analytics or Google Tag Manager is enabled on the Website",
+          ],
+          [
             "Cart contents",
             "The products and quantities in your bag, stored in your own browser",
             "As you shop",
@@ -144,6 +149,11 @@ const sections: LegalSection[] = [
             "Technical data, error logs",
             "Legitimate interest",
           ],
+          [
+            "Understand Website use and improve content and shopping journeys",
+            "Website measurement data",
+            "Consent, where required; otherwise our legitimate interest in improving the Website",
+          ],
         ],
       },
       {
@@ -188,6 +198,11 @@ const sections: LegalSection[] = [
             "Our hosting provider",
             "Technical request data",
             "To serve the Website",
+          ],
+          [
+            "Google",
+            "Website measurement data when Google Analytics or Google Tag Manager is enabled; no order, payment or health information",
+            "To measure Website performance and usage through Google Analytics",
           ],
           [
             "Professional advisers",
@@ -266,7 +281,7 @@ const sections: LegalSection[] = [
     blocks: [
       {
         kind: "p",
-        text: "We use a deliberately small number of strictly necessary technologies. We do not use advertising cookies, behavioural profiling, or third-party marketing trackers.",
+        text: "We use a deliberately small number of strictly necessary technologies. When enabled, Google Analytics or Google Tag Manager may place analytics cookies for aggregate Website measurement. We do not use them to send order, payment or health information, and we do not use advertising cookies or behavioural profiling unless this policy is updated before those tools are enabled.",
       },
       {
         kind: "table",
@@ -281,6 +296,11 @@ const sections: LegalSection[] = [
             "leafgenix.cart.v1",
             "Browser local storage",
             "Remembers what is in your shopping bag between visits. Never sent to our servers.",
+          ],
+          [
+            "Google Analytics cookies",
+            "Analytics cookie, only when Google Analytics or Google Tag Manager is enabled",
+            "Measures aggregate visits and Website use. Google provides controls for managing these cookies in its privacy tools and browser settings.",
           ],
         ],
       },
@@ -396,8 +416,8 @@ export default function PrivacyPolicyPage() {
     <LegalPage
       title="Privacy"
       titleAccent="Policy"
-      updated="18 August 2026"
-      effective="18 August 2026"
+      updated="25 September 2026"
+      effective="25 September 2026"
       intro={`${site.legalName} collects the minimum personal data it needs to take your order and get it to you. This page sets out exactly what that is, who it goes to, how long we keep it, and what you can ask us to do with it.`}
       sections={sections}
     />

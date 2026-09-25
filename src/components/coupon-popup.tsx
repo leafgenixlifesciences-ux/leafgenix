@@ -1,6 +1,6 @@
 "use client";
 
-import { BadgeCheck, Check, Copy, Gift, Leaf, Loader2, ShieldCheck, Sparkles, X } from "lucide-react";
+import { BadgeCheck, Check, Copy, Gift, Leaf, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -17,7 +17,7 @@ export function CouponPopup() {
   const [claimedCode, setClaimedCode] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const closeRef = useRef<HTMLButtonElement>(null);
+  const dismissRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (couponApplied) return;
@@ -36,7 +36,7 @@ export function CouponPopup() {
     if (!open) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
+    dismissRef.current?.focus();
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") dismiss();
     };
@@ -111,16 +111,6 @@ export function CouponPopup() {
         aria-labelledby="coupon-title"
         className="coupon-card-in relative w-full max-w-[61rem] overflow-hidden rounded-[1.75rem] bg-white shadow-[0_42px_120px_-28px_rgba(0,0,0,.82)] sm:rounded-[2.25rem]"
       >
-        <button
-          ref={closeRef}
-          type="button"
-          onClick={dismiss}
-          aria-label="Close offer"
-          className="focus-ring absolute top-3 right-3 z-30 grid h-11 w-11 place-items-center rounded-full border border-brand/10 bg-white/92 text-brand-deep shadow-[0_10px_30px_-16px_rgba(0,60,35,.6)] backdrop-blur transition hover:rotate-6 hover:bg-white sm:top-5 sm:right-5"
-        >
-          <X className="h-4 w-4" strokeWidth={2.3} />
-        </button>
-
         <div className="grid md:min-h-[38rem] md:grid-cols-[0.94fr_1.06fr]">
           <div className="relative hidden overflow-hidden bg-brand-deep p-9 text-white md:flex md:flex-col">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_5%,rgba(184,217,59,.34),transparent_34%),radial-gradient(circle_at_100%_86%,rgba(237,148,13,.25),transparent_38%)]" />
@@ -164,7 +154,7 @@ export function CouponPopup() {
             </div>
           </div>
 
-          <div className="relative flex flex-col justify-center bg-[#fbfcf8] p-4 pt-14 sm:p-9 sm:pt-12 lg:p-11">
+          <div className="relative flex flex-col justify-center bg-[#fbfcf8] p-4 py-5 sm:p-9 lg:p-11">
             {claimedCode ? (
               <div className="relative text-center">
                 <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-lime-bright text-brand-deep shadow-[0_16px_34px_-18px_rgba(0,92,45,.75)]">
@@ -249,10 +239,22 @@ export function CouponPopup() {
 
                 {error && <p role="alert" className="mt-4 rounded-xl bg-alert/8 px-3 py-2 text-sm font-medium text-alert">{error}</p>}
 
-                <button type="submit" disabled={submitting} className="group relative mt-4 flex min-h-13 w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-brand-deep px-5 py-3 text-base font-extrabold text-white shadow-[0_18px_36px_-20px_rgba(0,60,35,.85)] transition hover:-translate-y-0.5 hover:bg-brand disabled:cursor-wait disabled:opacity-65 sm:mt-5 sm:min-h-14 sm:py-4">
-                  {submitting ? <Loader2 className="h-5 w-5 animate-spin" /> : <Gift className="h-5 w-5 text-lime-bright" />}
-                  {submitting ? "Preparing your code…" : `Send my ${COUPON.label} code`}
-                </button>
+                <div className="mt-4 grid grid-cols-[0.72fr_1.55fr] gap-2.5 sm:mt-5 sm:grid-cols-[0.8fr_1.5fr] sm:gap-3">
+                  <button
+                    ref={dismissRef}
+                    type="button"
+                    onClick={dismiss}
+                    disabled={submitting}
+                    className="focus-ring flex min-h-13 items-center justify-center rounded-2xl border-[1.5px] border-brand/30 bg-white px-3 py-3 text-sm font-extrabold text-brand-deep transition hover:border-brand hover:bg-brand-soft disabled:cursor-wait disabled:opacity-50 sm:min-h-14 sm:px-5 sm:text-base"
+                  >
+                    Cancel
+                  </button>
+                  <button type="submit" disabled={submitting} className="group relative flex min-h-13 min-w-0 items-center justify-center gap-1.5 overflow-hidden rounded-2xl bg-brand-deep px-3 py-3 text-sm font-extrabold text-white shadow-[0_18px_36px_-20px_rgba(0,60,35,.85)] transition hover:-translate-y-0.5 hover:bg-brand disabled:cursor-wait disabled:opacity-65 sm:min-h-14 sm:gap-2 sm:px-5 sm:py-4 sm:text-base">
+                    {submitting ? <Loader2 className="h-5 w-5 shrink-0 animate-spin" /> : <Gift className="h-5 w-5 shrink-0 text-lime-bright" />}
+                    <span className="sm:hidden">{submitting ? "Preparing…" : `Get ${COUPON.label}`}</span>
+                    <span className="hidden sm:inline">{submitting ? "Preparing your code…" : `Send my ${COUPON.label} code`}</span>
+                  </button>
+                </div>
                 <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[0.68rem] text-faint">
                   <ShieldCheck className="h-3.5 w-3.5" /> Your details stay private. One coupon per customer.
                 </p>

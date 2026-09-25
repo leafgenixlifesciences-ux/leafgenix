@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Mono, Manrope } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 import { CartProvider } from "@/components/cart-provider";
 import { CartDrawer } from "@/components/cart-drawer";
 import { CouponPopup } from "@/components/coupon-popup";
-import { GoogleTagManager } from "@/components/google-tag-manager";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { LaunchGate } from "@/components/launch-gate";
@@ -87,6 +87,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const initiallyLaunched = launchHasPassed();
+  const containerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID?.trim();
+  const measurementId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID?.trim();
+  const hasTagManager = Boolean(containerId && /^GTM-[A-Z0-9]+$/i.test(containerId));
+  const hasAnalytics = Boolean(measurementId && /^G-[A-Z0-9]+$/i.test(measurementId));
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -150,6 +154,25 @@ export default function RootLayout({
       className={`${bricolage.variable} ${manrope.variable} ${plexMono.variable}`}
     >
       <head>
+        {hasTagManager ? (
+          <Script id="google-tag-manager" strategy="beforeInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${containerId}');`}
+          </Script>
+        ) : hasAnalytics ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+              strategy="beforeInteractive"
+            />
+            <Script id="google-analytics" strategy="beforeInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','${measurementId}');`}
+            </Script>
+          </>
+        ) : null}
         {/* Marks scripting as available before first paint. Scroll-reveal
             styles only engage when this class is present, so content is
             never hidden for users without JavaScript. */}
@@ -175,9 +198,6 @@ export default function RootLayout({
           <CartDrawer />
           <CouponPopup />
         </CartProvider>
-
-        <GoogleTagManager />
-
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

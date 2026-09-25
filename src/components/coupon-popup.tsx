@@ -217,16 +217,16 @@ export function CouponPopup() {
                     <label className="label" htmlFor="coupon-name">Your name</label>
                     <input id="coupon-name" name="name" required autoComplete="name" className="field !bg-white" placeholder="How should we address you?" />
                   </div>
-                  <div className="grid gap-2.5 sm:grid-cols-2 sm:gap-3.5">
-                    <div>
+                  <div className="grid min-w-0 gap-2.5 sm:grid-cols-2 sm:gap-3.5">
+                    <div className="min-w-0">
                       <label className="label" htmlFor="coupon-email">Email address</label>
                       <input id="coupon-email" name="email" type="email" required autoComplete="email" className="field !bg-white" placeholder="you@example.com" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <label className="label" htmlFor="coupon-phone">Mobile number</label>
-                      <div className="flex">
+                      <div className="flex w-full min-w-0">
                         <span className="grid shrink-0 place-items-center rounded-l-[0.875rem] border-[1.5px] border-r-0 border-line-strong bg-white px-3 text-sm font-semibold text-muted">+91</span>
-                        <input id="coupon-phone" name="phone" required inputMode="numeric" pattern="[0-9]{10}" maxLength={10} autoComplete="tel-national" className="field rounded-l-none !bg-white" placeholder="10-digit number" />
+                        <input id="coupon-phone" name="phone" required inputMode="numeric" pattern="[0-9]{10}" maxLength={10} autoComplete="tel-national" className="field min-w-0 flex-1 rounded-l-none !bg-white" placeholder="10-digit number" />
                       </div>
                     </div>
                   </div>

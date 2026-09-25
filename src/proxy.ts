@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/session";
 
 /**
@@ -9,6 +9,17 @@ import { updateSession } from "@/lib/supabase/session";
  * in earlier versions.)
  */
 export function proxy(request: NextRequest) {
+  // Anonymous catalogue traffic is the overwhelming majority of requests.
+  // Avoid a remote Supabase auth call when there is no auth cookie to refresh;
+  // this also lets public ISR pages stay cacheable at Netlify's edge.
+  const hasAuthCookie = request.cookies
+    .getAll()
+    .some(({ name }) => name.startsWith("sb-") && name.includes("-auth-token"));
+
+  if (!hasAuthCookie) {
+    return NextResponse.next({ request });
+  }
+
   return updateSession(request);
 }
 

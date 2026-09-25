@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { CheckoutForm } from "@/components/checkout-form";
 import { PageHero } from "@/components/page-hero";
 
@@ -41,14 +42,18 @@ export default async function CheckoutPage() {
 
   return (
     <>
-    <PageHero eyebrow="Step 2 of 2" title="Checkout" compact />
-    <section className="shell py-12 md:py-16">
-      <CheckoutForm
-        defaults={defaults}
-        signedIn={signedIn}
-        paymentsEnabled={razorpayConfigured()}
+      <PageHero eyebrow="Step 2 of 2" title="Checkout" compact />
+      <section className="shell py-12 md:py-16">
+        <CheckoutForm
+          defaults={defaults}
+          signedIn={signedIn}
+          paymentsEnabled={razorpayConfigured()}
+        />
+      </section>
+      <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="lazyOnload"
       />
-    </section>
     </>
   );
 }

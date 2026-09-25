@@ -8,7 +8,7 @@ import { Logo } from "@/components/brand";
 import { useCart } from "@/components/cart-provider";
 import { navLinks, site } from "@/lib/site";
 
-export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
+export function SiteHeader() {
   const { count, open, ready } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -78,8 +78,8 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
 
           <div className="flex items-center gap-1.5">
             <Link
-              href={signedIn ? "/account" : "/login"}
-              aria-label={signedIn ? "Your account" : "Sign in"}
+              href="/account"
+              aria-label="Your account"
               className="focus-ring hidden h-11 w-11 place-items-center rounded-full border border-line text-brand-deep transition-colors hover:border-brand hover:bg-surface-2 hover:text-brand sm:grid"
             >
               <User className="h-[1.15rem] w-[1.15rem]" strokeWidth={1.9} />
@@ -126,8 +126,8 @@ export function SiteHeader({ signedIn = false }: { signedIn?: boolean }) {
             {[
               ...navLinks,
               {
-                href: signedIn ? "/account" : "/login",
-                label: signedIn ? "Your orders" : "Sign in",
+                href: "/account",
+                label: "Your orders",
               },
             ].map((link) => (
               <Link

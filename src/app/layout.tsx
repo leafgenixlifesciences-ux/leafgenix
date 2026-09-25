@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, IBM_Plex_Mono, Manrope } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 import { CartProvider } from "@/components/cart-provider";
@@ -9,7 +8,6 @@ import { CouponPopup } from "@/components/coupon-popup";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { LaunchGate } from "@/components/launch-gate";
-import { getSessionUser } from "@/lib/auth";
 import { launchHasPassed } from "@/lib/launch";
 import { site } from "@/lib/site";
 import { siteUrl } from "@/lib/utils";
@@ -81,13 +79,9 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // Read once, server-side, so the header renders the right account state in
-  // the very first byte of HTML - no auth flicker. Deduped per request, so
-  // the pages below reuse this rather than asking Supabase again.
-  const signedIn = Boolean(await getSessionUser());
   const initiallyLaunched = launchHasPassed();
 
   const structuredData = {
@@ -171,18 +165,12 @@ export default async function RootLayout({
         </a>
 
         <CartProvider>
-          <SiteHeader signedIn={signedIn} />
+          <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />
           <CartDrawer />
           <CouponPopup />
         </CartProvider>
-
-        {/* Razorpay Checkout — loaded once, used by the checkout page */}
-        <Script
-          src="https://checkout.razorpay.com/v1/checkout.js"
-          strategy="lazyOnload"
-        />
 
         <script
           type="application/ld+json"

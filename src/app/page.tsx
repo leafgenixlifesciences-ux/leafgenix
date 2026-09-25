@@ -360,7 +360,7 @@ export default async function HomePage() {
           <div className="grid gap-x-7 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
             {grid.map((product, i) => (
               <Reveal key={product.id} delay={(i % 4) * 80} className="h-full">
-                <ProductCard product={product} priority={i < 4} />
+                <ProductCard product={product} />
               </Reveal>
             ))}
           </div>

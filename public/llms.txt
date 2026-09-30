@@ -11,10 +11,11 @@
 
 ## Verified business facts
 - Legal name: Leaf Genix Lifesciences
-- Location: Jaipur, Rajasthan, India
+- Address: 42, G-1, Nemi Nagar Extension, Amarpali Marg, Vaishali Nagar, Jaipur, Rajasthan 302021, India
 - FSSAI Registration: 22226076000075
 - GSTIN: 08BSWPS3920A1ZI
 - Support: support@leafpharmaceuticals.in | +91 95019 01100
+- Customer-support hours: Monday–Saturday, 09:00–19:00 IST; Sunday closed
 - Consumer products are nutraceuticals and dietary supplements, not medicines and not substitutes for professional medical advice.
 - Prescription products are published for reference and are not sold through this website.
 

@@ -9,7 +9,8 @@ export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await getProducts();
-  const siteUpdated = new Date("2026-09-24T00:00:00+05:30");
+  // Shared metadata and local-business details were updated on this date.
+  const siteUpdated = new Date("2026-09-30T00:00:00+05:30");
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteUrl("/"), lastModified: siteUpdated, changeFrequency: "weekly", priority: 1 },

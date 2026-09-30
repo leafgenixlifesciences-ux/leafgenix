@@ -145,6 +145,32 @@ export default function RootLayout({
         inLanguage: "en-IN",
         publisher: { "@id": siteUrl("/#organization") },
       },
+      {
+        "@type": "Store",
+        "@id": siteUrl("/#store"),
+        name: site.legalName,
+        alternateName: site.name,
+        url: siteUrl(),
+        image: siteUrl("/leafgenix-logo.png"),
+        telephone: site.supportPhone,
+        email: site.email,
+        priceRange: "₹₹",
+        parentOrganization: { "@id": siteUrl("/#organization") },
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: `${site.addressLines[1]}, ${site.addressLines[2]}`,
+          addressLocality: site.city,
+          addressRegion: site.state,
+          postalCode: site.postalCode,
+          addressCountry: "IN",
+        },
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          opens: "09:00",
+          closes: "19:00",
+        },
+      },
     ],
   };
 

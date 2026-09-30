@@ -41,7 +41,7 @@ export const site = {
   city: "Jaipur",
   state: "Rajasthan",
   postalCode: "302021",
-  supportHours: "Mon – Sat, 10:00 – 18:00 IST",
+  supportHours: "Mon – Sat, 09:00 – 19:00 IST; Sunday closed",
 
   // --- compliance ------------------------------------------------------- //
   // All values below are transcribed from primary documents:

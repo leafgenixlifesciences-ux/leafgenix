@@ -36,6 +36,104 @@ export type BlogPost = {
 
 export const posts: BlogPost[] = [
   {
+    slug: "how-to-store-supplements-in-india",
+    title: "How to store supplements in Indian weather: heat, humidity and expiry explained",
+    excerpt:
+      "A cupboard, a fridge and a car are not interchangeable storage spaces. Here is how heat, moisture and light change what is inside a supplement pack — and how to keep a product usable until its expiry date.",
+    category: "Label literacy",
+    accent: "#b85c00",
+    date: "2026-09-30",
+    readMinutes: 7,
+    related: "probion-colostrum-probiotic",
+    takeaways: [
+      "Follow the storage instruction printed on the pack; it is part of the product specification, not a generic suggestion.",
+      "Heat, humidity, light and repeated opening affect different formats in different ways: oils oxidise, powders clump and live cultures lose viable count.",
+      "The expiry date applies only to an unopened product stored as directed. An opened syrup, strip or jar may have a shorter use-by period.",
+      "A supplement that looks or smells unusually different should not be used simply because its printed expiry date has not passed.",
+    ],
+    blocks: [
+      {
+        kind: "p",
+        text: "Most supplement labels carry a short line such as 'store in a cool, dry place' or 'store below 25°C'. It is easy to treat that line as boilerplate, especially in India where a kitchen shelf can be warm for months at a time. It is not boilerplate. The manufacturer has tested the product in its stated pack and set its shelf life around specific storage conditions. If those conditions are not met, the printed expiry date no longer tells the whole story.",
+      },
+      { kind: "h2", text: "Start with the pack, not a generic rule" },
+      {
+        kind: "p",
+        text: "There is no single right storage place for every nutraceutical. A vitamin D oral spray, an omega-3 syrup, a probiotic sachet and a mineral tablet are different formulations. Some need only protection from moisture; some are sensitive to oxidation; some have a count of live organisms that has to remain viable until expiry. The instruction on the exact product in your hand is the one to follow, even when it differs from a similar-looking product beside it.",
+      },
+      {
+        kind: "table",
+        head: ["Product format", "What can affect it", "Practical storage habit"],
+        rows: [
+          ["Tablets and capsules", "Humidity can soften capsules and make tablets crumble or stick together.", "Keep the strip or bottle closed in a dry cupboard; leave desiccant sachets in a bottle unless the label says otherwise."],
+          ["Powders and sachets", "Moisture can cause clumping and make a measured dose unreliable.", "Open only when ready to use. Do not store an opened sachet for later unless the manufacturer expressly allows it."],
+          ["Fish oil and other oils", "Heat, light and oxygen speed oxidation, which can change smell and taste.", "Close the cap promptly, protect from sunlight and follow the label's instruction after opening."],
+          ["Probiotics", "Live culture counts may fall faster with heat or moisture.", "Check whether refrigeration is required; do not assume every probiotic needs a fridge or that every one is shelf-stable."],
+          ["Syrups and drops", "Repeated exposure to air, heat and a contaminated measuring spoon can affect the product after opening.", "Use the supplied cap or clean measuring device, recap immediately and note the opening date."],
+        ],
+      },
+      { kind: "h2", text: "Why Indian heat and humidity matter" },
+      {
+        kind: "p",
+        text: "A 'cool, dry place' is not the top shelf above a gas stove, a sunlit windowsill, a bathroom cabinet or the glove compartment of a parked car. Those places are convenient but they are also the places with the largest temperature swings. In monsoon weather, bathrooms and kitchens add moisture; in summer, a closed car can become far hotter than the air outside. A drawer or cupboard away from cooking heat, direct sun and steam is usually the more stable choice for products that do not require refrigeration.",
+      },
+      {
+        kind: "callout",
+        title: "The fridge is not an automatic upgrade",
+        text: "Refrigeration is useful only when the label asks for it. A cold refrigerator can create condensation when a bottle is repeatedly moved into warm air, and some formulations are not designed for it. If a probiotic or syrup says to refrigerate after opening, follow that instruction exactly; otherwise, store it as printed rather than inventing a colder rule.",
+      },
+      { kind: "h2", text: "Read the expiry date with the opening date" },
+      {
+        kind: "p",
+        text: "The best-before or expiry date is established for an unopened pack held under its stated storage conditions. Once a seal is broken, the product may have a separate instruction such as 'use within 30 days of opening' or 'consume within one month'. That is especially common for liquids and some probiotic products. Write the date opened on the carton or set a phone reminder; it is more reliable than trying to remember when a half-used bottle entered the fridge.",
+      },
+      {
+        kind: "p",
+        text: "Do not move tablets out of their blister strip into an unlabelled pill organiser for weeks at a time. The strip protects them from air and moisture, and it carries the batch number and expiry date. For daily use, take only the amount needed for a few days and keep the original carton until the product is finished. That also makes it possible to trace the product if you need to contact the brand about a quality concern.",
+      },
+      { kind: "h2", text: "What to check before taking a product" },
+      {
+        kind: "numbered",
+        items: [
+          "Check the product name, batch number and expiry or best-before date on the original pack.",
+          "Read the storage and after-opening instructions, including whether the product must be refrigerated.",
+          "Inspect the seal, strip or cap. Do not use a product with a broken seal, leaking bottle or damaged blister.",
+          "Look for unexpected changes: a swollen capsule, badly clumped powder, unusual colour, leakage or a strong off odour.",
+          "Use a clean, dry measuring cap or spoon for liquid products, then close the pack promptly.",
+        ],
+      },
+      { kind: "h2", text: "When a product has travelled or sat in the heat" },
+      {
+        kind: "p",
+        text: "A short trip home in ordinary weather is not automatically a reason to discard a supplement. What matters is the product format, the temperature it experienced, how long it was exposed and the label instruction. If a product that requires refrigeration has been left out for an extended period, or an oil, syrup or probiotic has been sitting in a hot car, contact the manufacturer with the batch number rather than guessing. They can tell you what the stated stability data supports for that product.",
+      },
+      {
+        kind: "p",
+        text: "The same principle applies to online deliveries. Check the parcel when it arrives, keep the invoice and carton until you have inspected the product, and report leakage or damage promptly. A responsible seller should be able to identify the batch and explain the intended storage conditions. If the pack is clearly compromised, do not rely on the expiry date alone.",
+      },
+      { kind: "h2", text: "Storage is part of label literacy" },
+      {
+        kind: "p",
+        text: "Good supplement use starts with the complete label: ingredient quantities, serving size, batch and expiry, and the storage line. That is why storage belongs in the same sixty-second check as dose and traceability. It does not turn a supplement into a medicine, and it does not change what a product can do. It simply helps ensure that the product you use is the one the manufacturer tested and labelled.",
+      },
+    ],
+    sources: [
+      {
+        label: "Food Safety and Standards (Labelling and Display) Regulations, 2020 — FSSAI",
+        url: "https://www.fssai.gov.in/cms/food-safety-and-standards-regulations.php",
+      },
+      {
+        label: "Food Safety and Standards (Health Supplements, Nutraceuticals, Food for Special Dietary Use, Food for Special Medical Purpose, and Prebiotic and Probiotic Food) Regulations, 2022 — FSSAI",
+        url: "https://www.fssai.gov.in/cms/food-safety-and-standards-regulations.php",
+      },
+      {
+        label: "Dietary Supplements: What You Need to Know — U.S. Food and Drug Administration",
+        url: "https://www.fda.gov/food/dietary-supplements",
+      },
+    ],
+  },
+
+  {
     slug: "how-to-read-a-nutraceutical-label",
     title: "How to read a nutraceutical label in India",
     excerpt:

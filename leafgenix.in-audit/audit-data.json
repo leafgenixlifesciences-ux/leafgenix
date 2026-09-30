@@ -1,0 +1,59 @@
+{
+  "summary": {
+    "health_score": 85,
+    "business_type": "Hybrid: online nutraceutical store with a Jaipur customer-support office",
+    "top_findings": [
+      "All 25 sitemap URLs returned HTTP 200 with title, canonical, one H1 and no accidental noindex.",
+      "Google Search Console reports valid Product, Merchant Listing and Breadcrumb enhancements.",
+      "Search Console indexing and experience data are still processing."
+    ],
+    "quick_wins": [
+      "Complete Google Business Profile verification when Google makes it available.",
+      "Claim consistent Bing Places and Apple Business Connect listings.",
+      "Continue publishing source-backed, non-medical-claim content."
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 94,
+      "what_works": [
+        "Crawlable robots and XML sitemap",
+        "One-hop HTTPS canonical redirects",
+        "Server-rendered titles, canonicals and JSON-LD"
+      ],
+      "findings": [
+        {
+          "title": "Field Core Web Vitals unavailable",
+          "severity": "Info",
+          "description": "Search Console has not accumulated experience data yet.",
+          "recommendation": "Review mobile field data after sufficient traffic is collected."
+        }
+      ]
+    },
+    {
+      "name": "Local and structured data",
+      "score": 78,
+      "what_works": [
+        "Consistent public NAP and opening hours",
+        "Live Store schema",
+        "Valid shopping and breadcrumb enhancements"
+      ],
+      "findings": [
+        {
+          "title": "Business Profile verification and external citations remain",
+          "severity": "High",
+          "description": "Google verification, reviews and non-Google business listings are external processes.",
+          "recommendation": "Complete verification and claim matching Bing and Apple listings."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {"name":"Phase 1: Google processing","timeframe":"Next 2-4 weeks","items":["Complete GBP verification when offered","Monitor Search Console coverage"]},
+      {"name":"Phase 2: Authority","timeframe":"Ongoing","items":["Collect genuine reviews","Publish expert-backed content","Earn legitimate citations"]}
+    ]
+  },
+  "artifacts": {"findings_dir":"findings/","screenshots_dir":"screenshots/"}
+}

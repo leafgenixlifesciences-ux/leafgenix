@@ -178,6 +178,8 @@ export default function RootLayout({
     <html
       lang="en-IN"
       className={`${bricolage.variable} ${manrope.variable} ${plexMono.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <head>
         {hasTagManager ? (
@@ -197,7 +199,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               strategy="beforeInteractive"
             />
             <Script id="google-analytics" strategy="beforeInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','${measurementId}');`}
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','${measurementId}',{allow_google_signals:false,allow_ad_personalization_signals:false});`}
             </Script>
           </>
         ) : null}
@@ -210,7 +212,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
       </head>
-      <body className="min-h-dvh antialiased">
+      <body className="min-h-dvh antialiased" suppressHydrationWarning>
         <LaunchGate initiallyLaunched={initiallyLaunched} />
         <a
           href="#main"

@@ -2,6 +2,7 @@
 
 import { BadgeCheck, Check, Copy, Gift, Leaf, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { useCart } from "@/components/cart-provider";
@@ -11,6 +12,7 @@ import { LAUNCH_AT_MS, launchHasPassed } from "@/lib/launch";
 const DISMISSED_KEY = "leafgenix.coupon.dismissed.v2";
 
 export function CouponPopup() {
+  const pathname = usePathname();
   const { applyCoupon, couponApplied } = useCart();
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -20,6 +22,7 @@ export function CouponPopup() {
   const dismissRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (pathname.startsWith("/admin")) return;
     if (couponApplied) return;
     try {
       if (window.sessionStorage.getItem(DISMISSED_KEY)) return;
@@ -30,7 +33,7 @@ export function CouponPopup() {
       : Math.max(3500, LAUNCH_AT_MS - Date.now() + 3500);
     const timer = window.setTimeout(() => setOpen(true), delay);
     return () => window.clearTimeout(timer);
-  }, [couponApplied]);
+  }, [couponApplied, pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -95,7 +98,7 @@ export function CouponPopup() {
     window.setTimeout(() => setCopied(false), 1800);
   }
 
-  if (!open) return null;
+  if (!open || pathname.startsWith("/admin")) return null;
 
   return (
     <div

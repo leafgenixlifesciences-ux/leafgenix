@@ -2,7 +2,7 @@ import { formatPaise } from "@/lib/money";
 import { COUPON } from "@/lib/offer";
 import { site } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/admin";
-import type { OrderItem, ShippingAddress } from "@/lib/types";
+import type { OrderItem, OrderStatus, ShippingAddress } from "@/lib/types";
 import { siteUrl } from "@/lib/utils";
 
 type EmailMessage = {
@@ -375,4 +375,68 @@ export async function sendPaidOrderEmails(orderId: string): Promise<void> {
   }
 
   await Promise.all(deliveries);
+}
+
+export async function sendOrderStatusEmail(
+  orderId: string,
+  status: Extract<OrderStatus, "processing" | "shipped" | "delivered" | "cancelled">,
+): Promise<void> {
+  if (!emailConfigured()) throw new Error("Order email delivery is not configured");
+
+  const { data, error } = await createAdminClient()
+    .from("orders")
+    .select(
+      "id, order_number, email, full_name, status, courier_name, tracking_number",
+    )
+    .eq("id", orderId)
+    .single();
+  if (error || !data) {
+    throw new Error(`Could not load order status email: ${error?.message ?? orderId}`);
+  }
+
+  const copy = {
+    processing: {
+      subject: `Order ${data.order_number} is being prepared`,
+      heading: "Your order is being prepared.",
+      body: "Our fulfilment team is packing your Leaf Genix order. We will send the tracking details as soon as it leaves our facility.",
+    },
+    shipped: {
+      subject: `Order ${data.order_number} has shipped`,
+      heading: "Your order is on its way.",
+      body: `Your parcel has been handed to ${data.courier_name || "our delivery partner"}.`,
+    },
+    delivered: {
+      subject: `Order ${data.order_number} was delivered`,
+      heading: "Delivered to your doorstep.",
+      body: "Your delivery has been marked complete. We hope the Leaf Genix experience feels as considered as the products inside.",
+    },
+    cancelled: {
+      subject: `Order ${data.order_number} was cancelled`,
+      heading: "Your order has been cancelled.",
+      body: "This order will not be dispatched. If a payment was captured, our support team will contact you about the refund process.",
+    },
+  }[status];
+
+  const tracking =
+    data.tracking_number && (status === "shipped" || status === "delivered")
+      ? `<div style="margin-top:20px;padding:17px 18px;border-radius:13px;background:#f4f7f2;border-left:4px solid #c9e82d;line-height:1.7">
+          <strong>Delivery partner:</strong> ${escapeHtml(data.courier_name || "—")}<br>
+          <strong>Tracking number:</strong> ${escapeHtml(data.tracking_number)}
+        </div>`
+      : "";
+
+  await sendEmail({
+    to: data.email,
+    replyTo: site.email,
+    subject: `${copy.subject} · ${site.name}`,
+    idempotencyKey: `order-status-${status}/${data.id}`,
+    html: shell(
+      `<p style="margin:0 0 8px;color:#66756d">Hi ${escapeHtml(data.full_name)},</p>
+       <h1 style="margin:0 0 12px;font-size:28px;line-height:1.2;color:#005c2d">${escapeHtml(copy.heading)}</h1>
+       <p style="margin:0;line-height:1.75">${escapeHtml(copy.body)}</p>
+       ${tracking}
+       <p style="margin:24px 0 0"><a href="${escapeHtml(siteUrl(`/order/${data.id}`))}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#005c2d;color:#ffffff;text-decoration:none;font-weight:700">View order details</a></p>`,
+      `${copy.heading} Order ${data.order_number}.`,
+    ),
+  });
 }

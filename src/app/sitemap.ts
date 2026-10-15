@@ -17,7 +17,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: siteUrl("/products"), lastModified: siteUpdated, changeFrequency: "weekly", priority: 0.9 },
     { url: siteUrl("/about"), lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.6 },
     { url: siteUrl("/prescription-range"), lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.6 },
-    { url: siteUrl("/blog"), lastModified: siteUpdated, changeFrequency: "weekly", priority: 0.6 },
+    {
+      url: siteUrl("/blog"),
+      lastModified: posts[0] ? new Date(posts[0].date) : siteUpdated,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
     { url: siteUrl("/gallery"), lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.6 },
     { url: siteUrl("/contact"), lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.5 },
     { url: siteUrl("/shipping-policy"), lastModified: siteUpdated, changeFrequency: "yearly", priority: 0.3 },

@@ -1,5 +1,5 @@
 /**
- * The journal. Four evergreen, educational pieces written in the same voice as
+ * The journal. Evergreen, educational pieces written in the same voice as
  * the rest of the site: specific, sourced, and free of disease claims. Each
  * post can point at one formulation in the range, but the article has to
  * stand on its own without it.
@@ -35,6 +35,250 @@ export type BlogPost = {
 };
 
 export const posts: BlogPost[] = [
+  {
+    slug: "best-time-to-take-supplements-with-food-or-empty-stomach",
+    title: "Best time to take supplements: with food, after food or on an empty stomach?",
+    excerpt:
+      "Morning versus night is rarely the most important question. The product label, the nutrient form, your meals and your medicines decide whether a supplement belongs with breakfast, away from tea, or at another time.",
+    category: "Everyday use",
+    accent: "#a84a2a",
+    date: "2026-10-15",
+    readMinutes: 8,
+    related: "synvit-forte-tablets",
+    takeaways: [
+      "Follow the exact product label first; two supplements with similar front labels can use different ingredient forms and directions.",
+      "Fat-soluble vitamins are generally better suited to a meal that contains some fat, while some minerals have their own timing rules.",
+      "Morning versus night usually matters less than taking the correct serving consistently and without clashing with medicines.",
+      "If a supplement causes nausea, constipation or another persistent symptom, stop experimenting with timing and speak to a doctor or pharmacist.",
+    ],
+    blocks: [
+      {
+        kind: "p",
+        text: "The best time to take a supplement is the time that matches its label, works with its ingredients and can be followed consistently. There is no universal rule that every vitamin belongs at breakfast or that every mineral works better at night. A multivitamin, an iron tablet, a calcium product, a probiotic sachet and a vitamin D spray may all need different handling even when they sit in the same cupboard.",
+      },
+      {
+        kind: "callout",
+        title: "The short answer",
+        text: "Start with the directions on the pack. If it says 'with food' or 'after meals', attach it to a regular meal. If it gives a specific gap from food or medicines, follow that gap. When the label is unclear—or you use prescription medicine—ask a pharmacist before building your own schedule.",
+      },
+      { kind: "h2", text: "Why food changes supplement timing" },
+      {
+        kind: "p",
+        text: "Food can change how comfortable a supplement feels and how some nutrients are absorbed. A meal stimulates digestion, supplies dietary fat and can buffer ingredients that irritate an empty stomach. That does not mean a heavy meal is required. It means that 'with food' is a formulation instruction, not a suggestion to take every product after the largest meal of the day.",
+      },
+      {
+        kind: "p",
+        text: "Vitamins A, D, E and K are described as fat-soluble because dietary fat is involved in their absorption. NIH guidance notes that vitamin D is best absorbed with a meal or snack that contains some fat. A normal balanced meal is enough; adding a spoonful of oil purely for a supplement is unnecessary. Water-soluble vitamins such as vitamin C and the B vitamins do not share that same fat requirement, although a person who feels queasy after a multivitamin may still find it easier to take with food.",
+      },
+      {
+        kind: "table",
+        head: ["What is on the label", "Useful timing starting point", "What to check"],
+        rows: [
+          ["Multivitamin or multimineral", "With a regular meal unless the pack says otherwise.", "Check for iron, calcium and fat-soluble vitamins; these can affect the most suitable routine."],
+          ["Vitamin D or a product with vitamins A, D, E or K", "With a meal or snack containing some fat.", "Add the amount from every product before taking a separate single-nutrient supplement."],
+          ["Calcium carbonate", "With food.", "Read the elemental calcium amount, not only the weight of the calcium compound."],
+          ["Calcium citrate", "With or without food.", "Large daily amounts may be split only when the label or clinician recommends it."],
+          ["Iron", "Use the product or clinician's instructions; calcium may need a different time.", "Iron can interact with medicines and may cause stomach symptoms, so do not invent a high-dose routine."],
+          ["Probiotic", "Exactly as the strain-specific pack directs.", "Check storage, water temperature and whether the product says before, with or after food."],
+        ],
+      },
+      { kind: "h2", text: "Morning or night: does the clock matter?" },
+      {
+        kind: "p",
+        text: "For many everyday supplements, there is no good evidence that a particular clock time changes the result. A repeatable routine matters more. Breakfast works for someone who eats breakfast every day; dinner may be easier for someone whose mornings are rushed. The useful question is not 'What is the perfect hour?' but 'Can I take this as directed every day without forgetting or doubling it?'.",
+      },
+      {
+        kind: "p",
+        text: "Individual comfort can still guide the choice. If a product feels heavy before bed, move it earlier. If taking several tablets together causes nausea, ask whether the label allows them to be divided. Do not split modified-release tablets, open capsules or change a prescribed schedule unless the pack or a healthcare professional says that is safe.",
+      },
+      { kind: "h2", text: "Tea, coffee and mineral supplements" },
+      {
+        kind: "p",
+        text: "Tea and coffee contain compounds that can reduce the absorption of non-haem iron from food, and an iron supplement may already have specific instructions about meals and beverages. Calcium can also interfere with iron absorption, which is why NIH guidance suggests taking individual calcium and iron supplements at different times. The correct gap depends on the product and on any medicine you use; a generic social-media timetable is not a substitute for the label or a pharmacist.",
+      },
+      {
+        kind: "p",
+        text: "This is also why a 'take everything together' pill box is not always ideal. Convenience matters, but it has to come after compatibility. Before separating products, check whether both nutrients are already combined in one professionally formulated product; its directions may have been designed around that formulation.",
+      },
+      { kind: "h2", text: "Medicines take priority over supplement convenience" },
+      {
+        kind: "p",
+        text: "Supplements can interact with prescription and over-the-counter medicines. Calcium can affect the absorption of levothyroxine and some antibiotics; iron can also interact with levothyroxine; vitamin K can change how warfarin works. These are examples, not a complete interaction list. If you take a regular medicine, show the pharmacist the complete supplement label rather than asking only about the product name.",
+      },
+      {
+        kind: "callout",
+        title: "Keep one complete list",
+        text: "Write down every medicine, supplement, powder, gummy and fortified drink you use, including the serving size and time. Share the list at medical and pharmacy visits. A photograph of each composition panel is often more useful than remembering the brand names.",
+      },
+      { kind: "h2", text: "Build a routine in five steps" },
+      {
+        kind: "numbered",
+        items: [
+          "Read the serving size, frequency, food instruction and warnings on the exact pack.",
+          "List the active ingredients and compare them with your other supplements and fortified foods.",
+          "Put products that require food beside a meal you eat consistently; keep products requiring separation in a different time slot.",
+          "Check the proposed schedule with a pharmacist if you use medicines, are pregnant or breastfeeding, are preparing for surgery, or are giving a supplement to a child.",
+          "Use a reminder and record the dose. If you miss one, follow the pack rather than automatically taking two servings together.",
+        ],
+      },
+      { kind: "h2", text: "When timing is not the real problem" },
+      {
+        kind: "p",
+        text: "Changing breakfast to dinner will not solve an unsuitable dose, an unnecessary product or a medicine interaction. Persistent nausea, constipation, diarrhoea, rash, dizziness or another new symptom deserves attention. Stop the new supplement and seek professional advice, especially when symptoms are severe, when several products were started together, or when the user is a child, pregnant, breastfeeding or managing a health condition.",
+      },
+      {
+        kind: "p",
+        text: "A practical supplement schedule is therefore simple: label first, medicines first, one complete ingredient list, and a time you can repeat. The clock is only one part of safe use—and usually not the most important one.",
+      },
+    ],
+    sources: [
+      {
+        label: "Vitamin D Fact Sheet for Consumers — NIH Office of Dietary Supplements",
+        url: "https://ods.od.nih.gov/factsheets/VitaminD-Consumer/",
+      },
+      {
+        label: "Calcium Fact Sheet for Consumers — NIH Office of Dietary Supplements",
+        url: "https://ods.od.nih.gov/factsheets/Calcium-Consumer/",
+      },
+      {
+        label: "Iron Fact Sheet for Health Professionals — NIH Office of Dietary Supplements",
+        url: "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/",
+      },
+      {
+        label: "Dietary Supplements: What You Need to Know — NIH Office of Dietary Supplements",
+        url: "https://ods.od.nih.gov/HealthInformation/DS_WhatYouNeedToKnow.aspx",
+      },
+    ],
+  },
+
+  {
+    slug: "can-you-take-multiple-supplements-together",
+    title: "Can you take multiple supplements together? How to spot duplicate doses",
+    excerpt:
+      "A multivitamin, a beauty gummy and a vitamin D product can repeat the same nutrients under different names. Use this label-first method to audit a supplement stack before it becomes an accidental high-dose routine.",
+    category: "Label literacy",
+    accent: "#6841a5",
+    date: "2026-10-08",
+    readMinutes: 9,
+    related: "synvit-forte-tablets",
+    takeaways: [
+      "Products are designed one label at a time, but your body receives the total from every supplement, fortified food and drink you use.",
+      "RDA describes an intake target for most healthy people; a tolerable upper limit is a safety boundary, not a goal.",
+      "Compare each active ingredient in the same unit and serving size, and watch for alternative names and different nutrient forms.",
+      "Medicine use, pregnancy, breastfeeding, childhood and planned surgery make a professional interaction check especially important.",
+    ],
+    blocks: [
+      {
+        kind: "p",
+        text: "Some supplements can be taken together, but 'together' has two meanings. One is timing: whether tablets can be swallowed in the same sitting. The more important one is total exposure: whether two or three products repeat the same vitamins, minerals or botanicals. A stack can look varied from the front while its composition panels quietly add up to a much larger dose of vitamin A, vitamin D, iron, zinc or another nutrient.",
+      },
+      {
+        kind: "callout",
+        title: "The safest first move",
+        text: "Do not add a new supplement by product name. Add it ingredient by ingredient. If the same nutrient appears on two labels, total the amount per day before deciding whether the combination makes sense.",
+      },
+      { kind: "h2", text: "Why duplicate doses are easy to miss" },
+      {
+        kind: "p",
+        text: "A daily multivitamin may contain twenty or more nutrients. A separate 'hair, skin and nails' product may repeat biotin, zinc, selenium and vitamins A, C or E. A bone-health product may repeat vitamin D already present in the multivitamin. Fortified protein powders, breakfast cereals and drinks can add another layer. None of those labels knows what else is in your kitchen; the person combining them has to do the total.",
+      },
+      {
+        kind: "table",
+        head: ["Combination to inspect", "Possible overlap", "Question to answer"],
+        rows: [
+          ["Multivitamin + single vitamin D", "Vitamin D, and sometimes vitamin K", "What is the total daily amount from both serving sizes?"],
+          ["Multivitamin + beauty supplement", "Biotin, zinc, selenium, vitamins A, C and E", "Does the second product fill a documented need or simply repeat the first?"],
+          ["Multivitamin + calcium product", "Calcium, vitamin D, magnesium or zinc", "Are the ingredient forms and elemental amounts clearly stated?"],
+          ["Sports powder + electrolyte tablet", "Sodium, potassium, magnesium and B vitamins", "How many servings are actually consumed on training and non-training days?"],
+          ["Adult supplement + fortified food or drink", "Iron, folic acid, vitamins A, B12 and D", "Has the fortified serving been included in the daily total?"],
+          ["Two products for the same goal", "Often several vitamins plus the same botanical", "Is the ingredient list different, or only the front-of-pack promise?"],
+        ],
+      },
+      { kind: "h2", text: "RDA and upper limit answer different questions" },
+      {
+        kind: "p",
+        text: "The Recommended Dietary Allowance is the daily intake expected to meet the needs of nearly all healthy people in a defined age and life-stage group. The tolerable upper limit is the highest usual daily intake unlikely to create adverse effects for most people. It is not an ideal dose and it is not permission to aim just below it. ICMR-NIN's 2020 nutrient requirements introduced Indian tolerable upper limits alongside RDAs and estimated average requirements.",
+      },
+      {
+        kind: "p",
+        text: "The percentage printed on a supplement label helps compare one serving with the reference used on that label, but it is not a personal prescription. Needs differ with age, sex, pregnancy, diet, laboratory results and health conditions. Some ingredients do not have an established RDA, and a missing percentage does not make an unlimited amount safe.",
+      },
+      { kind: "h2", text: "Put every amount into the same language" },
+      {
+        kind: "p",
+        text: "First align the serving sizes. A bottle may list amounts per two capsules while another lists them per one tablet; a powder may define a serving as two scoops. Next align the units. One milligram equals 1,000 micrograms, so 0.4 mg and 400 mcg are the same amount. IU conversions are nutrient-specific and sometimes form-specific, so do not apply one internet conversion rule to every vitamin. When labels use different units, use an official nutrient fact sheet or ask a pharmacist.",
+      },
+      {
+        kind: "p",
+        text: "Then check the form and the declared active amount. A calcium label should identify elemental calcium rather than leaving you to compare the total weight of calcium carbonate with the total weight of calcium citrate. Iron labels similarly state elemental iron. Different chemical forms can contain different proportions of the nutrient, which is why the declared active amount matters more than the longest number on the ingredients list.",
+      },
+      { kind: "h2", text: "The same ingredient may use different names" },
+      {
+        kind: "bullets",
+        items: [
+          "Vitamin B9 may appear as folate, folic acid or a named folate form.",
+          "Vitamin B12 may appear as cyanocobalamin, methylcobalamin or another cobalamin form.",
+          "Vitamin A may be listed as retinol or a retinyl compound, beta-carotene, or a mixture; their safety considerations are not identical.",
+          "Iron, calcium, magnesium and zinc may be paired with different salts, but the label should still make the active mineral amount clear.",
+          "A botanical can appear under a common name, a Latin name and an extract name across different products.",
+        ],
+      },
+      {
+        kind: "p",
+        text: "This is why matching only identical words is not enough. If you are uncertain whether two names refer to the same nutrient or botanical, treat it as an unresolved overlap until a pharmacist or reliable reference confirms it.",
+      },
+      { kind: "h2", text: "Interactions are not limited to supplement versus supplement" },
+      {
+        kind: "p",
+        text: "A stack also has to be checked against medicines. Vitamin K can affect warfarin therapy. Calcium and iron can interfere with the absorption of some medicines, including levothyroxine, when taken too close together. Some botanicals can change how medicines are processed or can affect bleeding risk. A composition panel is therefore part of your medication history, even when the product was bought without a prescription.",
+      },
+      {
+        kind: "p",
+        text: "Before surgery, during pregnancy or breastfeeding, for a child, or while managing a medical condition, do not rely on a generic compatibility chart. Share the exact labels with the relevant clinician. Children are not small adults, pregnancy changes the importance of several nutrients, and products marketed as 'natural' can still have pharmacological effects.",
+      },
+      { kind: "h2", text: "A ten-minute supplement-stack audit" },
+      {
+        kind: "numbered",
+        items: [
+          "Collect every supplement, gummy, powder, tonic and regularly used fortified drink in one place.",
+          "Write the actual daily serving of each product—not only the serving suggested on the front.",
+          "Create one row for every active ingredient and add its amount across products using the same unit.",
+          "Mark ingredients that repeat, that lack a clear quantity, or that appear in a proprietary blend.",
+          "Compare the totals with Indian RDA and tolerable-upper-limit references where those values exist; do not treat the upper limit as a target.",
+          "Add all prescription and over-the-counter medicines, then ask a pharmacist to check timing and interactions.",
+          "Remove products that duplicate another product without a clear, professionally advised reason.",
+        ],
+      },
+      { kind: "h2", text: "More products do not create a more complete plan" },
+      {
+        kind: "p",
+        text: "NIH consumer guidance notes that a basic multivitamin is generally unlikely to harm most users, but combining it with fortified foods and other supplements can push some nutrients above their upper limits. The risk is not equal for every ingredient, and more is not automatically better. The goal is to address a real nutritional gap with the smallest clear plan, not to collect overlapping promises.",
+      },
+      {
+        kind: "p",
+        text: "Keep the audit with your medicine list and repeat it whenever a product, serving size or formulation changes. A supplement routine is safest when every ingredient has a reason, every amount can be found, and one professional can see the whole picture.",
+      },
+    ],
+    sources: [
+      {
+        label: "Nutrient Requirements for Indians: brief note on RDA, EAR and tolerable upper limits — ICMR-NIN",
+        url: "https://www.nin.res.in/rdabook/brief_note.pdf",
+      },
+      {
+        label: "Multivitamin/mineral Supplements Fact Sheet for Consumers — NIH Office of Dietary Supplements",
+        url: "https://ods.od.nih.gov/factsheets/MVMS-Consumer/",
+      },
+      {
+        label: "Dietary Supplements: What You Need to Know — NIH Office of Dietary Supplements",
+        url: "https://ods.od.nih.gov/HealthInformation/DS_WhatYouNeedToKnow.aspx",
+      },
+      {
+        label: "Food Safety and Standards regulations — FSSAI",
+        url: "https://www.fssai.gov.in/cms/food-safety-and-standards-regulations.php",
+      },
+    ],
+  },
+
   {
     slug: "how-to-store-supplements-in-india",
     title: "How to store supplements in Indian weather: heat, humidity and expiry explained",

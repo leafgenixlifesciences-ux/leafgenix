@@ -20,7 +20,9 @@ import type { NextConfig } from "next";
  *   NEXT_STANDALONE=1 NEXT_IMAGE_UNOPTIMIZED=1 npm run build
  */
 const standalone = process.env.NEXT_STANDALONE === "1";
-const unoptimizedImages = process.env.NEXT_IMAGE_UNOPTIMIZED === "1";
+const unoptimizedImages =
+  process.env.NEXT_IMAGE_UNOPTIMIZED === "1" ||
+  process.env.CLOUDFLARE_WORKERS === "1";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -106,3 +108,11 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+// Makes `npm run dev` aware of Cloudflare bindings without changing the
+// standard Next.js development workflow.
+if (process.env.CLOUDFLARE_WORKERS === "1") {
+  import("@opennextjs/cloudflare").then(({ initOpenNextCloudflareForDev }) =>
+    initOpenNextCloudflareForDev(),
+  );
+}

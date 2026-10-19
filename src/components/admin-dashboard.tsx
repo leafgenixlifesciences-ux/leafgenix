@@ -1,10 +1,10 @@
 "use client";
 
 import {
-  AlertTriangle, BadgeIndianRupee, BellRing, Boxes, Check, ChevronRight,
-  CircleDot, Download, ExternalLink, Inbox, LayoutDashboard, Leaf, Loader2,
+  AlertTriangle, BellRing, Boxes, Check, CheckCheck, ChevronRight,
+  CircleDot, Download, ExternalLink, Inbox, IndianRupee, LayoutDashboard, Leaf, Loader2,
   LogOut, Mail, MapPin, Menu, PackageCheck, PackageOpen, Phone, RefreshCw,
-  Search, Send, Truck, UsersRound, X,
+  Search, Send, ShoppingBag, Truck, UsersRound, X,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -138,7 +138,7 @@ export function AdminDashboard({ initialOrders, initialLeads, products, dataErro
 
   const nav = [
     { id: "overview" as const, label: "Overview", icon: LayoutDashboard, count: 0 },
-    { id: "orders" as const, label: "Orders", icon: Boxes, count: fulfilmentQueue.length },
+    { id: "orders" as const, label: "Orders", icon: ShoppingBag, count: fulfilmentQueue.length },
     { id: "leads" as const, label: "Leads", icon: UsersRound, count: openLeads.length },
   ];
 
@@ -177,21 +177,21 @@ function Overview({ orders, leads, revenue, fulfilmentQueue, openLeads, lowStock
   onView: (view: View) => void; onOpenOrder: (order: AdminOrder) => void;
 }) {
   const stages = [
-    { label: "Order placed", count: orders.filter((o) => o.status === "paid").length, icon: BadgeIndianRupee },
+    { label: "Order placed", count: orders.filter((o) => o.status === "paid").length, icon: ShoppingBag },
     { label: "Preparing", count: orders.filter((o) => o.status === "processing").length, icon: PackageOpen },
     { label: "Shipped", count: orders.filter((o) => o.status === "shipped").length, icon: Truck },
-    { label: "Delivered", count: orders.filter((o) => o.status === "delivered").length, icon: PackageCheck },
+    { label: "Delivered", count: orders.filter((o) => o.status === "delivered").length, icon: CheckCheck },
   ];
   const metrics = [
-    { label: "Orders", value: orders.length, detail: `${fulfilmentQueue.length} active fulfilments`, icon: Boxes, action: () => onView("orders") },
-    { label: "Paid revenue", value: formatPaise(revenue), detail: "Captured order value", icon: BadgeIndianRupee },
+    { label: "Orders", value: orders.length, detail: `${fulfilmentQueue.length} active ${fulfilmentQueue.length === 1 ? "fulfilment" : "fulfilments"}`, icon: ShoppingBag, action: () => onView("orders") },
+    { label: "Paid revenue", value: formatPaise(revenue), detail: "Captured order value", icon: IndianRupee },
     { label: "Open leads", value: openLeads.length, detail: `${leads.length} total enquiries`, icon: UsersRound, action: () => onView("leads") },
     { label: "Low stock", value: lowStock.length, detail: lowStock.length ? "10 units or fewer" : "Stock healthy", icon: AlertTriangle },
   ];
   return <section>
     <div className={styles.pageHeading}><div><h1>Today’s operations</h1><p>{dayFormatter.format(new Date(syncedAt))} · live commercial snapshot</p></div><aside>Move paid orders forward, answer open leads and keep dispatch details accurate from one workspace.</aside></div>
-    <section className={styles.commandBand}><div className={styles.commandHead}><div><strong>Fulfilment flow</strong><span>Payment confirmation to final delivery</span></div><Truck size={21} /></div><div className={styles.stages}>{stages.map((stage) => { const Icon = stage.icon; return <div className={styles.stage} key={stage.label}><span className={styles.stageIcon}><Icon size={17} /></span><div><strong>{String(stage.count).padStart(2, "0")}</strong><span>{stage.label}</span></div></div>; })}</div></section>
-    <div className={styles.metricRail}>{metrics.map((metric) => { const Icon = metric.icon; return <button className={styles.metric} key={metric.label} onClick={metric.action} disabled={!metric.action}><div className={styles.metricTop}><span>{metric.label}</span><Icon size={15} /></div><div className={styles.metricValue}>{metric.value}</div><div className={styles.metricDetail}>{metric.detail}</div></button>; })}</div>
+    <section className={styles.commandBand}><div className={styles.commandHead}><div><strong>Fulfilment flow</strong><span>Payment confirmation to final delivery</span></div><Truck size={22} strokeWidth={1.9} /></div><div className={styles.stages}>{stages.map((stage) => { const Icon = stage.icon; return <div className={styles.stage} key={stage.label}><span className={styles.stageIcon}><Icon size={21} strokeWidth={1.9} /></span><div><strong>{String(stage.count).padStart(2, "0")}</strong><span className={styles.stageLabel}>{stage.label}</span></div></div>; })}</div></section>
+    <div className={styles.metricRail}>{metrics.map((metric) => { const Icon = metric.icon; return <button className={styles.metric} key={metric.label} onClick={metric.action} disabled={!metric.action}><div className={styles.metricTop}><span>{metric.label}</span><span className={styles.metricIcon}><Icon size={19} strokeWidth={1.9} /></span></div><div className={styles.metricValue}>{metric.value}</div><div className={styles.metricDetail}>{metric.detail}</div></button>; })}</div>
     <AdminPushControl />
     <div className={styles.overviewGrid}>
       <section className={styles.panel}><div className={styles.panelHeader}><div><h2>Recent orders</h2><p>The newest payments and fulfilment stages.</p></div><button className={styles.textButton} onClick={() => onView("orders")}>View all</button></div><OrderList orders={orders.slice(0, 6)} onOpen={onOpenOrder} embedded /></section>
@@ -234,8 +234,8 @@ function OrderDrawer({ order, status, setStatus, courierName, setCourierName, tr
 }) {
   const address = order.shipping_address;
   const canUpdateDelivery = ["paid", "processing", "shipped"].includes(order.status);
-  const choices = order.status === "paid" ? ["processing", "shipped", "cancelled"] as const
-    : order.status === "processing" ? ["processing", "shipped", "cancelled"] as const
+  const choices = order.status === "paid" ? ["processing", "shipped", "delivered", "cancelled"] as const
+    : order.status === "processing" ? ["processing", "shipped", "delivered", "cancelled"] as const
     : ["shipped", "delivered"] as const;
   return <div className={styles.drawerBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><aside className={styles.drawer} role="dialog" aria-modal="true" aria-labelledby="order-drawer-title">
     <header className={styles.drawerHeader}><div><div className={styles.orderId}>{order.order_number}</div><h2 id="order-drawer-title">Fulfilment details</h2></div><button className={styles.iconButton} onClick={onClose} aria-label="Close order"><X size={18} /></button></header>
@@ -243,7 +243,8 @@ function OrderDrawer({ order, status, setStatus, courierName, setCourierName, tr
       <section className={styles.customerBlock}><div className={styles.customerBlockTop}><strong>{order.full_name}</strong><StatusPill status={order.status} /></div><div className={styles.customerLinks}><a href={`mailto:${order.email}`}><Mail size={14} />{order.email}</a><a href={`tel:${order.phone}`}><Phone size={14} />+91 {order.phone}</a></div></section>
       <section className={styles.drawerPanel}><h3><MapPin size={15} />Delivery address</h3><address>{address.line1}<br />{address.line2 ? <>{address.line2}<br /></> : null}{address.city}, {address.state} {address.pincode}<br />{address.country}</address>{order.notes ? <p>Customer note: {order.notes}</p> : null}</section>
       <section className={styles.drawerPanel}><h3><Boxes size={15} />Items · {formatPaise(order.total_paise)}</h3><div>{order.order_items.map((item) => <div className={styles.itemRow} key={item.id}><div><strong>{item.product_name}</strong><span className={styles.subtle}>Qty {item.quantity} × {formatPaise(item.unit_price_paise)}</span></div><strong>{formatPaise(item.total_paise)}</strong></div>)}</div></section>
-      {canUpdateDelivery ? <form className={styles.fulfilmentForm} onSubmit={onSave}><h3><Truck size={17} />Move this order forward</h3><p>Current stage: <strong>{statusLabel[order.status]}</strong>. A new stage sends a branded update to the customer.</p><div className={styles.statusChoices}>{choices.map((value) => <button type="button" key={value} onClick={() => setStatus(value)} className={`${styles.statusChoice} ${status === value ? styles.statusChoiceActive : ""}`}>{statusLabel[value]}</button>)}</div><div className={styles.fieldGrid}><label>Courier<input value={courierName} onChange={(e) => setCourierName(e.target.value)} required={status === "shipped" || status === "delivered"} placeholder="e.g. Delhivery" /></label><label>Tracking number<input value={trackingNumber} onChange={(e) => setTrackingNumber(e.target.value)} required={status === "shipped" || status === "delivered"} placeholder="AWB / tracking ID" /></label></div>{status === "cancelled" ? <p className={styles.warning}><AlertTriangle size={15} />This does not refund the payment. Process any Razorpay refund separately.</p> : null}{notice ? <div className={`${styles.notice} ${notice.tone === "success" ? styles.noticeSuccess : styles.noticeError}`} style={{ marginTop: ".75rem", marginBottom: 0 }}>{notice.text}</div> : null}<button className={styles.primaryButton} type="submit" disabled={saving}>{saving ? <Loader2 size={15} /> : <Send size={15} />}{saving ? "Saving update…" : "Save and notify customer"}</button></form> : <div className={styles.warning} style={{ marginTop: 0 }}><PackageCheck size={16} />{order.status === "delivered" ? "This order is delivered and complete." : order.status === "cancelled" ? "This order has been cancelled." : "Delivery controls unlock after Razorpay confirms payment."}</div>}
+      {!canUpdateDelivery && notice ? <div className={`${styles.notice} ${notice.tone === "success" ? styles.noticeSuccess : styles.noticeError}`}>{notice.text}</div> : null}
+      {canUpdateDelivery ? <form className={styles.fulfilmentForm} onSubmit={onSave}><h3><Truck size={17} />Move this order forward</h3><p>Current stage: <strong>{statusLabel[order.status]}</strong>. A new stage sends a branded update to the customer.</p><div className={styles.statusChoices}>{choices.map((value) => <button type="button" key={value} onClick={() => setStatus(value)} className={`${styles.statusChoice} ${status === value ? styles.statusChoiceActive : ""}`}>{statusLabel[value]}</button>)}</div><div className={styles.fieldGrid}><label>Courier<input value={courierName} onChange={(e) => setCourierName(e.target.value)} required={status === "shipped"} placeholder="e.g. Delhivery" /></label><label>Tracking number<input value={trackingNumber} onChange={(e) => setTrackingNumber(e.target.value)} required={status === "shipped"} placeholder="AWB / tracking ID" /></label></div>{status === "delivered" && !trackingNumber ? <p className={styles.fieldHint}>Past deliveries can be closed without tracking details. Please verify the delivery before notifying the customer.</p> : null}{status === "cancelled" ? <p className={styles.warning}><AlertTriangle size={15} />This does not refund the payment. Process any Razorpay refund separately.</p> : null}{notice ? <div className={`${styles.notice} ${notice.tone === "success" ? styles.noticeSuccess : styles.noticeError}`} style={{ marginTop: ".75rem", marginBottom: 0 }}>{notice.text}</div> : null}<button className={styles.primaryButton} type="submit" disabled={saving}>{saving ? <Loader2 size={15} /> : <Send size={15} />}{saving ? "Saving update…" : "Save and notify customer"}</button></form> : <div className={styles.warning} style={{ marginTop: 0 }}><PackageCheck size={16} />{order.status === "delivered" ? "This order is delivered and complete." : order.status === "cancelled" ? "This order has been cancelled." : "Delivery controls unlock after Razorpay confirms payment."}</div>}
       <div className={styles.drawerMeta}><span>Payment: {order.payment_method || "Razorpay"}</span>{order.razorpay_payment_id ? <span className={styles.orderId}>{order.razorpay_payment_id}</span> : null}<a href={`/order/${order.id}`} target="_blank">Customer view <ExternalLink size={12} /></a></div>
     </div>
   </aside></div>;

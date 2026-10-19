@@ -52,7 +52,7 @@ export async function PATCH(
   }
 
   if (
-    ["shipped", "delivered"].includes(parsed.data.status) &&
+    parsed.data.status === "shipped" &&
     (!parsed.data.courierName || !parsed.data.trackingNumber)
   ) {
     return NextResponse.json(
@@ -80,8 +80,8 @@ export async function PATCH(
   }
 
   const allowed: Record<string, string[]> = {
-    paid: ["processing", "shipped", "cancelled"],
-    processing: ["shipped", "cancelled"],
+    paid: ["processing", "shipped", "delivered", "cancelled"],
+    processing: ["shipped", "delivered", "cancelled"],
     shipped: ["delivered"],
     delivered: [],
     cancelled: [],

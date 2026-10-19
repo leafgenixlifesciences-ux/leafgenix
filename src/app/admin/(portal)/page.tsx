@@ -1,10 +1,17 @@
+import { redirect } from "next/navigation";
+
 import { AdminDashboard } from "@/components/admin-dashboard";
+import { getAdminSession } from "@/lib/admin-auth";
 import type { AdminLead, AdminOrder, AdminProductHealth } from "@/lib/admin-types";
 import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPortalPage() {
+  // Layouts and pages can render in parallel, so the layout redirect alone
+  // must not be trusted to protect these service-role queries or their payload.
+  if (!(await getAdminSession())) redirect("/admin/login");
+
   let orders: AdminOrder[] = [];
   let leads: AdminLead[] = [];
   let products: AdminProductHealth[] = [];

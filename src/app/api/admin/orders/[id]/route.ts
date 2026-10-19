@@ -79,6 +79,20 @@ export async function PATCH(
     );
   }
 
+  const allowed: Record<string, string[]> = {
+    paid: ["processing", "shipped", "cancelled"],
+    processing: ["shipped", "cancelled"],
+    shipped: ["delivered"],
+    delivered: [],
+    cancelled: [],
+  };
+  if (parsed.data.status !== current.status && !allowed[current.status].includes(parsed.data.status)) {
+    return NextResponse.json({ error: "This order cannot move back to an earlier stage." }, { status: 409 });
+  }
+  if (parsed.data.status === "cancelled" && current.status === "cancelled") {
+    return NextResponse.json({ error: "This order is already cancelled." }, { status: 409 });
+  }
+
   const update = {
     status: parsed.data.status,
     courier_name: parsed.data.courierName || null,
@@ -88,16 +102,18 @@ export async function PATCH(
     .from("orders")
     .update(update)
     .eq("id", id)
+    .eq("status", current.status)
     .select("id, status, courier_name, tracking_number, updated_at")
-    .single();
+    .maybeSingle();
 
-  if (error || !data) {
+  if (error) {
     console.error("[admin/order]", error?.message);
     return NextResponse.json(
       { error: "Could not update this order." },
       { status: 500 },
     );
   }
+  if (!data) return NextResponse.json({ error: "Order changed elsewhere. Refresh and try again." }, { status: 409 });
 
   let emailWarning: string | undefined;
   if (current.status !== parsed.data.status) {

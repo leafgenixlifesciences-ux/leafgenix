@@ -108,43 +108,43 @@ function shell(content: string, preheader: string): string {
           .email-outer { padding: 0 !important; }
           .email-card { border-radius: 0 !important; border-left: 0 !important; border-right: 0 !important; }
           .email-header { padding: 22px 20px !important; }
-          .email-body { padding: 26px 20px !important; }
+          .email-body { padding: 28px 20px !important; }
           .email-footer { padding: 18px 20px !important; }
           .email-brand { font-size: 17px !important; }
-          .email-mark { width: 46px !important; height: 46px !important; }
+          .email-mark { width: 44px !important; height: 44px !important; }
           h1 { font-size: 25px !important; }
         }
       </style>
     </head>
-    <body style="margin:0;background:#f3f1e8;font-family:Arial,sans-serif;color:#163126">
+    <body style="margin:0;background:#f5f7ef;font-family:Arial,Helvetica,sans-serif;color:#173b29">
       <span style="display:none;max-height:0;overflow:hidden;opacity:0">${escapeHtml(preheader)}</span>
-      <table class="email-outer" role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f3f1e8;padding:32px 12px">
+      <table class="email-outer" role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f5f7ef;padding:36px 12px">
         <tr><td align="center">
-          <table class="email-card" role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#ffffff;border:1px solid #dce4dc;border-top:5px solid #c9e82d;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px rgba(15,54,36,.12)">
-            <tr><td class="email-header" style="background-color:#004f2a;background-image:linear-gradient(120deg,#003d24 0%,#006837 70%,#315f24 100%);padding:24px 30px;color:#ffffff">
+          <table class="email-card" role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#fffefa;border:1px solid #dce8d7;border-top:5px solid #bfdf67;border-radius:22px;overflow:hidden;box-shadow:0 18px 55px rgba(15,54,36,.09)">
+            <tr><td class="email-header" style="background-color:#eaf4e2;background-image:linear-gradient(120deg,#edf7e4 0%,#f8fbe9 70%,#e6f3df 100%);padding:26px 32px;color:#064b2d">
               <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td width="58" valign="middle">
-                    <div class="email-mark" style="width:50px;height:50px;border-radius:50%;background:#ffffff;text-align:center;overflow:hidden">
+                    <div class="email-mark" style="width:50px;height:50px;border:1px solid #c7dfc4;border-radius:14px;background:#ffffff;text-align:center;overflow:hidden">
                       <img src="${escapeHtml(markUrl)}" width="50" height="50" alt="" style="display:block;width:50px;height:50px;object-fit:contain">
                     </div>
                   </td>
                   <td valign="middle" style="padding-left:13px">
                     <div class="email-brand" style="font-size:19px;line-height:1.1;font-weight:800;letter-spacing:-.02em">Leaf Genix Lifesciences</div>
-                    <div style="margin-top:5px;font-size:11px;line-height:1.3;color:#d7e9dd">Lifting and Empowering All Families</div>
+                    <div style="margin-top:5px;font-size:11px;line-height:1.3;color:#64836a">Lifting and Empowering All Families</div>
                   </td>
                 </tr>
               </table>
             </td></tr>
-            <tr><td class="email-body" style="padding:34px 32px">${content}</td></tr>
-            <tr><td class="email-footer" style="padding:20px 30px;background:#f4f7f2;border-top:1px solid #dfe7df;font-size:12px;line-height:1.7;color:#64756c">
+            <tr><td class="email-body" style="padding:36px 34px"><div style="margin-bottom:18px;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#73934e">CARE, DELIVERED WITH CLARITY</div>${content}</td></tr>
+            <tr><td class="email-footer" style="padding:22px 32px;background:#f1f7ed;border-top:1px solid #deead7;font-size:12px;line-height:1.7;color:#64756c">
               <strong style="color:#315544">Need a hand?</strong> Reply to this email or contact<br>
               <a href="mailto:${escapeHtml(site.email)}" style="color:#005c2d;text-decoration:none">${escapeHtml(site.email)}</a>
               &nbsp;·&nbsp;
               <a href="tel:${escapeHtml(site.supportPhone.replace(/\s/g, ""))}" style="color:#005c2d;text-decoration:none">${escapeHtml(site.supportPhone)}</a>
             </td></tr>
           </table>
-          <div style="max-width:600px;padding:16px 18px 0;font-size:11px;line-height:1.6;color:#829087;text-align:center">
+          <div style="max-width:600px;padding:18px 18px 0;font-size:11px;line-height:1.6;color:#829087;text-align:center">
             ${escapeHtml(site.fullName)} · Jaipur, Rajasthan<br>
             This email relates to your enquiry, coupon request, or order.
           </div>
@@ -386,7 +386,7 @@ export async function sendOrderStatusEmail(
   const { data, error } = await createAdminClient()
     .from("orders")
     .select(
-      "id, order_number, email, full_name, status, courier_name, tracking_number",
+      "id, order_number, email, full_name, status, courier_name, tracking_number, updated_at",
     )
     .eq("id", orderId)
     .single();
@@ -425,15 +425,20 @@ export async function sendOrderStatusEmail(
         </div>`
       : "";
 
+  const stages = ["Order placed", "Preparing", "Shipped", "Delivered"];
+  const currentStage = { processing: 1, shipped: 2, delivered: 3, cancelled: -1 }[status];
+  const progress = status === "cancelled" ? "" : `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:22px 0;border-collapse:separate;border-spacing:4px"><tr>${stages.map((stage, index) => `<td style="padding:10px 4px;border-radius:7px;background:${index <= currentStage ? "#dcefb6" : "#edf0ea"};color:${index <= currentStage ? "#175438" : "#84948a"};font-size:10px;font-weight:700;text-align:center">${stage}</td>`).join("")}</tr></table>`;
+
   await sendEmail({
     to: data.email,
     replyTo: site.email,
     subject: `${copy.subject} · ${site.name}`,
-    idempotencyKey: `order-status-${status}/${data.id}`,
+    idempotencyKey: `order-status-${status}/${data.id}/${data.updated_at}`,
     html: shell(
       `<p style="margin:0 0 8px;color:#66756d">Hi ${escapeHtml(data.full_name)},</p>
        <h1 style="margin:0 0 12px;font-size:28px;line-height:1.2;color:#005c2d">${escapeHtml(copy.heading)}</h1>
        <p style="margin:0;line-height:1.75">${escapeHtml(copy.body)}</p>
+       ${progress}
        ${tracking}
        <p style="margin:24px 0 0"><a href="${escapeHtml(siteUrl(`/order/${data.id}`))}" style="display:inline-block;padding:12px 18px;border-radius:999px;background:#005c2d;color:#ffffff;text-decoration:none;font-weight:700">View order details</a></p>`,
       `${copy.heading} Order ${data.order_number}.`,

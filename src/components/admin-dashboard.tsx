@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState, useTransition } from "react";
 
 import styles from "@/components/admin-dashboard.module.css";
+import { AdminPushControl } from "@/components/admin-push-control";
 import type { AdminLead, AdminOrder, AdminProductHealth } from "@/lib/admin-types";
 import { formatPaise } from "@/lib/money";
 import type { OrderStatus } from "@/lib/types";
@@ -21,8 +22,8 @@ const fulfilmentStatuses = ["processing", "shipped", "delivered", "cancelled"] a
 const paidStatuses: OrderStatus[] = ["paid", "processing", "shipped", "delivered"];
 
 const statusLabel: Record<OrderStatus, string> = {
-  created: "Created", pending: "Awaiting payment", paid: "Paid",
-  failed: "Payment failed", processing: "Preparing", shipped: "In transit",
+  created: "Created", pending: "Awaiting payment", paid: "Order placed",
+  failed: "Payment failed", processing: "Preparing", shipped: "Shipped",
   delivered: "Delivered", cancelled: "Cancelled", refunded: "Refunded",
 };
 const statusClass: Record<OrderStatus, string> = {
@@ -107,6 +108,7 @@ export function AdminDashboard({ initialOrders, initialLeads, products, dataErro
 
   async function saveFulfilment(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); if (!selectedOrder) return; setSaving(true); setNotice(null);
+    const stageChanged = selectedOrder.status !== editStatus;
     try {
       const response = await fetch(`/api/admin/orders/${selectedOrder.id}`, {
         method: "PATCH", headers: { "Content-Type": "application/json" },
@@ -116,7 +118,7 @@ export function AdminDashboard({ initialOrders, initialLeads, products, dataErro
       if (response.status === 401) { router.replace("/admin/login"); return; }
       if (!response.ok || !result.order) throw new Error(result.error || "Update failed.");
       setOrders((current) => current.map((order) => order.id === result.order?.id ? { ...order, ...result.order } : order));
-      setNotice({ tone: result.warning ? "error" : "success", text: result.warning || "Delivery status updated and the customer was notified." });
+      setNotice({ tone: result.warning ? "error" : "success", text: result.warning || (stageChanged ? "Order stage updated. Customer email sent." : "Courier details saved. No new stage email was needed.") });
     } catch (error) {
       setNotice({ tone: "error", text: error instanceof Error ? error.message : "Update failed." });
     } finally { setSaving(false); }
@@ -175,9 +177,9 @@ function Overview({ orders, leads, revenue, fulfilmentQueue, openLeads, lowStock
   onView: (view: View) => void; onOpenOrder: (order: AdminOrder) => void;
 }) {
   const stages = [
-    { label: "Paid", count: orders.filter((o) => o.status === "paid").length, icon: BadgeIndianRupee },
+    { label: "Order placed", count: orders.filter((o) => o.status === "paid").length, icon: BadgeIndianRupee },
     { label: "Preparing", count: orders.filter((o) => o.status === "processing").length, icon: PackageOpen },
-    { label: "In transit", count: orders.filter((o) => o.status === "shipped").length, icon: Truck },
+    { label: "Shipped", count: orders.filter((o) => o.status === "shipped").length, icon: Truck },
     { label: "Delivered", count: orders.filter((o) => o.status === "delivered").length, icon: PackageCheck },
   ];
   const metrics = [
@@ -190,6 +192,7 @@ function Overview({ orders, leads, revenue, fulfilmentQueue, openLeads, lowStock
     <div className={styles.pageHeading}><div><h1>Today’s operations</h1><p>{dayFormatter.format(new Date(syncedAt))} · live commercial snapshot</p></div><aside>Move paid orders forward, answer open leads and keep dispatch details accurate from one workspace.</aside></div>
     <section className={styles.commandBand}><div className={styles.commandHead}><div><strong>Fulfilment flow</strong><span>Payment confirmation to final delivery</span></div><Truck size={21} /></div><div className={styles.stages}>{stages.map((stage) => { const Icon = stage.icon; return <div className={styles.stage} key={stage.label}><span className={styles.stageIcon}><Icon size={17} /></span><div><strong>{String(stage.count).padStart(2, "0")}</strong><span>{stage.label}</span></div></div>; })}</div></section>
     <div className={styles.metricRail}>{metrics.map((metric) => { const Icon = metric.icon; return <button className={styles.metric} key={metric.label} onClick={metric.action} disabled={!metric.action}><div className={styles.metricTop}><span>{metric.label}</span><Icon size={15} /></div><div className={styles.metricValue}>{metric.value}</div><div className={styles.metricDetail}>{metric.detail}</div></button>; })}</div>
+    <AdminPushControl />
     <div className={styles.overviewGrid}>
       <section className={styles.panel}><div className={styles.panelHeader}><div><h2>Recent orders</h2><p>The newest payments and fulfilment stages.</p></div><button className={styles.textButton} onClick={() => onView("orders")}>View all</button></div><OrderList orders={orders.slice(0, 6)} onOpen={onOpenOrder} embedded /></section>
       <section className={styles.panel}><div className={styles.panelHeader}><div><h2>Attention</h2><p>The next actions with customer impact.</p></div><CircleDot size={17} color="#ff7a59" /></div><div className={styles.pulseList}>{[
@@ -230,14 +233,17 @@ function OrderDrawer({ order, status, setStatus, courierName, setCourierName, tr
   saving: boolean; notice: Notice; onClose: () => void; onSave: (event: React.FormEvent<HTMLFormElement>) => void;
 }) {
   const address = order.shipping_address;
-  const canUpdateDelivery = paidStatuses.includes(order.status) || order.status === "cancelled";
+  const canUpdateDelivery = ["paid", "processing", "shipped"].includes(order.status);
+  const choices = order.status === "paid" ? ["processing", "shipped", "cancelled"] as const
+    : order.status === "processing" ? ["processing", "shipped", "cancelled"] as const
+    : ["shipped", "delivered"] as const;
   return <div className={styles.drawerBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><aside className={styles.drawer} role="dialog" aria-modal="true" aria-labelledby="order-drawer-title">
     <header className={styles.drawerHeader}><div><div className={styles.orderId}>{order.order_number}</div><h2 id="order-drawer-title">Fulfilment details</h2></div><button className={styles.iconButton} onClick={onClose} aria-label="Close order"><X size={18} /></button></header>
     <div className={styles.drawerBody}>
       <section className={styles.customerBlock}><div className={styles.customerBlockTop}><strong>{order.full_name}</strong><StatusPill status={order.status} /></div><div className={styles.customerLinks}><a href={`mailto:${order.email}`}><Mail size={14} />{order.email}</a><a href={`tel:${order.phone}`}><Phone size={14} />+91 {order.phone}</a></div></section>
       <section className={styles.drawerPanel}><h3><MapPin size={15} />Delivery address</h3><address>{address.line1}<br />{address.line2 ? <>{address.line2}<br /></> : null}{address.city}, {address.state} {address.pincode}<br />{address.country}</address>{order.notes ? <p>Customer note: {order.notes}</p> : null}</section>
       <section className={styles.drawerPanel}><h3><Boxes size={15} />Items · {formatPaise(order.total_paise)}</h3><div>{order.order_items.map((item) => <div className={styles.itemRow} key={item.id}><div><strong>{item.product_name}</strong><span className={styles.subtle}>Qty {item.quantity} × {formatPaise(item.unit_price_paise)}</span></div><strong>{formatPaise(item.total_paise)}</strong></div>)}</div></section>
-      {canUpdateDelivery ? <form className={styles.fulfilmentForm} onSubmit={onSave}><h3><Truck size={17} />Update delivery</h3><p>Changing the stage sends a branded email to the customer.</p><div className={styles.statusChoices}>{fulfilmentStatuses.map((value) => <button type="button" key={value} onClick={() => setStatus(value)} className={`${styles.statusChoice} ${status === value ? styles.statusChoiceActive : ""}`}>{statusLabel[value]}</button>)}</div><div className={styles.fieldGrid}><label>Courier<input value={courierName} onChange={(e) => setCourierName(e.target.value)} required={status === "shipped" || status === "delivered"} placeholder="e.g. Delhivery" /></label><label>Tracking number<input value={trackingNumber} onChange={(e) => setTrackingNumber(e.target.value)} required={status === "shipped" || status === "delivered"} placeholder="AWB / tracking ID" /></label></div>{status === "cancelled" && paidStatuses.includes(order.status) ? <p className={styles.warning}><AlertTriangle size={15} />This changes fulfilment only. Process any Razorpay refund separately.</p> : null}{notice ? <div className={`${styles.notice} ${notice.tone === "success" ? styles.noticeSuccess : styles.noticeError}`} style={{ marginTop: ".75rem", marginBottom: 0 }}>{notice.text}</div> : null}<button className={styles.primaryButton} type="submit" disabled={saving}>{saving ? <Loader2 size={15} /> : <Send size={15} />}{saving ? "Saving update…" : "Save and notify customer"}</button></form> : <div className={styles.warning} style={{ marginTop: 0 }}><AlertTriangle size={16} />Delivery controls unlock after Razorpay confirms payment.</div>}
+      {canUpdateDelivery ? <form className={styles.fulfilmentForm} onSubmit={onSave}><h3><Truck size={17} />Move this order forward</h3><p>Current stage: <strong>{statusLabel[order.status]}</strong>. A new stage sends a branded update to the customer.</p><div className={styles.statusChoices}>{choices.map((value) => <button type="button" key={value} onClick={() => setStatus(value)} className={`${styles.statusChoice} ${status === value ? styles.statusChoiceActive : ""}`}>{statusLabel[value]}</button>)}</div><div className={styles.fieldGrid}><label>Courier<input value={courierName} onChange={(e) => setCourierName(e.target.value)} required={status === "shipped" || status === "delivered"} placeholder="e.g. Delhivery" /></label><label>Tracking number<input value={trackingNumber} onChange={(e) => setTrackingNumber(e.target.value)} required={status === "shipped" || status === "delivered"} placeholder="AWB / tracking ID" /></label></div>{status === "cancelled" ? <p className={styles.warning}><AlertTriangle size={15} />This does not refund the payment. Process any Razorpay refund separately.</p> : null}{notice ? <div className={`${styles.notice} ${notice.tone === "success" ? styles.noticeSuccess : styles.noticeError}`} style={{ marginTop: ".75rem", marginBottom: 0 }}>{notice.text}</div> : null}<button className={styles.primaryButton} type="submit" disabled={saving}>{saving ? <Loader2 size={15} /> : <Send size={15} />}{saving ? "Saving update…" : "Save and notify customer"}</button></form> : <div className={styles.warning} style={{ marginTop: 0 }}><PackageCheck size={16} />{order.status === "delivered" ? "This order is delivered and complete." : order.status === "cancelled" ? "This order has been cancelled." : "Delivery controls unlock after Razorpay confirms payment."}</div>}
       <div className={styles.drawerMeta}><span>Payment: {order.payment_method || "Razorpay"}</span>{order.razorpay_payment_id ? <span className={styles.orderId}>{order.razorpay_payment_id}</span> : null}<a href={`/order/${order.id}`} target="_blank">Customer view <ExternalLink size={12} /></a></div>
     </div>
   </aside></div>;

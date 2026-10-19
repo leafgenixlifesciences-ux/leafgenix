@@ -4,6 +4,7 @@ import { verifyPaymentSignature } from "@/lib/razorpay";
 import { verifySchema } from "@/lib/validation";
 import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
 import { sendPaidOrderEmails } from "@/lib/email";
+import { sendNewOrderPush } from "@/lib/admin-push";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -118,6 +119,12 @@ export async function POST(request: Request) {
       }
     }
     return NextResponse.json({ ok: true, orderId, alreadyRecorded: true });
+  }
+
+  try {
+    await sendNewOrderPush(orderId);
+  } catch (pushError) {
+    console.error("[verify] admin push failed", pushError instanceof Error ? pushError.message : "Unknown error");
   }
 
   // Idempotent in the database: returns false when stock has already moved.

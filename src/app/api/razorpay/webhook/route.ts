@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
 import { verifyWebhookSignature } from "@/lib/razorpay";
 import { sendPaidOrderEmails } from "@/lib/email";
+import { sendNewOrderPush } from "@/lib/admin-push";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -88,6 +89,11 @@ export async function POST(request: Request) {
         let paidOrderId = claimed?.[0]?.id as string | undefined;
 
         if (paidOrderId) {
+          try {
+            await sendNewOrderPush(paidOrderId);
+          } catch (pushError) {
+            console.error("[webhook] admin push failed", pushError instanceof Error ? pushError.message : "Unknown error");
+          }
           const { error: stockError } = await admin.rpc(
             "decrement_stock_for_order",
             { p_order_id: paidOrderId },

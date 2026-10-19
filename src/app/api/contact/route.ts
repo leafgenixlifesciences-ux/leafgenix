@@ -76,7 +76,7 @@ export async function POST(request: Request) {
       message,
     });
   } catch (err) {
-    console.error("[contact]", err);
+    console.error("[contact]", err instanceof Error ? err.message : String(err));
     return NextResponse.json(
       { error: "We couldn't send that. Please email us directly." },
       { status: 500 },

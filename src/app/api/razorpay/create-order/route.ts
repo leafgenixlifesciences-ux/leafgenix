@@ -25,6 +25,10 @@ export async function POST(request: Request) {
   }
 
   if (!razorpayConfigured()) {
+    console.error("[create-order] payment configuration missing", {
+      keyIdPresent: Boolean(razorpayKeyId()),
+      keySecretPresent: Boolean(process.env.RAZORPAY_KEY_SECRET),
+    });
     return NextResponse.json(
       {
         error:
@@ -240,8 +244,18 @@ export async function POST(request: Request) {
       },
     });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("[create-order] razorpay:", message);
+    const gatewayError = err as {
+      statusCode?: number;
+      error?: { code?: string; description?: string };
+    };
+    const message =
+      gatewayError?.error?.description ??
+      (err instanceof Error ? err.message : "Unknown error");
+    console.error("[create-order] razorpay:", {
+      statusCode: gatewayError?.statusCode,
+      code: gatewayError?.error?.code,
+      message,
+    });
 
     await admin
       .from("orders")

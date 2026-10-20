@@ -79,7 +79,7 @@ export function CouponPopup() {
         throw new Error(json.error ?? "Could not issue your coupon");
       }
 
-      applyCoupon(json.couponCode);
+      await applyCoupon(json.couponCode);
       setClaimedCode(json.couponCode);
       try {
         window.sessionStorage.setItem(DISMISSED_KEY, "1");

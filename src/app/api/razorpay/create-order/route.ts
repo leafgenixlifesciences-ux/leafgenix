@@ -5,7 +5,8 @@ import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
 import { razorpay, razorpayConfigured, razorpayKeyId } from "@/lib/razorpay";
 import { checkoutSchema } from "@/lib/validation";
 import { shippingFor } from "@/lib/shipping";
-import { couponIsValid, couponPricePaise, normalizeCouponCode } from "@/lib/offer";
+import { couponPricePaise } from "@/lib/offer";
+import { activeCoupon } from "@/lib/coupon-db";
 import { site } from "@/lib/site";
 import type { Product } from "@/lib/types";
 
@@ -66,12 +67,17 @@ export async function POST(request: Request) {
   }
 
   const input = parsed.data;
-  if (input.couponCode && !couponIsValid(input.couponCode)) {
-    return NextResponse.json({ error: "That coupon code is not valid." }, { status: 422 });
+  let coupon = null;
+  try {
+    coupon = input.couponCode ? await activeCoupon(input.couponCode) : null;
+  } catch (error) {
+    console.error("[create-order] coupon lookup", error);
+    return NextResponse.json({ error: "Could not check your coupon right now." }, { status: 503 });
   }
-  const couponCode = couponIsValid(input.couponCode)
-    ? normalizeCouponCode(input.couponCode)
-    : null;
+  if (input.couponCode && !coupon) {
+    return NextResponse.json({ error: "That coupon code is invalid or expired." }, { status: 422 });
+  }
+  const couponCode = coupon?.code ?? null;
   const admin = createAdminClient();
 
   // ---------------------------------------------------------------
@@ -127,7 +133,7 @@ export async function POST(request: Request) {
     }
     // Selling price is computed here, on the server, from the database M.R.P.
     // The browser sends only a slug and a quantity, so it has no say in it.
-    const unitPaise = couponPricePaise(product.mrp_paise, couponCode);
+    const unitPaise = couponPricePaise(product.mrp_paise, coupon);
     lines.push({
       product,
       quantity: item.quantity,
@@ -168,6 +174,7 @@ export async function POST(request: Request) {
       subtotal_paise: subtotalPaise,
       shipping_paise: shippingPaise,
       discount_paise: discountPaise,
+      coupon_code: couponCode,
       total_paise: totalPaise,
       status: "created",
       notes: [input.notes, couponCode ? `Coupon: ${couponCode}` : ""]

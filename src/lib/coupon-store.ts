@@ -1,6 +1,6 @@
 "use client";
 
-import { couponIsValid, normalizeCouponCode } from "@/lib/offer";
+import { couponFormatValid, normalizeCouponCode } from "@/lib/offer";
 
 const STORAGE_KEY = "leafgenix.coupon.v1";
 let current: string | null = null;
@@ -10,7 +10,7 @@ const listeners = new Set<() => void>();
 function read(): string | null {
   try {
     const value = window.localStorage.getItem(STORAGE_KEY);
-    return couponIsValid(value) ? normalizeCouponCode(value) : null;
+    return couponFormatValid(value) ? normalizeCouponCode(value) : null;
   } catch {
     return null;
   }
@@ -52,7 +52,7 @@ export function getCouponServerSnapshot(): null {
 
 export function storeCoupon(code: string): boolean {
   const normalized = normalizeCouponCode(code);
-  if (!couponIsValid(normalized)) return false;
+  if (!couponFormatValid(normalized)) return false;
   current = normalized;
   try {
     window.localStorage.setItem(STORAGE_KEY, normalized);

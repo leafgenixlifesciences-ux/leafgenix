@@ -21,6 +21,7 @@ export function CartDrawer() {
     shippingPaise,
     totalPaise,
     couponCode,
+    couponOffer,
     couponApplied,
     setQuantity,
     remove,
@@ -227,7 +228,7 @@ export function CartDrawer() {
                           </span>
                         )}
                         {formatPaise(
-                          couponPricePaise(line.mrpPaise, couponCode) * line.quantity,
+                          couponPricePaise(line.mrpPaise, couponOffer) * line.quantity,
                         )}
                       </span>
                     </div>

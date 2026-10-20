@@ -4,7 +4,7 @@ import {
   AlertTriangle, BellRing, Boxes, Check, CheckCheck, ChevronRight,
   CircleDot, Download, ExternalLink, Inbox, IndianRupee, LayoutDashboard, Leaf, Loader2,
   LogOut, Mail, MapPin, Menu, PackageCheck, PackageOpen, Phone, RefreshCw,
-  Search, Send, ShoppingBag, Truck, UsersRound, X,
+  Search, Send, ShoppingBag, TicketPercent, Trash2, Truck, UsersRound, X,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -12,11 +12,13 @@ import { useMemo, useState, useTransition } from "react";
 
 import styles from "@/components/admin-dashboard.module.css";
 import { AdminPushControl } from "@/components/admin-push-control";
-import type { AdminLead, AdminOrder, AdminProductHealth } from "@/lib/admin-types";
+import { AdminMarketing } from "@/components/admin-marketing";
+import { AdminCoupons } from "@/components/admin-coupons";
+import type { AdminCampaign, AdminCoupon, AdminLead, AdminOrder, AdminProductHealth } from "@/lib/admin-types";
 import { formatPaise } from "@/lib/money";
 import type { OrderStatus } from "@/lib/types";
 
-type View = "overview" | "orders" | "leads";
+type View = "overview" | "orders" | "leads" | "marketing" | "coupons";
 type Notice = { tone: "success" | "error"; text: string } | null;
 const fulfilmentStatuses = ["processing", "shipped", "delivered", "cancelled"] as const;
 const paidStatuses: OrderStatus[] = ["paid", "processing", "shipped", "delivered"];
@@ -59,8 +61,9 @@ function PageHeading({ title, body, aside }: { title: string; body: string; asid
   return <div className={styles.pageHeading}><div><h2>{title}</h2><p>{body}</p></div>{aside ? <aside>{aside}</aside> : null}</div>;
 }
 
-export function AdminDashboard({ initialOrders, initialLeads, leadOrderCounts, products, dataError, syncedAt }: {
+export function AdminDashboard({ initialOrders, initialLeads, leadOrderCounts, products, coupons, subscriberCount, latestCampaign, dataError, syncedAt }: {
   initialOrders: AdminOrder[]; initialLeads: AdminLead[]; leadOrderCounts: Record<string, number> | null; products: AdminProductHealth[];
+  coupons: AdminCoupon[]; subscriberCount: number; latestCampaign: AdminCampaign | null;
   dataError: string | null; syncedAt: string;
 }) {
   const router = useRouter();
@@ -134,12 +137,26 @@ export function AdminDashboard({ initialOrders, initialLeads, leadOrderCounts, p
       setLeads((current) => current.map((item) => item.id === lead.id ? { ...item, handled: result.lead!.handled } : item));
     } catch (error) { setNotice({ tone: "error", text: error instanceof Error ? error.message : "Lead update failed." }); }
   }
+  async function deleteLead(lead: AdminLead) {
+    if (!window.confirm(`Delete ${lead.name}'s enquiry permanently? This does not delete their orders or marketing subscription.`)) return;
+    setNotice(null);
+    try {
+      const response = await fetch(`/api/admin/leads/${lead.id}`, { method: "DELETE" });
+      const result = await response.json() as { error?: string };
+      if (response.status === 401) { router.replace("/admin/login"); return; }
+      if (!response.ok) throw new Error(result.error || "Lead deletion failed.");
+      setLeads((current) => current.filter((item) => item.id !== lead.id));
+      setNotice({ tone: "success", text: `${lead.name}'s enquiry was deleted.` });
+    } catch (error) { setNotice({ tone: "error", text: error instanceof Error ? error.message : "Lead deletion failed." }); }
+  }
   async function logout() { await fetch("/api/admin/logout", { method: "POST" }); router.replace("/admin/login"); router.refresh(); }
 
   const nav = [
     { id: "overview" as const, label: "Overview", icon: LayoutDashboard, count: 0 },
     { id: "orders" as const, label: "Orders", icon: ShoppingBag, count: fulfilmentQueue.length },
     { id: "leads" as const, label: "Leads", icon: UsersRound, count: openLeads.length },
+    { id: "marketing" as const, label: "Marketing", icon: Mail, count: 0 },
+    { id: "coupons" as const, label: "Coupons", icon: TicketPercent, count: 0 },
   ];
 
   return <div className={styles.root}>
@@ -163,7 +180,7 @@ export function AdminDashboard({ initialOrders, initialLeads, leadOrderCounts, p
       <main className={styles.content}>
         {dataError ? <div className={styles.errorBanner} role="alert"><AlertTriangle size={18} /><span>{dataError}</span></div> : null}
         {notice && !selectedOrder ? <div className={`${styles.notice} ${notice.tone === "success" ? styles.noticeSuccess : styles.noticeError}`}>{notice.text}</div> : null}
-        {view === "overview" ? <Overview orders={orders} leads={leads} revenue={revenue} fulfilmentQueue={fulfilmentQueue} openLeads={openLeads} lowStock={lowStock} syncedAt={syncedAt} onView={changeView} onOpenOrder={openOrder} /> : view === "orders" ? <OrdersView orders={filteredOrders} query={orderQuery} setQuery={setOrderQuery} statusFilter={statusFilter} setStatusFilter={setStatusFilter} onOpen={openOrder} /> : <LeadsView leads={filteredLeads} orderCounts={leadOrderCounts} query={leadQuery} setQuery={setLeadQuery} onToggle={toggleLead} />}
+        {view === "overview" ? <Overview orders={orders} leads={leads} revenue={revenue} fulfilmentQueue={fulfilmentQueue} openLeads={openLeads} lowStock={lowStock} syncedAt={syncedAt} onView={changeView} onOpenOrder={openOrder} /> : view === "orders" ? <OrdersView orders={filteredOrders} query={orderQuery} setQuery={setOrderQuery} statusFilter={statusFilter} setStatusFilter={setStatusFilter} onOpen={openOrder} /> : view === "leads" ? <LeadsView leads={filteredLeads} orderCounts={leadOrderCounts} query={leadQuery} setQuery={setLeadQuery} onToggle={toggleLead} onDelete={deleteLead} /> : view === "marketing" ? <AdminMarketing subscriberCount={subscriberCount} initialCampaign={latestCampaign} /> : <AdminCoupons initialCoupons={coupons} asOf={syncedAt} />}
       </main>
     </div>
 
@@ -212,9 +229,15 @@ function OrdersView({ orders, query, setQuery, statusFilter, setStatusFilter, on
   return <section><PageHeading title="Order desk" body="Search payment records, prepare parcels and update delivery progress." aside={`${orders.length} matching order${orders.length === 1 ? "" : "s"}`} /><div className={styles.toolbar}><label className={styles.searchField}><Search size={16} /><span className="sr-only">Search orders</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Order, customer, phone or tracking…" /></label><select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} aria-label="Filter order status"><option value="all">All statuses</option>{Object.entries(statusLabel).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select><button className={styles.secondaryButton} onClick={exportOrders}><Download size={15} />Export</button></div><OrderList orders={orders} onOpen={onOpen} /></section>;
 }
 
-function LeadsView({ leads, orderCounts, query, setQuery, onToggle }: { leads: AdminLead[]; orderCounts: Record<string, number> | null; query: string; setQuery: (value: string) => void; onToggle: (lead: AdminLead) => void }) {
+const LEADS_PER_PAGE = 15;
+
+function LeadsView({ leads, orderCounts, query, setQuery, onToggle, onDelete }: { leads: AdminLead[]; orderCounts: Record<string, number> | null; query: string; setQuery: (value: string) => void; onToggle: (lead: AdminLead) => void; onDelete: (lead: AdminLead) => void }) {
+  const [page, setPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(leads.length / LEADS_PER_PAGE));
+  const currentPage = Math.min(page, totalPages);
+  const visibleLeads = leads.slice((currentPage - 1) * LEADS_PER_PAGE, currentPage * LEADS_PER_PAGE);
   function exportLeads() { downloadCsv("leafgenix-leads.csv", [["Name", "Email", "Phone", "Subject", "Message", "Paid orders", "Handled", "Created"], ...leads.map((l) => [l.name, l.email, l.phone, l.subject, l.message, orderCounts?.[l.id] ?? "Unavailable", l.handled ? "Yes" : "No", l.created_at])]); }
-  return <section><PageHeading title="Lead inbox" body="Every enquiry in one view, with paid-order history matched by email or phone." aside={`${leads.filter((l) => !l.handled).length} open conversations`} /><div className={styles.toolbar}><label className={styles.searchField}><Search size={16} /><span className="sr-only">Search leads</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search name, email, phone or message…" /></label><button className={styles.secondaryButton} onClick={exportLeads}><Download size={15} />Export</button></div><LeadList leads={leads} orderCounts={orderCounts} onToggle={onToggle} /></section>;
+  return <section><PageHeading title="Lead inbox" body="Every enquiry in one view, with paid-order history matched by email or phone." aside={`${leads.filter((l) => !l.handled).length} open conversations`} /><div className={styles.toolbar}><label className={styles.searchField}><Search size={16} /><span className="sr-only">Search leads</span><input value={query} onChange={(e) => { setQuery(e.target.value); setPage(1); }} placeholder="Search name, email, phone or message…" /></label><button className={styles.secondaryButton} onClick={exportLeads}><Download size={15} />Export</button></div><LeadList leads={visibleLeads} orderCounts={orderCounts} onToggle={onToggle} onDelete={onDelete} />{leads.length > LEADS_PER_PAGE ? <nav className={styles.pagination} aria-label="Lead pages"><span>Showing {(currentPage - 1) * LEADS_PER_PAGE + 1}–{Math.min(currentPage * LEADS_PER_PAGE, leads.length)} of {leads.length}</span><div><button disabled={currentPage === 1} onClick={() => setPage(currentPage - 1)}>Previous</button><strong>Page {currentPage} of {totalPages}</strong><button disabled={currentPage === totalPages} onClick={() => setPage(currentPage + 1)}>Next</button></div></nav> : null}</section>;
 }
 
 function OrderList({ orders, onOpen, embedded = false }: { orders: AdminOrder[]; onOpen: (order: AdminOrder) => void; embedded?: boolean }) {
@@ -222,9 +245,9 @@ function OrderList({ orders, onOpen, embedded = false }: { orders: AdminOrder[];
   return <div className={embedded ? "" : styles.tableWrap}><div className={styles.tableScroller}><table className={styles.table}><thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Delivery</th><th style={{ textAlign: "right" }}>Value</th><th aria-label="Open" /></tr></thead><tbody>{orders.map((order) => <tr key={order.id} onClick={() => onOpen(order)}><td><div className={styles.orderId}>{order.order_number}</div><div className={styles.subtle}>{dateTime(order.created_at)}</div></td><td><div className={styles.customer}>{order.full_name}</div><div className={styles.subtle}>{order.email}</div></td><td><StatusPill status={order.status} /></td><td><div className={styles.customer}>{order.courier_name || "Not assigned"}</div><div className={styles.subtle}>{order.tracking_number || "Tracking pending"}</div></td><td className={styles.money}>{formatPaise(order.total_paise)}</td><td><ChevronRight size={15} color="#8c9a91" /></td></tr>)}</tbody></table></div><div className={styles.mobileOrders}>{orders.map((order) => <button key={order.id} className={styles.mobileOrder} onClick={() => onOpen(order)}><div className={styles.mobileOrderTop}><div><div className={styles.orderId}>{order.order_number}</div><div className={styles.customer}>{order.full_name}</div></div><StatusPill status={order.status} /></div><div className={styles.mobileOrderBottom}><div className={styles.subtle}>{dateTime(order.created_at)}</div><div className={styles.money}>{formatPaise(order.total_paise)}</div></div></button>)}</div></div>;
 }
 
-function LeadList({ leads, orderCounts, onToggle }: { leads: AdminLead[]; orderCounts: Record<string, number> | null; onToggle: (lead: AdminLead) => void }) {
+function LeadList({ leads, orderCounts, onToggle, onDelete }: { leads: AdminLead[]; orderCounts: Record<string, number> | null; onToggle: (lead: AdminLead) => void; onDelete: (lead: AdminLead) => void }) {
   if (!leads.length) return <div className={`${styles.panel} ${styles.empty}`}><div><Inbox size={30} /><strong>No leads in this view</strong><span>New coupon requests and enquiries will appear here.</span></div></div>;
-  return <div className={styles.tableWrap}><div className={`${styles.tableScroller} ${styles.leadScroller}`} tabIndex={0} role="region" aria-label="Lead inbox table, scroll horizontally to see all columns"><table className={`${styles.table} ${styles.leadTable}`}><caption className="sr-only">Lead enquiries and each contact&apos;s paid-order count</caption><thead><tr><th scope="col">Contact</th><th scope="col">Enquiry</th><th scope="col">Paid orders</th><th scope="col">Received</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead><tbody>{leads.map((lead) => { const coupon = lead.subject?.toLowerCase().includes("coupon"); const count = orderCounts?.[lead.id]; return <tr key={lead.id} className={lead.handled ? styles.leadRowHandled : undefined}><td><div className={styles.leadPerson}><span className={`${styles.leadIcon} ${coupon ? styles.couponIcon : ""}`}>{coupon ? <Leaf size={18} /> : <Mail size={18} />}</span><div className={styles.leadPersonText}><strong>{lead.name}</strong><a href={`mailto:${lead.email}`}>{lead.email}</a>{lead.phone ? <a href={`tel:${lead.phone}`}>{lead.phone}</a> : null}</div></div></td><td><strong className={styles.leadSubject}>{lead.subject || "Website enquiry"}</strong><p className={styles.leadExcerpt} title={lead.message}>{lead.message}</p></td><td><span className={`${styles.orderCount} ${count ? styles.orderCountActive : ""}`}>{count ?? "—"}<span>{count === undefined ? "unavailable" : count === 1 ? "order" : "orders"}</span></span></td><td className={styles.leadReceived}>{dateTime(lead.created_at)}</td><td><span className={`${styles.leadState} ${lead.handled ? styles.leadStateHandled : styles.leadStateOpen}`}>{lead.handled ? "Handled" : "Open"}</span></td><td><button className={styles.leadTableAction} onClick={() => onToggle(lead)}>{lead.handled ? <CircleDot size={15} /> : <Check size={15} />}{lead.handled ? "Reopen" : "Mark handled"}</button></td></tr>; })}</tbody></table></div></div>;
+  return <div className={styles.tableWrap}><div className={`${styles.tableScroller} ${styles.leadScroller}`} tabIndex={0} role="region" aria-label="Lead inbox table, scroll horizontally to see all columns"><table className={`${styles.table} ${styles.leadTable}`}><caption className="sr-only">Lead enquiries and each contact&apos;s paid-order count</caption><thead><tr><th scope="col">Contact</th><th scope="col">Enquiry</th><th scope="col">Paid orders</th><th scope="col">Received</th><th scope="col">Status</th><th scope="col">Actions</th></tr></thead><tbody>{leads.map((lead) => { const coupon = lead.subject?.toLowerCase().includes("coupon"); const count = orderCounts?.[lead.id]; return <tr key={lead.id} className={lead.handled ? styles.leadRowHandled : undefined}><td><div className={styles.leadPerson}><span className={`${styles.leadIcon} ${coupon ? styles.couponIcon : ""}`}>{coupon ? <Leaf size={18} /> : <Mail size={18} />}</span><div className={styles.leadPersonText}><strong>{lead.name}</strong><a href={`mailto:${lead.email}`}>{lead.email}</a>{lead.phone ? <a href={`tel:${lead.phone}`}>{lead.phone}</a> : null}</div></div></td><td><strong className={styles.leadSubject}>{lead.subject || "Website enquiry"}</strong><p className={styles.leadExcerpt} title={lead.message}>{lead.message}</p></td><td><span className={`${styles.orderCount} ${count ? styles.orderCountActive : ""}`}>{count ?? "—"}<span>{count === undefined ? "unavailable" : count === 1 ? "order" : "orders"}</span></span></td><td className={styles.leadReceived}>{dateTime(lead.created_at)}</td><td><span className={`${styles.leadState} ${lead.handled ? styles.leadStateHandled : styles.leadStateOpen}`}>{lead.handled ? "Handled" : "Open"}</span></td><td><div className={styles.leadActions}><button className={styles.leadTableAction} onClick={() => onToggle(lead)}>{lead.handled ? <CircleDot size={15} /> : <Check size={15} />}{lead.handled ? "Reopen" : "Mark handled"}</button><button className={`${styles.leadTableAction} ${styles.leadDelete}`} onClick={() => onDelete(lead)} aria-label={`Delete ${lead.name}'s enquiry`} title="Delete lead"><Trash2 size={15} /></button></div></td></tr>; })}</tbody></table></div></div>;
 }
 
 function OrderDrawer({ order, status, setStatus, courierName, setCourierName, trackingNumber, setTrackingNumber, saving, notice, onClose, onSave }: {

@@ -11,6 +11,7 @@ type EmailMessage = {
   html: string;
   idempotencyKey: string;
   replyTo?: string;
+  headers?: Record<string, string>;
 };
 
 type ContactEmailInput = {
@@ -88,6 +89,7 @@ async function sendEmail(message: EmailMessage): Promise<void> {
       reply_to: message.replyTo,
       subject: message.subject,
       html: message.html,
+      headers: message.headers,
     }),
   });
 
@@ -96,7 +98,7 @@ async function sendEmail(message: EmailMessage): Promise<void> {
   }
 }
 
-function shell(content: string, preheader: string): string {
+function shell(content: string, preheader: string, unsubscribeUrl?: string): string {
   const markUrl = siteUrl("/leafgenix-mark.png");
   return `<!doctype html>
   <html lang="en">
@@ -146,12 +148,44 @@ function shell(content: string, preheader: string): string {
           </table>
           <div style="max-width:600px;padding:18px 18px 0;font-size:11px;line-height:1.6;color:#829087;text-align:center">
             ${escapeHtml(site.fullName)} · Jaipur, Rajasthan<br>
-            This email relates to your enquiry, coupon request, or order.
+            ${unsubscribeUrl ? `You received this because you opted in to Leaf Genix offers.<br><a href="${escapeHtml(unsubscribeUrl)}" style="color:#315544;text-decoration:underline">Unsubscribe from marketing emails</a>` : "This email relates to your enquiry, coupon request, or order."}
           </div>
         </td></tr>
       </table>
     </body>
   </html>`;
+}
+
+export async function sendMarketingEmail(input: {
+  campaignId: string;
+  to: string;
+  name: string;
+  subject: string;
+  body: string;
+  unsubscribeToken: string;
+}): Promise<void> {
+  const unsubscribeUrl = siteUrl(`/api/marketing/unsubscribe?token=${encodeURIComponent(input.unsubscribeToken)}`);
+  const paragraphs = input.body.trim().split(/\n\s*\n/).map((paragraph) =>
+    `<p style="margin:0 0 17px;color:#40584a;font-size:15px;line-height:1.8">${escapeHtml(paragraph).replaceAll("\n", "<br>")}</p>`,
+  ).join("");
+  const html = shell(
+    `<p style="margin:0 0 8px;color:#66756d">Hi ${escapeHtml(input.name)},</p>
+     <h1 style="margin:0 0 22px;font-size:29px;line-height:1.18;color:#005c2d">${escapeHtml(input.subject)}</h1>
+     ${paragraphs}
+     <p style="margin:24px 0 0"><a href="${escapeHtml(siteUrl("/products"))}" style="display:inline-block;padding:13px 22px;border-radius:999px;background:#005c2d;color:#ffffff;text-decoration:none;font-weight:700">Explore Leaf Genix</a></p>`,
+    input.subject,
+    unsubscribeUrl,
+  );
+  await sendEmail({
+    to: input.to,
+    replyTo: site.email,
+    subject: `${input.subject} · ${site.name}`,
+    html,
+    idempotencyKey: `marketing/${input.campaignId}/${input.to}`,
+    headers: {
+      "List-Unsubscribe": `<${unsubscribeUrl}>`,
+    },
+  });
 }
 
 export async function sendContactEmails(input: ContactEmailInput): Promise<void> {

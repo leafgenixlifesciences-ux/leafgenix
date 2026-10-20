@@ -19,6 +19,7 @@ export function CartView() {
     shippingPaise,
     totalPaise,
     couponCode,
+    couponOffer,
     couponApplied,
     setQuantity,
     remove,
@@ -93,7 +94,7 @@ export function CartView() {
                   <p className="mt-1 text-xs text-muted">{line.packSize}</p>
                   <p className="mt-2 flex flex-wrap items-baseline gap-2 text-sm tabular-nums">
                     <span className="font-medium text-body">
-                      {formatPaise(couponPricePaise(line.mrpPaise, couponCode))} each
+                      {formatPaise(couponPricePaise(line.mrpPaise, couponOffer))} each
                     </span>
                     {couponApplied && (
                       <span className="strike text-xs text-faint">
@@ -119,7 +120,7 @@ export function CartView() {
                   label={`Quantity for ${line.name}`}
                 />
                 <span className="font-semibold text-lg tabular-nums">
-                  {formatPaise(couponPricePaise(line.mrpPaise, couponCode) * line.quantity)}
+                  {formatPaise(couponPricePaise(line.mrpPaise, couponOffer) * line.quantity)}
                 </span>
               </div>
             </div>

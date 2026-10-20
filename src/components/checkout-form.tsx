@@ -39,6 +39,7 @@ export function CheckoutForm({
     shippingPaise,
     totalPaise,
     couponCode,
+    couponOffer,
     couponApplied,
     ready,
     clear,
@@ -86,7 +87,7 @@ export function CheckoutForm({
         country: "India",
       },
       notes: String(fd.get("notes") ?? ""),
-      couponCode: couponCode ?? "",
+      couponCode: couponApplied ? couponCode ?? "" : "",
       items: lines.map((l) => ({ slug: l.slug, quantity: l.quantity })),
     };
 
@@ -430,7 +431,7 @@ export function CheckoutForm({
                 <p className="text-xs text-muted">{line.packSize}</p>
               </div>
               <span className="text-right text-sm tabular-nums">
-                {formatPaise(couponPricePaise(line.mrpPaise, couponCode) * line.quantity)}
+                {formatPaise(couponPricePaise(line.mrpPaise, couponOffer) * line.quantity)}
                 {couponApplied && (
                   <span className="strike block text-[0.6875rem] text-faint">
                     {formatPaise(line.mrpPaise * line.quantity)}

@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -10,7 +11,7 @@ import {
 } from "react";
 import type { CartLine } from "@/lib/types";
 import { shippingFor } from "@/lib/shipping";
-import { couponIsValid, priceLines } from "@/lib/offer";
+import { normalizeCouponCode, priceLines, type CouponOffer } from "@/lib/offer";
 import {
   clearCoupon,
   getCouponServerSnapshot,
@@ -42,6 +43,7 @@ type CartContextValue = {
   shippingPaise: number;
   totalPaise: number;
   couponCode: string | null;
+  couponOffer: CouponOffer | null;
   couponApplied: boolean;
   /** False only during SSR/hydration — used to defer cart-dependent UI. */
   ready: boolean;
@@ -50,7 +52,7 @@ type CartContextValue = {
   setQuantity: (slug: string, quantity: number) => void;
   remove: (slug: string) => void;
   clear: () => void;
-  applyCoupon: (code: string) => boolean;
+  applyCoupon: (code: string) => Promise<boolean>;
   removeCoupon: () => void;
   open: () => void;
   close: () => void;
@@ -77,6 +79,29 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     getCouponSnapshot,
     getCouponServerSnapshot,
   );
+  const [validatedOffer, setValidatedOffer] = useState<CouponOffer | null>(null);
+  const couponOffer = validatedOffer?.code === couponCode ? validatedOffer : null;
+
+  useEffect(() => {
+    if (!couponCode) return;
+    const controller = new AbortController();
+    fetch(`/api/coupons/validate?code=${encodeURIComponent(couponCode)}`, { signal: controller.signal, cache: "no-store" })
+      .then(async (response) => response.ok ? (await response.json() as { offer: CouponOffer }).offer : response.status === 404 ? null : undefined)
+      .then((offer) => { if (offer) setValidatedOffer(offer); else if (offer === null) clearCoupon(); })
+      .catch(() => { /* Keep the stored code for another attempt, but never quote an unverified discount. */ });
+    return () => controller.abort();
+  }, [couponCode]);
+
+  const applyCoupon = useCallback(async (code: string): Promise<boolean> => {
+    const normalized = normalizeCouponCode(code);
+    try {
+      const response = await fetch(`/api/coupons/validate?code=${encodeURIComponent(normalized)}`, { cache: "no-store" });
+      if (!response.ok) return false;
+      const { offer } = await response.json() as { offer: CouponOffer };
+      setValidatedOffer(offer);
+      return storeCoupon(offer.code);
+    } catch { return false; }
+  }, []);
 
   // Re-price the bag against the database once per mount.
   //
@@ -122,7 +147,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<CartContextValue>(() => {
     const { subtotalPaise, discountPaise, listTotalPaise } = priceLines(
       lines,
-      couponCode,
+      couponOffer,
     );
     const shippingPaise = shippingFor(subtotalPaise);
 
@@ -135,7 +160,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       shippingPaise,
       totalPaise: subtotalPaise + shippingPaise,
       couponCode,
-      couponApplied: couponIsValid(couponCode),
+      couponOffer,
+      couponApplied: Boolean(couponOffer),
       ready,
       isOpen,
       add: (line, quantity) => {
@@ -145,12 +171,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       setQuantity: setLineQuantity,
       remove: removeLine,
       clear: clearCart,
-      applyCoupon: storeCoupon,
-      removeCoupon: clearCoupon,
+      applyCoupon,
+      removeCoupon: () => { setValidatedOffer(null); clearCoupon(); },
       open: () => setIsOpen(true),
       close: () => setIsOpen(false),
     };
-  }, [lines, ready, isOpen, couponCode]);
+  }, [lines, ready, isOpen, couponCode, couponOffer, applyCoupon]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

@@ -47,3 +47,26 @@ export type AdminProductHealth = {
   stock: number;
   is_active: boolean;
 };
+
+export type AdminCoupon = {
+  code: string;
+  discount_percent: number;
+  active: boolean;
+  expires_at: string | null;
+  created_at: string;
+  redemptions: number;
+  customers: number;
+  discount_paise: number;
+  revenue_paise: number;
+};
+
+export type AdminCampaign = {
+  id: string;
+  subject: string;
+  body: string;
+  created_at: string;
+  pending: number;
+  sent: number;
+  failed: number;
+  skipped: number;
+};

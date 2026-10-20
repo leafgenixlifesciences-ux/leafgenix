@@ -65,6 +65,14 @@ export async function POST(request: Request) {
       .single();
     if (error || !lead) throw new Error(error?.message ?? "Coupon lead was not saved");
 
+    const { error: subscriberError } = await admin.from("marketing_subscribers").upsert({
+      email,
+      name,
+      consent_at: new Date().toISOString(),
+      unsubscribed_at: null,
+    }, { onConflict: "email" });
+    if (subscriberError) throw new Error(`Marketing consent could not be recorded: ${subscriberError.message}`);
+
     await sendCouponEmails({ id: lead.id, name, email, phone });
   } catch (error) {
     console.error("[coupon]", error);

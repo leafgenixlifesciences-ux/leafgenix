@@ -49,3 +49,18 @@ export async function PATCH(
   }
   return NextResponse.json({ ok: true, lead: data });
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  if (!(await getAdminSession())) return NextResponse.json({ error: "Admin session expired." }, { status: 401 });
+  if (request.headers.get("origin") !== new URL(request.url).origin) return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
+  if (!adminConfigured()) return NextResponse.json({ error: "Database is not configured." }, { status: 503 });
+  const { id } = await params;
+  if (!z.string().uuid().safeParse(id).success) return NextResponse.json({ error: "Invalid lead." }, { status: 400 });
+  const { data, error } = await createAdminClient().from("contact_messages")
+    .delete().eq("id", id).select("id").single();
+  if (error || !data) return NextResponse.json({ error: "Could not delete this lead." }, { status: 500 });
+  return NextResponse.json({ ok: true, id });
+}

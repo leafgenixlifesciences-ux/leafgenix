@@ -245,6 +245,7 @@
 .leadTable th:nth-child(5) { width: 9%; }
 .leadTable th:nth-child(6) { width: 14%; }
 .leadTable td { vertical-align: middle; }
+.leadTable tbody tr { cursor: default; }
 .leadRowHandled { background: #fafbf8; }
 .leadPerson { display: flex; align-items: flex-start; gap: .75rem; }
 .leadIcon { display: grid; width: 2.45rem; height: 2.45rem; flex: 0 0 auto; place-items: center; border-radius: .75rem; color: var(--admin-green); background: #edf5ec; }
@@ -265,6 +266,15 @@
 .leadStateHandled { color: #3b7b52; background: #e8f5e7; }
 .leadTableAction { display: inline-flex; min-height: 2.15rem; align-items: center; justify-content: center; gap: .38rem; padding: 0 .65rem; border: 1px solid #cbded0; border-radius: .6rem; color: #245f40; background: #fff; font-size: .68rem; font-weight: 800; white-space: nowrap; }
 .leadTableAction:hover { border-color: #9fc6a9; background: #f1f8ed; }
+.leadActions { display: flex; align-items: center; gap: .35rem; }
+.leadDelete { width: 2.15rem; padding: 0; color: #a64133; border-color: #f0d4ce; }
+.leadDelete:hover { color: #8b2f24; border-color: #dfb7ad; background: #fff3ef; }
+.pagination { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: .8rem; color: #738579; font-size: .72rem; }
+.pagination > div { display: flex; align-items: center; gap: .5rem; }
+.pagination strong { padding: 0 .35rem; color: #3e624a; font-size: .68rem; white-space: nowrap; }
+.pagination button { min-height: 2.25rem; padding: 0 .8rem; border: 1px solid #d8e4d6; border-radius: .6rem; color: #246245; background: white; font-size: .7rem; font-weight: 800; }
+.pagination button:hover { background: #f1f8ed; }
+.pagination button:disabled { cursor: not-allowed; opacity: .45; }
 
 .drawerBackdrop { position: fixed; inset: 0; z-index: 150; display: flex; justify-content: flex-end; background: rgba(4, 16, 10, 0.58); backdrop-filter: blur(6px); }
 .drawer { width: min(100%, 36rem); height: 100%; overflow-y: auto; background: #f8faf5; box-shadow: -2rem 0 5rem -2.5rem rgba(0,0,0,.3); }
@@ -370,6 +380,8 @@
   .tableScroller { display: none; }
   .mobileOrders { display: block; }
   .leadScroller { display: block; }
+  .pagination { align-items: stretch; flex-direction: column; }
+  .pagination > div { justify-content: space-between; }
   .customerLinks, .fieldGrid { grid-template-columns: 1fr; }
   .statusChoices { grid-template-columns: 1fr 1fr; }
 }

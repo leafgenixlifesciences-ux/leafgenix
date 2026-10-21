@@ -229,7 +229,7 @@ function OrdersView({ orders, query, setQuery, statusFilter, setStatusFilter, on
   return <section><PageHeading title="Order desk" body="Search payment records, prepare parcels and update delivery progress." aside={`${orders.length} matching order${orders.length === 1 ? "" : "s"}`} /><div className={styles.toolbar}><label className={styles.searchField}><Search size={16} /><span className="sr-only">Search orders</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Order, customer, phone or tracking…" /></label><select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} aria-label="Filter order status"><option value="all">All statuses</option>{Object.entries(statusLabel).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select><button className={styles.secondaryButton} onClick={exportOrders}><Download size={15} />Export</button></div><OrderList orders={orders} onOpen={onOpen} /></section>;
 }
 
-const LEADS_PER_PAGE = 15;
+const LEADS_PER_PAGE = 10;
 
 function LeadsView({ leads, orderCounts, query, setQuery, onToggle, onDelete }: { leads: AdminLead[]; orderCounts: Record<string, number> | null; query: string; setQuery: (value: string) => void; onToggle: (lead: AdminLead) => void; onDelete: (lead: AdminLead) => void }) {
   const [page, setPage] = useState(1);

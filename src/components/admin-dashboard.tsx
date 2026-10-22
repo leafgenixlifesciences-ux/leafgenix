@@ -207,9 +207,9 @@ function Overview({ orders, leads, revenue, fulfilmentQueue, openLeads, lowStock
   ];
   return <section>
     <div className={styles.pageHeading}><div><h1>Today’s operations</h1><p>{dayFormatter.format(new Date(syncedAt))} · live commercial snapshot</p></div><aside>Move paid orders forward, answer open leads and keep dispatch details accurate from one workspace.</aside></div>
+    <AdminPushControl />
     <section className={styles.commandBand}><div className={styles.commandHead}><div><strong>Fulfilment flow</strong><span>Payment confirmation to final delivery</span></div><Truck size={22} strokeWidth={1.9} /></div><div className={styles.stages}>{stages.map((stage) => { const Icon = stage.icon; return <div className={styles.stage} key={stage.label}><span className={styles.stageIcon}><Icon size={21} strokeWidth={1.9} /></span><div><strong>{String(stage.count).padStart(2, "0")}</strong><span className={styles.stageLabel}>{stage.label}</span></div></div>; })}</div></section>
     <div className={styles.metricRail}>{metrics.map((metric) => { const Icon = metric.icon; return <button className={styles.metric} key={metric.label} onClick={metric.action} disabled={!metric.action}><div className={styles.metricTop}><span>{metric.label}</span><span className={styles.metricIcon}><Icon size={19} strokeWidth={1.9} /></span></div><div className={styles.metricValue}>{metric.value}</div><div className={styles.metricDetail}>{metric.detail}</div></button>; })}</div>
-    <AdminPushControl />
     <div className={styles.overviewGrid}>
       <section className={styles.panel}><div className={styles.panelHeader}><div><h2>Recent orders</h2><p>The newest payments and fulfilment stages.</p></div><button className={styles.textButton} onClick={() => onView("orders")}>View all</button></div><OrderList orders={orders.slice(0, 6)} onOpen={onOpenOrder} embedded /></section>
       <section className={styles.panel}><div className={styles.panelHeader}><div><h2>Attention</h2><p>The next actions with customer impact.</p></div><CircleDot size={17} color="#ff7a59" /></div><div className={styles.pulseList}>{[

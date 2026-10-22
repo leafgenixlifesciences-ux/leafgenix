@@ -313,13 +313,17 @@
 
 .navBackdrop { display: none; }
 
-.pushCard { display: flex; align-items: center; gap: 1rem; margin-top: 1rem; padding: 1.1rem 1.25rem; border: 1px solid #d9e8d0; border-radius: 1rem; background: linear-gradient(110deg, #f8fcef, #fffefa); }
+.pushCard { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; padding: 1.1rem 1.25rem; border: 1px solid #d9e8d0; border-radius: 1rem; background: linear-gradient(110deg, #f8fcef, #fffefa); }
 .pushIcon { display: grid; width: 3rem; height: 3rem; flex: 0 0 auto; place-items: center; border-radius: .9rem; color: #105d3e; background: #e4f1d7; }
 .pushCopy { flex: 1; min-width: 0; }
 .eyebrow { display: block; color: #6f944f; font-size: .56rem; font-weight: 900; letter-spacing: .17em; }
 .pushCopy h2 { margin: .2rem 0 0; color: var(--admin-forest); font-family: var(--font-display); font-size: 1.07rem; letter-spacing: -.035em; }
 .pushCopy p { margin: .25rem 0 0; color: var(--admin-muted); font-size: .68rem; line-height: 1.5; }
 .pushCopy small { display: block; margin-top: .45rem; color: #41684f; font-size: .66rem; line-height: 1.5; }
+.pushGuide { margin-top: .7rem; padding: .75rem .85rem; border: 1px solid #d7e7ca; border-radius: .7rem; background: #fff; color: var(--admin-ink); font-size: .7rem; line-height: 1.55; }
+.pushGuide strong { display: block; color: var(--admin-forest); }
+.pushGuide ol { margin: .35rem 0 0; padding-left: 1.1rem; }
+.pushGuide li + li { margin-top: .15rem; }
 .pushButton, .pushSecondary { display: inline-flex; min-height: 2.65rem; align-items: center; justify-content: center; gap: .5rem; flex: 0 0 auto; padding: 0 .9rem; border-radius: .65rem; font-size: .68rem; font-weight: 800; }
 .pushButton { color: #fff; background: var(--admin-green); }
 .pushButton:hover { background: #075434; }

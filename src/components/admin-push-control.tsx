@@ -6,17 +6,21 @@ import { useEffect, useState } from "react";
 
 import styles from "@/components/admin-dashboard.module.css";
 
-type PushState = "loading" | "ready" | "enabled" | "unsupported" | "unconfigured";
+type PushState = "loading" | "ready" | "enabled" | "unsupported" | "unconfigured" | "error";
 
 export function AdminPushControl() {
   const [state, setState] = useState<PushState>("loading");
   const [publicKey, setPublicKey] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  const [isIphone, setIsIphone] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     let active = true;
     async function load() {
+      setIsIphone(/iPhone|iPad|iPod/i.test(navigator.userAgent));
       if (!isPushSupported()) { if (active) setState("unsupported"); return; }
       try {
         const response = await fetch("/api/admin/push", { cache: "no-store" });
@@ -35,11 +39,17 @@ export function AdminPushControl() {
           });
           setState(saved.ok ? "enabled" : "ready");
         } else setState("ready");
-      } catch { if (active) { setState("ready"); setMessage("Could not check phone alerts. Try again shortly."); } }
+      } catch { if (active) { setState("error"); setMessage("Could not check phone alerts. Please retry."); } }
     }
     void load();
     return () => { active = false; };
-  }, []);
+  }, [retryCount]);
+
+  function retry() {
+    setMessage("");
+    setState("loading");
+    setRetryCount((count) => count + 1);
+  }
 
   async function enable() {
     setBusy(true); setMessage("");
@@ -85,11 +95,18 @@ export function AdminPushControl() {
       <span className={styles.eyebrow}>STAY IN THE LOOP</span>
       <h2>New order? Know instantly.</h2>
       <p>Get a private push alert on this phone when a payment is confirmed. Admin email remains your backup.</p>
-      {state === "unsupported" ? <small>On iPhone, add LeafGenix to your Home Screen, then open the admin portal from there. Android Chrome supports alerts directly.</small> : null}
-      {state === "unconfigured" ? <small>Phone alerts need VAPID keys and the database migration before they can be enabled.</small> : null}
+      {state === "unsupported" ? <small>{isIphone ? "On iPhone, open the admin portal from a Home Screen shortcut to enable alerts." : "This browser does not support push alerts. Try Chrome on Android or a Home Screen shortcut on iPhone."}</small> : null}
+      {state === "unconfigured" ? <small>Alert setup is incomplete on the server. Try again in a moment.</small> : null}
       {message ? <small role="status">{message}</small> : null}
+      {showGuide ? <div className={styles.pushGuide}>
+        <strong>{isIphone ? "Enable alerts on iPhone" : "Enable alerts on your phone"}</strong>
+        <ol>{isIphone ? <><li>Open leafgenix.in in Safari.</li><li>Tap Share, then Add to Home Screen.</li><li>Open LeafGenix from the new icon, sign in to Admin, and tap Enable phone alerts.</li></> : <><li>Open leafgenix.in in Chrome on your phone.</li><li>Sign in to Admin and tap Enable phone alerts.</li><li>Allow notifications when your phone asks.</li></>}</ol>
+      </div> : null}
     </div>
     {state === "ready" && publicKey ? <button type="button" className={styles.pushButton} disabled={busy} onClick={enable}>{busy ? <Loader2 size={16} /> : <BellRing size={16} />} Enable phone alerts</button> : null}
     {state === "enabled" ? <button type="button" className={styles.pushSecondary} disabled={busy} onClick={disable}>{busy ? <Loader2 size={16} /> : <BellOff size={16} />} Alerts on · Turn off</button> : null}
+    {state === "unsupported" ? <button type="button" className={styles.pushButton} aria-expanded={showGuide} onClick={() => setShowGuide((visible) => !visible)}><BellRing size={16} /> {showGuide ? "Hide setup steps" : "Set up phone alerts"}</button> : null}
+    {state === "loading" ? <button type="button" className={styles.pushSecondary} disabled><Loader2 size={16} /> Checking alerts…</button> : null}
+    {state === "unconfigured" || state === "error" || (state === "ready" && !publicKey) ? <button type="button" className={styles.pushSecondary} onClick={retry}><BellRing size={16} /> Retry alert setup</button> : null}
   </section>;
 }

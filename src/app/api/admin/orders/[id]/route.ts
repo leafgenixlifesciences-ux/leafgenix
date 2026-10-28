@@ -4,6 +4,7 @@ import { z } from "zod";
 import { getAdminSession } from "@/lib/admin-auth";
 import { sendOrderStatusEmail } from "@/lib/email";
 import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
+import { sendOrderWhatsApp } from "@/lib/whatsapp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -122,6 +123,12 @@ export async function PATCH(
     } catch (error) {
       console.error("[admin/order-status-email]", error);
       emailWarning = "Status saved, but the customer email could not be sent.";
+    }
+    try {
+      await sendOrderWhatsApp(id, parsed.data.status);
+    } catch (error) {
+      console.error("[admin/order-status-whatsapp]", error);
+      emailWarning = [emailWarning, "Status saved, but the WhatsApp update could not be sent."].filter(Boolean).join(" ");
     }
   }
 

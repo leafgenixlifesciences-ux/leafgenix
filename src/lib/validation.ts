@@ -23,6 +23,7 @@ export const checkoutSchema = z.object({
     .trim()
     .transform((v) => v.replace(/[\s-]/g, "").replace(/^(\+91|0)/, ""))
     .pipe(z.string().regex(PHONE_IN, "Enter a valid 10-digit mobile number")),
+  whatsappConsent: z.boolean().default(false),
   address: z.object({
     line1: z.string().trim().min(4, "Enter your house / flat and street").max(200),
     line2: z.string().trim().max(200).optional().or(z.literal("")),

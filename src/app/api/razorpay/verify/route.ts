@@ -5,6 +5,7 @@ import { verifySchema } from "@/lib/validation";
 import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
 import { sendPaidOrderEmails } from "@/lib/email";
 import { sendNewOrderPush } from "@/lib/admin-push";
+import { sendOrderWhatsApp } from "@/lib/whatsapp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -117,6 +118,11 @@ export async function POST(request: Request) {
       } catch (error) {
         console.error("[verify] order email:", error);
       }
+      try {
+        await sendOrderWhatsApp(orderId, "paid");
+      } catch (error) {
+        console.error("[verify] order WhatsApp:", error);
+      }
     }
     return NextResponse.json({ ok: true, orderId, alreadyRecorded: true });
   }
@@ -140,6 +146,11 @@ export async function POST(request: Request) {
     await sendPaidOrderEmails(orderId);
   } catch (error) {
     console.error("[verify] order email:", error);
+  }
+  try {
+    await sendOrderWhatsApp(orderId, "paid");
+  } catch (error) {
+    console.error("[verify] order WhatsApp:", error);
   }
 
   return NextResponse.json({ ok: true, orderId });

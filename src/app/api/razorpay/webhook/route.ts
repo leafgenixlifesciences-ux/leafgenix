@@ -3,6 +3,7 @@ import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
 import { verifyWebhookSignature } from "@/lib/razorpay";
 import { sendPaidOrderEmails } from "@/lib/email";
 import { sendNewOrderPush } from "@/lib/admin-push";
+import { sendOrderWhatsApp } from "@/lib/whatsapp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -115,6 +116,11 @@ export async function POST(request: Request) {
           // Throwing makes Razorpay retry a transient Resend failure. The
           // order is already safely paid, and both emails are idempotent.
           await sendPaidOrderEmails(paidOrderId);
+          try {
+            await sendOrderWhatsApp(paidOrderId, "paid");
+          } catch (whatsAppError) {
+            console.error("[webhook] order WhatsApp:", whatsAppError);
+          }
         }
         break;
       }

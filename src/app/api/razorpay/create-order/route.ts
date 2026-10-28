@@ -169,6 +169,8 @@ export async function POST(request: Request) {
       user_id: userId,
       email: input.email,
       phone: input.phone,
+      whatsapp_consent: input.whatsappConsent,
+      whatsapp_consented_at: input.whatsappConsent ? new Date().toISOString() : null,
       full_name: input.fullName,
       shipping_address: { ...input.address, country: input.address.country || "India" },
       subtotal_paise: subtotalPaise,

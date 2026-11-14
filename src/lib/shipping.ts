@@ -4,9 +4,11 @@
 
 export const FREE_SHIPPING_THRESHOLD_PAISE = 99900; // ₹999
 export const FLAT_SHIPPING_PAISE = 5900; // ₹59
+/** The hidden checkout test product costs ₹1; it ships free so a test costs ₹1. */
+const TEST_ORDER_MAX_PAISE = 100;
 
 export function shippingFor(subtotalPaise: number): number {
-  if (subtotalPaise <= 0) return 0;
+  if (subtotalPaise <= TEST_ORDER_MAX_PAISE) return 0;
   return subtotalPaise >= FREE_SHIPPING_THRESHOLD_PAISE ? 0 : FLAT_SHIPPING_PAISE;
 }
 

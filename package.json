@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node -e \"require('child_process').execSync(process.env.WORKERS_CI==='1'?'opennextjs-cloudflare build':'next build',{stdio:'inherit'})\"",
     "cf:build": "cross-env CLOUDFLARE_WORKERS=1 opennextjs-cloudflare build",
     "cf:preview": "npm run cf:build && opennextjs-cloudflare preview",
     "cf:deploy": "npm run cf:build && opennextjs-cloudflare deploy",

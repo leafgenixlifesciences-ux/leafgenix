@@ -22,7 +22,9 @@ import type { NextConfig } from "next";
 const standalone = process.env.NEXT_STANDALONE === "1";
 const unoptimizedImages =
   process.env.NEXT_IMAGE_UNOPTIMIZED === "1" ||
-  process.env.CLOUDFLARE_WORKERS === "1";
+  process.env.CLOUDFLARE_WORKERS === "1" ||
+  // Set by Cloudflare's Git build (Workers Builds).
+  process.env.WORKERS_CI === "1";
 
 const isProd = process.env.NODE_ENV === "production";
 

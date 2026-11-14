@@ -34,10 +34,17 @@ yarn-error.log*
 .env*
 # ...but .env.example is the template every new checkout needs, so it stays.
 !.env.example
+# Public, browser-visible build values only. Never put a secret in it.
+!.env.production
 
 # vercel
 .vercel
-
+.claude-flow
+.open-next-before-linux
+.swarm
+scripts
+social
+design-previews
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -13,7 +13,7 @@ import { AddToCart } from "@/components/add-to-cart";
 import { ProductCard } from "@/components/product-card";
 import { ProductCarousel } from "@/components/product-carousel";
 import { Reveal } from "@/components/reveal";
-import { getProductBySlug, getRelatedProducts } from "@/lib/queries";
+import { getProductBySlug, getRelatedProducts, HIDDEN_PRODUCT_SLUG } from "@/lib/queries";
 import { formatPaise, rupees } from "@/lib/money";
 import { deliveryWindow, siteUrl } from "@/lib/utils";
 import { FREE_SHIPPING_THRESHOLD_PAISE } from "@/lib/shipping";
@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: `${product.name} — ${product.pack_size}`,
     description: product.short_description ?? product.tagline ?? undefined,
     alternates: { canonical: `/products/${product.slug}` },
+    robots: slug === HIDDEN_PRODUCT_SLUG ? { index: false, follow: false } : undefined,
     openGraph: {
       title: `${product.name} · ${site.name}`,
       description: product.short_description ?? undefined,

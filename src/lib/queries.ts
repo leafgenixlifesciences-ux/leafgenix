@@ -27,6 +27,12 @@ const CATALOGUE_TTL = 120; // seconds
 const CATALOGUE_TAG = "catalogue";
 
 /**
+ * Checkout test product. Buyable by direct link only: kept out of every
+ * listing, the sitemap and search indexing.
+ */
+export const HIDDEN_PRODUCT_SLUG = "test-item-k7q4x9";
+
+/**
  * Keep the public catalogue usable in local development and during a brief
  * Supabase outage. The JSON file is the checked-in catalogue source used by
  * the project, including its local /public product images.
@@ -46,6 +52,7 @@ export const getProducts = unstable_cache(
       .from("products")
       .select("*")
       .eq("is_active", true)
+      .neq("slug", HIDDEN_PRODUCT_SLUG)
       .order("sort_order", { ascending: true });
 
     if (error) {
@@ -66,6 +73,7 @@ export const getFeaturedProducts = unstable_cache(
       .select("*")
       .eq("is_active", true)
       .eq("is_featured", true)
+      .neq("slug", HIDDEN_PRODUCT_SLUG)
       .order("sort_order", { ascending: true })
       .limit(limit);
 
@@ -107,6 +115,7 @@ export const getRelatedProducts = unstable_cache(
       .select("*")
       .eq("is_active", true)
       .neq("slug", slug)
+      .neq("slug", HIDDEN_PRODUCT_SLUG)
       .order("sort_order", { ascending: true })
       .limit(limit);
 

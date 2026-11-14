@@ -78,7 +78,8 @@ export function CheckoutForm({
       fullName: String(fd.get("fullName") ?? ""),
       email: String(fd.get("email") ?? ""),
       phone: String(fd.get("phone") ?? ""),
-      whatsappConsent: fd.get("whatsappConsent") === "on",
+      // Order updates go to the checkout mobile number on WhatsApp by default.
+      whatsappConsent: true,
       address: {
         line1: String(fd.get("line1") ?? ""),
         line2: String(fd.get("line2") ?? ""),
@@ -294,19 +295,6 @@ export function CheckoutForm({
             </div>
           </div>
         </fieldset>
-
-        <label className="flex items-start gap-3 rounded-2xl border border-line-strong bg-surface-2 p-4 text-sm leading-relaxed text-muted">
-          <input
-            type="checkbox"
-            name="whatsappConsent"
-            className="mt-1 h-4 w-4 shrink-0 accent-green-800"
-            disabled={busy}
-          />
-          <span>
-            Send me order confirmation and delivery updates on WhatsApp at the mobile number above.
-            This is optional; email updates will still arrive. To stop WhatsApp updates, contact our support team.
-          </span>
-        </label>
 
         {/* ---- address ---- */}
         <fieldset disabled={busy} className="disabled:opacity-60">

@@ -5,6 +5,7 @@ import { clientIp, rateLimit, tooManyRequests } from "@/lib/rate-limit";
 import { createAdminClient, adminConfigured } from "@/lib/supabase/admin";
 import { couponLeadSchema } from "@/lib/validation";
 import { emailConfigured, sendCouponEmails } from "@/lib/email";
+import { sendCouponWhatsApp } from "@/lib/whatsapp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -80,6 +81,13 @@ export async function POST(request: Request) {
       { error: "We couldn't issue your coupon right now. Please try again." },
       { status: 502 },
     );
+  }
+
+  // The coupon is already issued by email; a WhatsApp failure must not undo that.
+  try {
+    await sendCouponWhatsApp({ name, phone });
+  } catch (error) {
+    console.error("[coupon] WhatsApp:", error);
   }
 
   return NextResponse.json({ ok: true, couponCode: COUPON.code });

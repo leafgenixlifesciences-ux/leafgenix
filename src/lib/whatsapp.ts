@@ -1,4 +1,5 @@
 import { formatPaise } from "@/lib/money";
+import { COUPON } from "@/lib/offer";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 type Event = "paid" | "processing" | "shipped" | "delivered" | "cancelled";
@@ -39,6 +40,37 @@ function phoneNumber(value: string): string {
   return digits.length === 10 ? `91${digits}` : digits;
 }
 
+class GupshupRejection extends Error {}
+
+/** Submit one approved template. Throws GupshupRejection when Gupshup refuses it. */
+async function postTemplate(destination: string, templateId: string, params: string[]): Promise<string> {
+  const form = new URLSearchParams({
+    channel: "whatsapp",
+    source: phoneNumber(process.env.GUPSHUP_SOURCE_PHONE!),
+    destination: phoneNumber(destination),
+    "src.name": process.env.GUPSHUP_APP_NAME!,
+    template: JSON.stringify({ id: templateId, params }),
+  });
+  const response = await fetch("https://api.gupshup.io/wa/api/v1/template/msg", {
+    method: "POST",
+    headers: {
+      apikey: process.env.GUPSHUP_API_KEY!,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: form,
+    signal: AbortSignal.timeout(10_000),
+  });
+  const result = (await response.json()) as {
+    status?: string;
+    messageId?: string;
+    message?: string;
+  };
+  if (!response.ok || result.status !== "submitted" || !result.messageId) {
+    throw new GupshupRejection(`Gupshup ${response.status}: ${result.message || result.status || "No message ID"}`);
+  }
+  return result.messageId;
+}
+
 async function submit(
   order: Order,
   event: Event,
@@ -60,34 +92,16 @@ async function submit(
 
   let rejected = false;
   try {
-    const form = new URLSearchParams({
-      channel: "whatsapp",
-      source: phoneNumber(process.env.GUPSHUP_SOURCE_PHONE!),
-      destination: phoneNumber(destination),
-      "src.name": process.env.GUPSHUP_APP_NAME!,
-      template: JSON.stringify({ id: templateId, params }),
-    });
-    const response = await fetch("https://api.gupshup.io/wa/api/v1/template/msg", {
-      method: "POST",
-      headers: {
-        apikey: process.env.GUPSHUP_API_KEY!,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: form,
-      signal: AbortSignal.timeout(10_000),
-    });
-    const result = (await response.json()) as {
-      status?: string;
-      messageId?: string;
-      message?: string;
-    };
-    if (!response.ok || result.status !== "submitted" || !result.messageId) {
-      rejected = true;
-      throw new Error(`Gupshup ${response.status}: ${result.message || result.status || "No message ID"}`);
+    let messageId: string;
+    try {
+      messageId = await postTemplate(destination, templateId, params);
+    } catch (error) {
+      rejected = error instanceof GupshupRejection;
+      throw error;
     }
     const { error: updateError } = await admin
       .from("order_whatsapp_messages")
-      .update({ message_id: result.messageId, submitted_at: new Date().toISOString() })
+      .update({ message_id: messageId, submitted_at: new Date().toISOString() })
       .eq("id", claim.id);
     if (updateError) throw new Error(`WhatsApp receipt save failed: ${updateError.message}`);
   } catch (error) {
@@ -140,7 +154,7 @@ function getCustomerTemplateParams(order: Order, event: Event): string[] {
   ];
 }
 
-/** Send approved utility templates only. Never send a customer message without checkout opt-in. */
+/** Send approved utility templates only, and only to orders flagged for WhatsApp updates. */
 export async function sendOrderWhatsApp(orderId: string, event: Event): Promise<void> {
   if (!configured()) return;
 
@@ -174,4 +188,21 @@ export async function sendOrderWhatsApp(orderId: string, event: Event): Promise<
   const outcomes = await Promise.allSettled(sends);
   const failed = outcomes.find((result) => result.status === "rejected");
   if (failed?.status === "rejected") throw failed.reason;
+}
+
+/**
+ * Welcome-coupon message for the popup lead form, whose consent line covers
+ * contact by phone. Sent only when its own template is configured.
+ */
+export async function sendCouponWhatsApp(lead: { name: string; phone: string }): Promise<void> {
+  const templateId = process.env.GUPSHUP_TEMPLATE_COUPON;
+  if (
+    !templateId ||
+    !process.env.GUPSHUP_API_KEY ||
+    !process.env.GUPSHUP_APP_NAME ||
+    !process.env.GUPSHUP_SOURCE_PHONE
+  ) {
+    return;
+  }
+  await postTemplate(lead.phone, templateId, [lead.name, COUPON.code]);
 }

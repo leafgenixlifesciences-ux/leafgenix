@@ -22,8 +22,15 @@ function configured(): boolean {
     process.env.GUPSHUP_API_KEY &&
     process.env.GUPSHUP_APP_NAME &&
     process.env.GUPSHUP_SOURCE_PHONE &&
-    process.env.GUPSHUP_TEMPLATE_ORDER_PAID &&
-    process.env.GUPSHUP_TEMPLATE_ORDER_STATUS,
+    (
+      process.env.GUPSHUP_TEMPLATE_ORDER_PAID ||
+      process.env.GUPSHUP_TEMPLATE_ORDER_STATUS ||
+      process.env.GUPSHUP_TEMPLATE_ORDER_PROCESSING ||
+      process.env.GUPSHUP_TEMPLATE_ORDER_SHIPPED ||
+      process.env.GUPSHUP_TEMPLATE_ORDER_DELIVERED ||
+      process.env.GUPSHUP_TEMPLATE_ORDER_CANCELLED ||
+      process.env.GUPSHUP_TEMPLATE_ADMIN_ORDER
+    ),
   );
 }
 
@@ -93,6 +100,46 @@ async function submit(
   }
 }
 
+function getOrderStatusTemplateId(event: Event): string | undefined {
+  if (event === "paid") {
+    // The paid template takes two params; the status template takes four.
+    return process.env.GUPSHUP_TEMPLATE_ORDER_PAID || undefined;
+  }
+
+  const map: Record<Exclude<Event, "paid">, string | undefined> = {
+    processing: process.env.GUPSHUP_TEMPLATE_ORDER_PROCESSING || process.env.GUPSHUP_TEMPLATE_ORDER_STATUS,
+    shipped: process.env.GUPSHUP_TEMPLATE_ORDER_SHIPPED || process.env.GUPSHUP_TEMPLATE_ORDER_STATUS,
+    delivered: process.env.GUPSHUP_TEMPLATE_ORDER_DELIVERED || process.env.GUPSHUP_TEMPLATE_ORDER_STATUS,
+    cancelled: process.env.GUPSHUP_TEMPLATE_ORDER_CANCELLED || process.env.GUPSHUP_TEMPLATE_ORDER_STATUS,
+  };
+
+  return map[event];
+}
+
+function getCustomerStatusText(order: Order, event: Exclude<Event, "paid">): string {
+  const statusText: Record<Exclude<Event, "paid">, string> = {
+    processing: "We are preparing your order for dispatch.",
+    shipped: `Courier: ${order.courier_name || "delivery partner"}; tracking: ${order.tracking_number || "available by email"}.`,
+    delivered: "Your delivery has been marked complete.",
+    cancelled: "This order was cancelled. Contact support if you paid.",
+  };
+
+  return statusText[event];
+}
+
+function getCustomerTemplateParams(order: Order, event: Event): string[] {
+  if (event === "paid") {
+    return [order.full_name, order.order_number];
+  }
+
+  return [
+    order.full_name,
+    order.order_number,
+    event,
+    getCustomerStatusText(order, event),
+  ];
+}
+
 /** Send approved utility templates only. Never send a customer message without checkout opt-in. */
 export async function sendOrderWhatsApp(orderId: string, event: Event): Promise<void> {
   if (!configured()) return;
@@ -118,24 +165,11 @@ export async function sendOrderWhatsApp(orderId: string, event: Event): Promise<
     ));
   }
   if (order.whatsapp_consent) {
-    const templateId = event === "paid"
-      ? process.env.GUPSHUP_TEMPLATE_ORDER_PAID!
-      : process.env.GUPSHUP_TEMPLATE_ORDER_STATUS!;
-    const params = event === "paid"
-      ? [order.full_name, order.order_number]
-      : [
-          order.full_name,
-          order.order_number,
-          event,
-          {
-            processing: "We are preparing it for dispatch.",
-            shipped: `Courier: ${order.courier_name || "delivery partner"}; tracking: ${order.tracking_number || "available by email"}.`,
-            delivered: "Your delivery has been marked complete.",
-            cancelled: "This order was cancelled. Contact support if you paid.",
-            paid: "Your payment has been received.",
-          }[event],
-        ];
-    sends.push(submit(order, event, "customer", order.phone, templateId, params));
+    const templateId = getOrderStatusTemplateId(event);
+    if (templateId) {
+      const params = getCustomerTemplateParams(order, event);
+      sends.push(submit(order, event, "customer", order.phone, templateId, params));
+    }
   }
   const outcomes = await Promise.allSettled(sends);
   const failed = outcomes.find((result) => result.status === "rejected");
